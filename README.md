@@ -1,5 +1,6 @@
 # Automated Testing Framework
 
+## Installations
 ## Java JDK
 * Download Java JDK from [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 * Install it and set **JAVA_HOME** to JDK's bin folder.
@@ -14,3 +15,10 @@
 * export JAVA_HOME="$(/usr/libexec/java_home)"
 * export ANDROID_HOME=/Users/hanna_kokhanava/Library/Android/sdk
 * export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$JAVA_HOME$
+
+
+## Tips
+To get information about the name of the package and the first activity that has to be launched for the testing
+1. Browse through the **SDK folder -> Build-Tools -> Version folder**
+2. Open cmd and execute command **aapt dumb badging "path_to_apk"**
+3. Find **package** (in the beginning of logs) and **launchable-activity** parameters
