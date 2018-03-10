@@ -1,0 +1,21 @@
+group 'com.linkedin'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext.seleniumVersion = '2.53.0'
+
+dependencies {
+    // Selenium Grid
+    compile "org.seleniumhq.selenium:selenium-server:$seleniumVersion"
+    // Appium
+    compile "io.appium:java-client:5.0.4"
+    // TestNG
+    compile 'org.testng:testng:6.10'
+}
