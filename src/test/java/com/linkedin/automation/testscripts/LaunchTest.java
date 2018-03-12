@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
  */
 public class LaunchTest extends BaseCase {
 
-    @Test(description = "Login as NL user")
+    @Test(description = "Example test")
     public void login() {
         System.out.println("Test was launched");
     }
