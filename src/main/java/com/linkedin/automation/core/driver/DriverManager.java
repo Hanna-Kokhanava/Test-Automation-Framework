@@ -1,4 +1,4 @@
-package com.linkedin.automation.driver;
+package com.linkedin.automation.core.driver;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -25,7 +25,6 @@ public class DriverManager {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
         driverPool.set(driver);
     }
 

@@ -1,7 +1,10 @@
 package com.linkedin.automation.unit;
 
-import com.linkedin.automation.driver.DriverCreator;
-import com.linkedin.automation.driver.IDriverCreator;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.linkedin.automation.core.creators.IDriverCreator;
+import com.linkedin.automation.core.driver.DriverModules;
+import com.linkedin.automation.core.driver.dependencies.IDependencies;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -9,12 +12,29 @@ import org.testng.annotations.BeforeClass;
  * Created on 10.03.2018
  */
 public class BaseCase {
-    //TODO @Inject Guice lib
-    protected IDriverCreator driverCreator = new DriverCreator();
+    @Inject
+    private IDependencies dependencies;
+    @Inject
+    protected IDriverCreator driverCreator;
+
+    {
+        servicesInject();
+    }
+
+    private void servicesInject() {
+        Guice.createInjector(
+                new DriverModules())
+                .injectMembers(this);
+    }
+
+    @BeforeClass(description = "Configure dependencies", alwaysRun = true)
+    public void configDependencies() {
+        dependencies.configureDependencies();
+    }
 
     @BeforeClass(description = "Base case configuration set up")
     public void setUp() throws Exception {
-        driverCreator.createDriver("en");
+        driverCreator.createDriver();
     }
 
     @AfterClass(description = "Quit driver", alwaysRun = true)

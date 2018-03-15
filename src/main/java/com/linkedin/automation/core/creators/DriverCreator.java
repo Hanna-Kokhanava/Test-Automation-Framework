@@ -1,5 +1,6 @@
-package com.linkedin.automation.driver;
+package com.linkedin.automation.core.creators;
 
+import com.linkedin.automation.core.driver.DriverManager;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
@@ -8,13 +9,13 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class DriverCreator implements IDriverCreator {
 
     @Override
-    public void createDriver(String deviceLanguage) {
-        createDriver(deviceLanguage, null);
+    public void createDriver() {
+        createDriver(null);
     }
 
     @Override
-    public void createDriver(String deviceLanguage, DesiredCapabilities customCapabilities) {
-        DesiredCapabilities capabilities = DriverCapabilities.createCapabilities(deviceLanguage);
+    public void createDriver(DesiredCapabilities customCapabilities) {
+        DesiredCapabilities capabilities = DriverCapabilities.createCapabilities();
         if (null != customCapabilities) {
             capabilities.merge(customCapabilities);
         }

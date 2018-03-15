@@ -1,4 +1,4 @@
-package com.linkedin.automation.driver;
+package com.linkedin.automation.core.creators;
 
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -23,7 +23,7 @@ public class DriverCapabilities {
     private static final String FULL_RESET = "true";
     private static final String NO_RESET = "false";
 
-    public static DesiredCapabilities createCapabilities(String deviceLanguage) {
+    public static DesiredCapabilities createCapabilities() {
         DesiredCapabilities caps = new DesiredCapabilities();
         File app = new File(APP_PATH);
 
