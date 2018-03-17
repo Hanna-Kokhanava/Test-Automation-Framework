@@ -12,7 +12,7 @@ public abstract class BaseAppiumServer extends AbstractServer implements IAppium
         URIBuilder uriBuilder = new URIBuilder().setScheme("http");
         uriBuilder.setPort(4881);
         uriBuilder.setHost("localhost");
-        return checkStatus(uriBuilder.setPath(WD_SERVER_STATUS));
+        return checkServerStatus(uriBuilder.setPath(WD_SERVER_STATUS));
     }
 
     @Override

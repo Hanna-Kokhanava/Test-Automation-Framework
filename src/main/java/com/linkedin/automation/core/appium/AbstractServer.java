@@ -1,5 +1,9 @@
 package com.linkedin.automation.core.appium;
 
+import com.linkedin.automation.core.tools.http.HttpClientService;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.openqa.selenium.server.browserlaunchers.Sleeper;
 
@@ -13,12 +17,24 @@ import java.util.function.Function;
 public abstract class AbstractServer {
     private static final int WAIT_SECONDS_FOR_SERVER_CONDITION = Integer.parseInt("60");
 
-    protected static boolean checkStatus(URIBuilder uriBuilder) {
-        boolean status = false;
+    protected static boolean checkServerStatus(URIBuilder uriBuilder) {
+        boolean status;
+        int responseCode = 0;
 
-        //TODO execute HttpGet request and get response status code
-        //TODO try several times
-
+        int attemptsCount = 3;
+        try {
+            do {
+                //Get status information using GET
+                HttpGet request = new HttpGet(uriBuilder.build());
+                try (CloseableHttpResponse response = HttpClientService.getHttpClient().execute(request)) {
+                    responseCode = response.getStatusLine().getStatusCode();
+                    status = responseCode == HttpStatus.SC_OK;
+                }
+            } while (!status && --attemptsCount > 0);
+        } catch (Exception e) {
+            status = false;
+        }
+        System.out.println("Server returns status " + status + " with response code : " + responseCode);
         return status;
     }
 

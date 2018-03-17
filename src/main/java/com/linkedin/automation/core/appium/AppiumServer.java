@@ -14,6 +14,6 @@ public class AppiumServer extends BaseAppiumServer {
         URIBuilder uriBuilder = new URIBuilder().setScheme("http");
         uriBuilder.setPort(4881);
         uriBuilder.setHost("localhost");
-        waitForServerStarts((Void) -> checkStatus(uriBuilder.setPath(WD_SERVER_STATUS)));
+        waitForServerStarts((Void) -> checkServerStatus(uriBuilder.setPath(WD_SERVER_STATUS)));
     }
 }
