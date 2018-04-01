@@ -92,6 +92,10 @@ public class Device {
             this.partOfDeviceName = partOfDeviceName;
         }
 
+        public String[] getPartOfDeviceName() {
+            return partOfDeviceName;
+        }
+
         public boolean is(DeviceType compareWith) {
             return this == compareWith || this.os().is(compareWith);
         }
