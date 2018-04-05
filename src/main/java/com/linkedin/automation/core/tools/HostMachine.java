@@ -8,10 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
  * Created on 01.04.2018
  */
 public class HostMachine {
-    /**
-     * [username:password@]hostname:port
-     */
-    private final static String URI_PATTERN = "^(?:(.+):(.+)@)?(.+):(\\d+)$";
 
     @XmlAttribute
     private String username;
@@ -37,4 +33,16 @@ public class HostMachine {
         return CommandExecutor.getHostNameOfLocalhost();
     }
 
+    public String getPort() {
+        return port;
+    }
+
+    public int getPortInt() {
+        return Integer.parseInt(port);
+    }
+
+    @Override
+    public String toString() {
+        return "[username=" + username + ", password=" + password + ", hostname=" + hostname + ", port=" + port + "]";
+    }
 }

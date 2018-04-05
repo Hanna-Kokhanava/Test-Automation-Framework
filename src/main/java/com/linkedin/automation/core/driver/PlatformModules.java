@@ -1,6 +1,9 @@
 package com.linkedin.automation.core.driver;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Scopes;
+import com.linkedin.automation.core.driver.config.AndroidPlatformConfig;
+import com.linkedin.automation.core.driver.config.IPlatformConfig;
 
 /**
  * Created on 20.03.2018
@@ -9,6 +12,6 @@ import com.google.inject.AbstractModule;
 public class PlatformModules extends AbstractModule {
     @Override
     protected void configure() {
-        //Bind interface implementation according to the platform type
+        bind(IPlatformConfig.class).to(AndroidPlatformConfig.class).in(Scopes.SINGLETON);
     }
 }

@@ -21,7 +21,21 @@ public final class PropertyLoader {
 
         DEVICE_UDID("device.udid"),
 
-        DEVICES_XML("devices.xml");
+        DEVICES_XML("devices.xml"),
+
+        APP_NO_RESET("app.noReset"),
+
+        APP_FULL_RESET("app.fullReset"),
+
+        DEFAULT_TIMEOUT("default.timeout"),
+
+        LAUNCH_TIMEOUT("launch.timeout"),
+
+        DRIVER_TYPE("driver.type"),
+
+        DEVICE_READY_TIMEOUT("device.ready.timeout"),
+
+        NEW_COMMAND_TIMEOUT("new.command.timeout");
 
         private final String propKey;
 
@@ -49,6 +63,18 @@ public final class PropertyLoader {
         return get(key.getKey());
     }
 
+    public static String get(Property key, String defaultValue) {
+        return get(key.getKey(), defaultValue);
+    }
+
+    public static String get(String keyName, String defaultValue) {
+        try {
+            return PropertyLoader.get(keyName);
+        } catch (NullPointerException e) {
+            return defaultValue;
+        }
+    }
+
     public static String get(String keyName) {
         String envVarValue = System.getenv(keyName);
         if (!isNullOrEmpty(envVarValue))
@@ -65,44 +91,12 @@ public final class PropertyLoader {
         throw new NullPointerException("Unable to resolve '" + keyName + "' property value");
     }
 
-    public static String get(Property key, String defaultValue) {
-        return get(key.getKey(), defaultValue);
-    }
-
-    /**
-     * Gets test property, use default value if property not found
-     *
-     * @param keyName          the property key
-     * @param defaultValue the default value
-     * @return the property value
-     * @see #get(Property)
-     */
-    public static String get(String keyName, String defaultValue) {
-        try {
-            return PropertyLoader.get(keyName);
-        } catch (NullPointerException e) {
-            return defaultValue;
-        }
-    }
-
-    /**
-     * Gets the test property value.
-     *
-     * @param keyName the property key
-     * @return the test property value
-     */
     private static String getPropertyFromFile(String keyName) {
         if (testProperties == null)
             testProperties = PropertyLoader.loadPropertiesFromFile(ProjectDir.getProjectResource(TEST_PROPERTIES_PATH));
         return testProperties.getProperty(keyName);
     }
 
-    /**
-     * Load all properties from file.
-     *
-     * @param propertyFile the path to properties file in classpath
-     * @return the properties
-     */
     private static Properties loadPropertiesFromFile(File propertyFile) {
         Properties result = new Properties();
         File testPropertiesResourceFile = Objects.requireNonNull(propertyFile,

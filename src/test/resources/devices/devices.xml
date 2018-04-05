@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<devices>
+    <device deviceName="Xiaomi Note" deviceType="android-phone" osVersion="7.0" deviceUDID="288a31960804">
+        <appium hostname="localhost" username="" password="" port="4881"/>
+    </device>
+</devices>

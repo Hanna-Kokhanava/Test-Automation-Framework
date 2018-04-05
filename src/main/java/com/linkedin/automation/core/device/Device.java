@@ -25,7 +25,7 @@ public class Device {
     private DeviceType deviceType;
 
     @XmlElement
-    private HostMachine hostMachine;
+    private HostMachine appium;
 
     @XmlAttribute
     private String osVersion;
@@ -43,7 +43,7 @@ public class Device {
     }
 
     public HostMachine getAppiumHostMachine() {
-        return hostMachine;
+        return appium;
     }
 
     public Double getOsVersion() {

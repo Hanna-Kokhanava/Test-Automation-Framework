@@ -1,14 +1,15 @@
 package com.linkedin.automation.core.creators;
 
+import com.linkedin.automation.core.device.Device;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
  * Created on 10.03.2018
  */
 public interface IDriverCreator {
-    void createDriver();
+    Device createDriver() throws Exception;
 
-    void createDriver(DesiredCapabilities customCapabilities);
+    Device createDriver(DesiredCapabilities customCapabilities) throws Exception;
 
     void closeDriver();
 }

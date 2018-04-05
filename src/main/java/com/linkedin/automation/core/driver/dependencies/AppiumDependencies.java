@@ -1,21 +1,27 @@
 package com.linkedin.automation.core.driver.dependencies;
 
-import com.google.inject.Inject;
-import com.linkedin.automation.core.appium.IAppiumServer;
+import com.linkedin.automation.core.device.Device;
+import com.linkedin.automation.core.device.DeviceManager;
+import com.linkedin.automation.core.driver.managers.AppiumServerManager;
+import com.linkedin.automation.core.manager.ApplicationManager;
+import com.linkedin.automation.core.tools.files.PropertyLoader;
 
 /**
  * Created on 15.03.2018
  */
 public class AppiumDependencies implements IDependencies {
-    @Inject
-    private IAppiumServer appiumServer;
 
     @Override
     public void configureDependencies() {
-        if (!appiumServer.checkStatus()) {
-            appiumServer.startServer();
+        Device device = DeviceManager.getDevice(PropertyLoader.get(PropertyLoader.Property.DEVICE_UDID));
+        DeviceManager.setCurrentDevice(device);
+
+        if (!AppiumServerManager.checkIfServerIsRunnning(device.getAppiumHostMachine().getPortInt())) {
+            AppiumServerManager.startServer(device);
         } else {
-            System.out.println("Appium server was already started");
+            System.out.println("Appium server already was started");
         }
+
+        ApplicationManager.uploadApp(device.getAppiumHostMachine());
     }
 }

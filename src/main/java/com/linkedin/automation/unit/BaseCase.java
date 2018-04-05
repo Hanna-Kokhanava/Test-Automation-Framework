@@ -22,17 +22,16 @@ public class BaseCase {
     }
 
     private void servicesInject() {
-        Guice.createInjector(
-                new DriverModules())
+        Guice.createInjector(new DriverModules())
                 .injectMembers(this);
     }
 
-    @BeforeClass(description = "Configure dependencies", alwaysRun = true)
+    @BeforeClass(description = "Configure dependencies and start Appium server", alwaysRun = true)
     public void configDependencies() {
         dependencies.configureDependencies();
     }
 
-    @BeforeClass(description = "Base case configuration set up")
+    @BeforeClass(description = "Create driver", dependsOnMethods = {"configDependencies"})
     public void setUp() throws Exception {
         driverCreator.createDriver();
     }
