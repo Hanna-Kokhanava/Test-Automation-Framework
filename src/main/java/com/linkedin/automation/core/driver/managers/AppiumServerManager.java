@@ -30,6 +30,7 @@ public class AppiumServerManager {
 
         AppiumServiceBuilder builder = new AppiumServiceBuilder();
         builder.withIPAddress("127.0.0.1");
+//        builder.withIPAddress("0.0.0.0");
         builder.usingPort(host.getPortInt());
         builder.withCapabilities(desiredCapabilities);
         builder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);

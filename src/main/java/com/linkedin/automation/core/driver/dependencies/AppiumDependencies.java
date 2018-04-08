@@ -21,7 +21,6 @@ public class AppiumDependencies implements IDependencies {
         } else {
             System.out.println("Appium server already was started");
         }
-
         ApplicationManager.uploadApp(device.getAppiumHostMachine());
     }
 }
