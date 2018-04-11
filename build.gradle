@@ -11,6 +11,7 @@ repositories {
 
 ext.seleniumVersion = '2.53.0'
 ext.guiceVersion = '4.1.0'
+ext.htmlElementsVersion = '1.12'
 
 dependencies {
     // Selenium Grid
@@ -23,4 +24,6 @@ dependencies {
     compile "com.google.inject:guice:$guiceVersion",
             "com.google.inject.extensions:guice-multibindings:$guiceVersion",
             "com.google.inject.extensions:guice-assistedinject:$guiceVersion"
+    compile "ru.yandex.qatools.htmlelements:htmlelements-java:$htmlElementsVersion",
+            "ru.yandex.qatools.htmlelements:htmlelements-matchers:$htmlElementsVersion"
 }

@@ -32,11 +32,11 @@ public class AppiumCapabilities {
         caps.setCapability(APP, ApplicationManager.getAbsolutePath());
 
         caps.setCapability(AndroidMobileCapabilityType.DEVICE_READY_TIMEOUT, Integer.parseInt(PropertyLoader.get(PropertyLoader.Property.DEVICE_READY_TIMEOUT, "120")));
-        caps.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.thirtydegreesray.openhub");
-        caps.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "com.thirtydegreesray.openhub.ui.activity.SplashActivity");
+//        caps.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.thirtydegreesray.openhub");
+//        caps.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "com.thirtydegreesray.openhub.ui.activity.SplashActivity");
 
-//        caps.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.linkedin.android");
-//        caps.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "com.linkedin.android.authenticator.LaunchActivity");
+        caps.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.linkedin.android");
+        caps.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "com.linkedin.android.authenticator.LaunchActivity");
         return caps;
     }
 
