@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!DOCTYPE devices PUBLIC "ROOT-VALUE"
+        "src/main/resources/deviceDoctype.dtd">
+
 <devices>
-    <device deviceName="Xiaomi Note" deviceType="android-phone" osVersion="7.0" deviceUDID="288a31960804">
+    <device deviceName="Xiaomi Note" deviceType="android-phone" platformVersion="7.0" udid="288a31960804">
         <appium hostname="localhost" username="" password="" port="4881"/>
+    </device>
+
+    <device deviceName="Samsung Galaxy" deviceType="android-phone" platformVersion="7.0" udid="0815f8330b0f3201">
+        <appium hostname="localhost" username="" password="" port="4881"/>
+    </device>
+
+    <device deviceName="Samsung Galaxy Tab" deviceType="android-tablet" platformVersion="7.0" udid="5203d902e2b814dd">
+        <appium hostname="localhost" username="" password="" port="4882"/>
+    </device>
+
+    <device deviceName="Samsung Galaxy S8 emulator" deviceType="android-phone" platformVersion="7.0"
+            udid="192.168.56.101:5555">
+        <appium hostname="localhost" username="" password="" port="4881"/>
+    </device>
+
+    <device deviceName="Tablet emulator" deviceType="android-tablet" platformVersion="7.0" udid="192.168.56.102:5555">
+        <appium hostname="localhost" username="" password="" port="4882"/>
     </device>
 </devices>

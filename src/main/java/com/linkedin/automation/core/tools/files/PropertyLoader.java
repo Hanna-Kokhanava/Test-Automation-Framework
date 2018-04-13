@@ -13,6 +13,8 @@ import static com.google.common.base.Strings.isNullOrEmpty;
  * Created on 02.04.2018
  */
 public final class PropertyLoader {
+
+    // Property keys from .properties file
     public enum Property {
 
         APP_PATH("app.path"),
@@ -30,6 +32,8 @@ public final class PropertyLoader {
         DEFAULT_TIMEOUT("default.timeout"),
 
         LAUNCH_TIMEOUT("launch.timeout"),
+
+        MULTY_TREAD_DRIVER_URL("driver.url"),
 
         DRIVER_TYPE("driver.type"),
 
@@ -67,7 +71,7 @@ public final class PropertyLoader {
         return get(key.getKey(), defaultValue);
     }
 
-    public static String get(String keyName, String defaultValue) {
+    private static String get(String keyName, String defaultValue) {
         try {
             return PropertyLoader.get(keyName);
         } catch (NullPointerException e) {
@@ -75,7 +79,7 @@ public final class PropertyLoader {
         }
     }
 
-    public static String get(String keyName) {
+    private static String get(String keyName) {
         String envVarValue = System.getenv(keyName);
         if (!isNullOrEmpty(envVarValue))
             return envVarValue;
@@ -91,16 +95,26 @@ public final class PropertyLoader {
         throw new NullPointerException("Unable to resolve '" + keyName + "' property value");
     }
 
+    /**
+     * Returns property value from file by its key name
+     *
+     * @param keyName - property key
+     */
     private static String getPropertyFromFile(String keyName) {
         if (testProperties == null)
             testProperties = PropertyLoader.loadPropertiesFromFile(ProjectDir.getProjectResource(TEST_PROPERTIES_PATH));
         return testProperties.getProperty(keyName);
     }
 
+    /**
+     * Loads properties from given file as property list
+     *
+     * @param propertyFile - file which contains properties
+     */
     private static Properties loadPropertiesFromFile(File propertyFile) {
         Properties result = new Properties();
         File testPropertiesResourceFile = Objects.requireNonNull(propertyFile,
-                String.format("Not found '%s' resource", propertyFile));
+                String.format("Not found '%s' resource file", propertyFile));
 
         try (InputStream stream = new FileInputStream(testPropertiesResourceFile)) {
             result.load(stream);

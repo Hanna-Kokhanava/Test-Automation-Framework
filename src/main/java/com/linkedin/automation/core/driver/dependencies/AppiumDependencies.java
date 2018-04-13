@@ -16,7 +16,7 @@ public class AppiumDependencies implements IDependencies {
         Device device = DeviceManager.getDevice(PropertyLoader.get(PropertyLoader.Property.DEVICE_UDID));
         DeviceManager.setCurrentDevice(device);
 
-        if (!AppiumServerManager.checkIfServerIsRunnning(device.getAppiumHostMachine().getPortInt())) {
+        if (!AppiumServerManager.checkIfServerIsRunning(device.getAppiumHostMachine().getPortInt())) {
             AppiumServerManager.startServer(device);
         } else {
             System.out.println("Appium server already was started");
