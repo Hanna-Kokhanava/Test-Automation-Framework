@@ -6,6 +6,7 @@ import com.linkedin.automation.core.mobile_elements.interfaces.Checkable;
 import com.linkedin.automation.core.mobile_elements.interfaces.Proxifyable;
 import com.linkedin.automation.core.mobile_elements.interfaces.Touchable;
 import com.linkedin.automation.core.mobile_elements.interfaces.Waitable;
+import com.linkedin.automation.core.waiters.CheckThat;
 import com.linkedin.automation.core.waiters.WaitFor;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.TouchAction;
@@ -23,8 +24,7 @@ import java.util.stream.Collectors;
  * Adds mobile-specific features & gestures, such as swipe, touch, etc.
  */
 public class MobileElement extends TypifiedElement implements Touchable, Waitable, Checkable, Proxifyable {
-
-
+    
     protected MobileElement(WebElement wrappedElement) {
         super(wrappedElement);
     }
@@ -42,6 +42,12 @@ public class MobileElement extends TypifiedElement implements Touchable, Waitabl
         return mobileElements;
     }
 
+    /**
+     * Find mobile element
+     *
+     * @param by the search strategy
+     * @return founded mobile element
+     */
     public MobileElement findMobileElement(By by) {
         return create(by.findElement(getNotProxiedElement()));
     }
@@ -172,21 +178,21 @@ public class MobileElement extends TypifiedElement implements Touchable, Waitabl
 
     @Override
     public void checkExist() {
-        
+        CheckThat.exist(this);
     }
 
     @Override
     public void checkDisplayed() {
-
+        CheckThat.displayed(this);
     }
 
     @Override
-    public void checkTextEqual(String expected) {
-
+    public void checkTextEqual(String expectedValue) {
+        CheckThat.textEqual(this, expectedValue);
     }
 
     @Override
-    public void checkTextNotEqual(String expected) {
-
+    public void checkTextNotEqual(String expectedValue) {
+        CheckThat.textNotEqual(this, expectedValue);
     }
 }

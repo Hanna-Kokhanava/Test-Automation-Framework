@@ -13,5 +13,4 @@ public class LaunchTest extends BaseCase {
         System.out.println("Test was launched");
         System.out.println("What???");
     }
-
 }

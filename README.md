@@ -20,5 +20,5 @@
 ## Tips
 To get information about the name of the package and the first activity that has to be launched for the testing
 1. Browse through the **SDK folder -> Build-Tools -> Version folder**
-2. Open cmd and execute command **aapt dumb badging "path_to_apk"**
+2. Open cmd and execute command **./aapt dumb badging "path_to_apk"**
 3. Find **package** (in the beginning of logs) and **launchable-activity** parameters

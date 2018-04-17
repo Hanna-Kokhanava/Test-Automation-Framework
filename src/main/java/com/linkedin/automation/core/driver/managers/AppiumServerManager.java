@@ -30,7 +30,6 @@ public class AppiumServerManager {
 
         AppiumServiceBuilder builder = new AppiumServiceBuilder();
         builder.withIPAddress("127.0.0.1");
-//        builder.withIPAddress("0.0.0.0");
         builder.usingPort(host.getPortInt());
         builder.withCapabilities(desiredCapabilities);
         builder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
@@ -41,7 +40,7 @@ public class AppiumServerManager {
 
     public static void stopServer(Device device) {
         System.out.println("Stopping appium server on " + device.getAppiumHostMachine());
-        if (!checkIfServerIsRunnning(device.getAppiumHostMachine().getPortInt())) {
+        if (!checkIfServerIsRunning(device.getAppiumHostMachine().getPortInt())) {
             System.out.println("Appium server already stopped");
         } else {
             service.stop();
@@ -55,7 +54,7 @@ public class AppiumServerManager {
         startServer(device);
     }
 
-    public static boolean checkIfServerIsRunnning(int port) {
+    public static boolean checkIfServerIsRunning(int port) {
         boolean isServerRunning = false;
         ServerSocket serverSocket;
         try {
