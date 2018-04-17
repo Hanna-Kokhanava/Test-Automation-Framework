@@ -39,7 +39,9 @@ public final class PropertyLoader {
 
         DEVICE_READY_TIMEOUT("device.ready.timeout"),
 
-        NEW_COMMAND_TIMEOUT("new.command.timeout");
+        NEW_COMMAND_TIMEOUT("new.command.timeout"),
+
+        SCROLL_TIMEOUT("scroll.timeout");
 
         private final String propKey;
 

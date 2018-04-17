@@ -15,6 +15,8 @@ public interface Waitable {
 
     void waitForDisplayed();
 
+    void waitForDisplayed(int timeout);
+
     void waitForNotDisplayed();
 
     void waitForNotDisplayed(int timeout);

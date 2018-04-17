@@ -43,7 +43,8 @@ public class DriverManager {
         }
     }
 
-    private static final DriverType driverType = DriverType.findByValue(PropertyLoader.get(PropertyLoader.Property.DRIVER_TYPE, "appium"));
+    private static final DriverType driverType = DriverType
+            .findByValue(PropertyLoader.get(PropertyLoader.Property.DRIVER_TYPE, "appium"));
     private static HostMachine driverHost;
 
     private static final String URI_SCHEME = "http";
@@ -89,11 +90,9 @@ public class DriverManager {
         AppiumDriver driver;
         try {
             if (DeviceManager.getDeviceTypeFromConfigFile().os() == Device.DeviceType.ANDROID) {
-
                 driver = new AndroidDriver(
                         getDriverHost().getURIBuilder(URI_SCHEME).setPath(WD_SERVER_ROOT).build().toURL(), capabilities);
             } else {
-
                 driver = new IOSDriver(
                         getDriverHost().getURIBuilder(URI_SCHEME).setPath(WD_SERVER_ROOT).build().toURL(), capabilities);
             }

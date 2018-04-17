@@ -35,7 +35,6 @@ public class AppiumDriverCreator implements IDriverCreator {
             AppiumServerManager.restartServer(device);
             DriverManager.createDriver(device.getAppiumHostMachine(), capabilities);
         }
-        System.out.println();
         return device;
     }
 

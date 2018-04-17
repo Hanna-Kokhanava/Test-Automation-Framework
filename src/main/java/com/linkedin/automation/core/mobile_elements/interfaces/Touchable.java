@@ -22,6 +22,8 @@ public interface Touchable extends WrapsDriver {
 
     void scroll(Direction direction);
 
+    void scrollToVisible(Direction direction);
+
     void swipe(double startX, double startY, double endX, double endY, double duration);
 
     boolean isExist();

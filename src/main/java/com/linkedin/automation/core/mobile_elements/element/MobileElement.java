@@ -1,6 +1,7 @@
-package com.linkedin.automation.core.mobile_elements;
+package com.linkedin.automation.core.mobile_elements.element;
 
 import com.google.common.collect.Lists;
+import com.linkedin.automation.core.device.Device;
 import com.linkedin.automation.core.device.functions.Direction;
 import com.linkedin.automation.core.mobile_elements.interfaces.Checkable;
 import com.linkedin.automation.core.mobile_elements.interfaces.Proxifyable;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
  * Adds mobile-specific features & gestures, such as swipe, touch, etc.
  */
 public class MobileElement extends TypifiedElement implements Touchable, Waitable, Checkable, Proxifyable {
-    
+
     protected MobileElement(WebElement wrappedElement) {
         super(wrappedElement);
     }
@@ -77,6 +78,10 @@ public class MobileElement extends TypifiedElement implements Touchable, Waitabl
         return ((WrapsDriver) getWrappedElement()).getWrappedDriver();
     }
 
+    public io.appium.java_client.MobileElement getWrappedMobileElement() {
+        return (io.appium.java_client.MobileElement) getWrappedElement();
+    }
+
     @Override
     public String getAttribute(String name) {
         return getWrappedElement().getAttribute(name);
@@ -102,6 +107,12 @@ public class MobileElement extends TypifiedElement implements Touchable, Waitabl
     public void scroll(Direction direction) {
         swipe(direction.getStartX(), direction.getStartY(), direction.getEndX(), direction.getEndY(), 1);
     }
+
+    @Override
+    public void scrollToVisible(Direction direction) {
+        Device.TouchScreen.scrollToVisible(this, direction);
+    }
+
 
     @Override
     public void swipe(double startX, double startY, double endX, double endY, double duration) {
@@ -164,6 +175,11 @@ public class MobileElement extends TypifiedElement implements Touchable, Waitabl
     @Override
     public void waitForDisplayed() {
         WaitFor.displayed(this);
+    }
+
+    @Override
+    public void waitForDisplayed(int timeout) {
+        WaitFor.displayed(this, timeout);
     }
 
     @Override

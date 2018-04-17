@@ -1,9 +1,15 @@
 package com.linkedin.automation.core.device;
 
 import com.google.gson.annotations.SerializedName;
+import com.linkedin.automation.core.device.functions.Direction;
+import com.linkedin.automation.core.device.functions.Key;
 import com.linkedin.automation.core.driver.managers.DriverManager;
+import com.linkedin.automation.core.mobile_elements.interfaces.Touchable;
 import com.linkedin.automation.core.tools.HostMachine;
+import com.linkedin.automation.core.tools.files.PropertyLoader;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.remote.AutomationName;
+import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.server.browserlaunchers.Sleeper;
@@ -12,6 +18,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
+import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -193,7 +200,116 @@ public class Device {
     public static class TouchScreen {
 
         /**
-         * Gets the device window size.
+         * Timeout waiting for element appears while scrolling
+         */
+        private static final long SCROLL_TIMEOUT_MILLIS = Integer.parseInt(
+                PropertyLoader.get(PropertyLoader.Property.SCROLL_TIMEOUT, "120000"));
+
+        /**
+         * Perform scroll on the screen
+         *
+         * @param direction the direction to scroll to
+         */
+        public static void scroll(Direction direction) {
+            switch (DeviceManager.getCurrentDevice().getDeviceType().os()) {
+                case IOS:
+                    String scrollUIAJavaScript = "var mainWin = '$.mainApp().mainWindow()';"
+                            + "var isValid = '.isValid()';"
+                            // define different scrollable containers
+                            + "var firstCollView = mainWin + '.collectionViews()[0]';"
+                            + "var firstTableView = mainWin + '.tableViews()[0]';"
+                            + "var firstScrollView = mainWin + '.scrollViews()[0]';"
+                            + "var scrollableView = firstCollView;"
+                            // checks if we have UIACollectionView or UIATableView or UIAScrollView container
+                            + "if (eval(firstCollView + isValid))"
+                            + "		scrollableView = firstCollView;"
+                            + "else if (eval(firstTableView + isValid))"
+                            + "		scrollableView = firstTableView;"
+                            + "else if (eval(firstScrollView + isValid))"
+                            + "		scrollableView = firstScrollView;"
+                            // perform scroll using one of the methods:
+                            // scrollUp(), scrollDown(), scrollLeft() or scrollRight()
+                            + "eval(scrollableView + '.scroll' + '" + direction.getDir() + "()');";
+                    try {
+                        DriverManager.getDriver().executeScript(scrollUIAJavaScript);
+                    } catch (WebDriverException ignoredException) {
+                    }
+                    break;
+                case ANDROID:
+                    swipe(direction.getStartX(), direction.getStartY(), direction.getEndX(), direction.getEndY(), 1);
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        /**
+         * Scroll in specified direction until element became visible
+         * Element may not exist at all
+         *
+         * @param element   the {@link Touchable} element to scroll to
+         * @param direction the {@link Direction} direction
+         */
+        public static void scrollToVisible(Touchable element, Direction direction) {
+            long startTime = System.currentTimeMillis();
+            long endTime = startTime + SCROLL_TIMEOUT_MILLIS;
+
+            while (!element.isDisplayed() &&
+                    System.currentTimeMillis() < endTime) {
+                scroll(direction);
+            }
+        }
+
+        /**
+         * Perform swipe on the screen. Coordinate should be in pixels or [0.0,1.0) units
+         *
+         * @param startX   x coordinate where swipe begins
+         * @param startY   y coordinate where swipe begins
+         * @param endX     x coordinate where swipe ends
+         * @param endY     y coordinate where swipe ends
+         * @param duration time (in seconds) to spend performing the swipe/drag<br>
+         */
+        public static void swipe(double startX, double startY, double endX, double endY, double duration) {
+            if (startX < 1.0 && startY < 1.0 && endX < 1.0 && endY < 1.0) {
+                Dimension size = getSize();
+                startX *= size.width;
+                startY *= size.height;
+                endX *= size.width;
+                endY *= size.height;
+            }
+
+            // appium converts press-wait-moveto-release to a swipe action
+            TouchAction touchAction = new TouchAction(DriverManager.getDriver());
+            touchAction.press((int) startX, (int) startY)
+                    .waitAction((Duration.ofMillis((int) duration * 1000)))
+                    .moveTo((int) endX, (int) endY)
+                    .release()
+                    .perform();
+        }
+
+        /**
+         * Perform tap on the screen. Coordinate should be in pixels or <b>[0.0,1.0)</b> units.
+         *
+         * @param x        x coordinate to tap
+         * @param y        y coordinate to tap
+         * @param duration how long (in seconds) to tap
+         */
+        public static void tap(double x, double y, double duration) {
+            if (x < 1.0 && y < 1.0) {
+                Dimension size = getSize();
+                x *= size.width;
+                y *= size.height;
+            }
+
+            TouchAction touchAction = new TouchAction(DriverManager.getDriver());
+            // appium converts press-release
+            touchAction
+                    .tap((int) x, (int) y)
+                    .perform();
+        }
+
+        /**
+         * Gets the device window size
          *
          * @return the size
          */
