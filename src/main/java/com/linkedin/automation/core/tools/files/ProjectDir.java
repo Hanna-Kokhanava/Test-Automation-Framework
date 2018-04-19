@@ -30,9 +30,10 @@ public class ProjectDir {
     }
 
     /**
-     * Returns project resource file or null if resource wasn't found
+     * Gets defined resource as file or null if resource was not found
      *
-     * @param identifier - name of requested project resource
+     * @param identifier resource
+     * @return file of target resource
      */
     @Nullable
     public static File getProjectResource(String identifier) {

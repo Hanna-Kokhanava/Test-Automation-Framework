@@ -1,12 +1,16 @@
 package com.linkedin.automation.core.device;
 
 import com.linkedin.automation.core.driver.managers.DriverManager;
+import com.linkedin.automation.core.tools.commands.Command;
+import com.linkedin.automation.core.tools.commands.CommandExecutor;
 import com.linkedin.automation.core.tools.files.ProjectDir;
 import com.linkedin.automation.core.tools.files.PropertyLoader;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DeviceManager {
 
@@ -19,7 +23,7 @@ public class DeviceManager {
     /**
      * Gets list of all {@link Device} items from devices.xml
      */
-    private static final List<Device> devicesList = ProjectDir.readFromResource(Devices.class,
+    private static final List<Device> actualDevicesList = ProjectDir.readFromResource(Devices.class,
             PropertyLoader.get(PropertyLoader.Property.DEVICES_XML)).devicesList;
 
     private static final ThreadLocal<Device> currentDevice = new ThreadLocal<>();
@@ -50,7 +54,7 @@ public class DeviceManager {
      * @param udid device UDID
      */
     public static Device getDevice(String udid) {
-        for (Device device : devicesList) {
+        for (Device device : actualDevicesList) {
             if (device.getDeviceUDID().equalsIgnoreCase(udid)) {
                 return device;
             }
@@ -121,5 +125,40 @@ public class DeviceManager {
 
     private static boolean isExactMatch(String deviceName, String matchAgainst) {
         return matchAgainst.equals(deviceName);
+    }
+
+
+    //For GRID
+
+    /**
+     * Get list of {@link Device} from XML file with {@link Device.DeviceType} extracted from config properties
+     *
+     * @return {@link Device} list
+     */
+    public static List<Device> getDevicesListByConfigType() {
+        List<Device> devices = actualDevicesList.stream().filter(device -> getDeviceTypeFromConfigFile() ==
+                device.getDeviceType()).collect(Collectors.toList());
+
+        if (!devices.isEmpty()) {
+            return devices;
+        }
+        throw new RuntimeException("Device [" + getDeviceTypeFromConfigFile() + "] not found");
+    }
+
+    /**
+     * Check is device connected to appium host machine
+     *
+     * @param device checkable device
+     * @return {@code true} if connected
+     */
+    public static boolean isDeviceConnectedToHostMachine(Device device) {
+        String commandResult;
+        if (device.isAndroid()) {
+            commandResult = CommandExecutor.execute(device.getAppiumHostMachine(), Command.ADB_DEVICES_UDID_LIST);
+        } else {
+            commandResult = CommandExecutor.execute(device.getAppiumHostMachine(), Command.IOS_IDEVICE_UDID_LIST);
+        }
+        List<String> devicesUDID = Arrays.asList(commandResult.split("\n"));
+        return devicesUDID.contains(device.getDeviceUDID());
     }
 }

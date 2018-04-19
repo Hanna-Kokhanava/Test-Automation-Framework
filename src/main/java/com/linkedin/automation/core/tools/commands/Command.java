@@ -11,6 +11,9 @@ public enum Command {
     SYSTEM_GET_OS_NAME("sw_vers", "ver"),
     SYSTEM_TEMPLATE_KILL_PID("taskkill /PID %s /F"),
 
+    ADB_DEVICES_UDID_LIST("adb devices | awk '!/grep/{print $1}' | grep -v 'List'"),
+    IOS_IDEVICE_UDID_LIST("idevice_id --list"),
+
     CD("cd %s; ");
 
     private String macCommand;

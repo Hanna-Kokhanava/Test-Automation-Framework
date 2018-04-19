@@ -1,79 +1,82 @@
 package com.linkedin.automation.core.tools.files;
 
-import org.apache.commons.io.FileUtils;
+import com.linkedin.automation.core.tools.HostMachine;
 
+import javax.annotation.Nonnull;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created on 01.04.2018
  */
-public class FileManager {
+public abstract class FileManager {
 
-    public enum ResultFolder {
-        APPIUM_FOLDER("appium");
+    private static Map<HostMachine, FileManager> managerMap = new HashMap<>();
+    protected final HostMachine hostMachine;
 
-        private String folderName;
-
-        ResultFolder(String folderName) {
-            this.folderName = folderName;
-        }
-
-        @Override
-        public String toString() {
-            return this.folderName;
-        }
-
-        public File getLocalDir() {
-            return getDirectory(getRootProjectDir(), this);
-        }
+    FileManager(HostMachine hostMachine) {
+        this.hostMachine = hostMachine;
     }
 
-    public static boolean isFileExist(ResultFolder folder, File file, String filename) {
-        File[] files = folder.getLocalDir().listFiles();
-        if (files == null) {
-            return false;
+    public static FileManager getInstance(HostMachine hostMachine) {
+        if (!managerMap.containsKey(hostMachine)) {
+            FileManager instance = hostMachine.isRemote() ? new RemoteFileManager(hostMachine) : new LocalFileManager();
+            managerMap.put(hostMachine, instance);
         }
-
-        for (File folderFile : files) {
-            if (folderFile.length() == file.length() && folderFile.getName().equals(filename)) {
-                return true;
-            }
-        }
-        return false;
+        return managerMap.get(hostMachine);
     }
 
-    public static void copyFile(ResultFolder targetFolder, File sourceFile, String targetFilename) {
-        try {
-            File dest = new File(getDirectory(getRootProjectDir(), targetFolder)
-                    + File.separator + targetFilename);
-            dest.delete();
-            FileUtils.copyFile(sourceFile, dest);
-        } catch (IOException e) {
-            System.out.println("Error while trying to copy file...");
-        }
+    /**
+     * Copy file to folder
+     *
+     * @param targetFolderPath to which folder file must be copied
+     * @param sourceFile       {@link File} which local file must be copied
+     * @param targetFilename   how copied file must be named
+     */
+    abstract void copyFile(String targetFolderPath, File sourceFile, @Nonnull String targetFilename);
+
+    public void copyFile(ResultFolder targetFolder, File sourceFile, @Nonnull String targetFilename) {
+        copyFile(targetFolder.getPathToFolder(hostMachine), sourceFile, targetFilename);
     }
 
-    private static File getSubProjectDir(Class<?> clazz) {
-        String pathBuildClass = clazz.getProtectionDomain().getCodeSource().getLocation().getPath();
-        return new File(pathBuildClass.replaceFirst("\\/(build|out)\\/.*", ""));
+    /**
+     * Check what file exist and same on machine.
+     *
+     * @param folderPath in which folder need to check file
+     * @param file       verifiable file must be the same as local {@link File}
+     * @param filename   how verifiable file must be named
+     * @return {@code true} if verifiable file have the same filename and file size
+     */
+    abstract boolean isFileExist(String folderPath, File file, String filename);
+
+    public boolean isFileExist(ResultFolder targetFolder, File sourceFile, String filename) {
+        return isFileExist(targetFolder.getPathToFolder(hostMachine), sourceFile, filename);
     }
 
-    private static File getRootProjectDir() {
-        File dir = new File(System.getProperty("user.dir"));
-        File subProjectDir = getSubProjectDir(FileManager.class);
-        if (dir.equals(subProjectDir) || !dir.equals(subProjectDir.getParentFile())) {
-            return dir.getParentFile();
-        }
-        return dir;
+    /**
+     * Remove file in root directory on remote machine
+     *
+     * @param folderPath in which folder need to remove file
+     * @param filename   which file must be removed
+     */
+    abstract void removeFile(String folderPath, @Nonnull String filename);
+
+    public void removeFile(ResultFolder folder, @Nonnull String filename) {
+        removeFile(folder.getPathToFolder(hostMachine), filename);
     }
 
-    private static File getDirectory(File targetDir, ResultFolder folder) {
-        File directory = new File(targetDir, folder.toString());
-        if (!directory.exists() && !directory.mkdirs()) {
-            System.out.println(String.format("Unable to create destination folder: '%1$s'", targetDir.toString() + folder.toString()));
-            return null;
+    public static BufferedWriter getFileWriter(File file, OpenOption... options) throws IOException {
+        if (file == null || file.isDirectory()) {
+            System.out.println("Cannot append to file");
+            throw new RuntimeException("File is failed");
         }
-        return directory;
+        return Files.newBufferedWriter(Paths.get(file.toURI()), Charset.forName("UTF8"), options);
     }
 }

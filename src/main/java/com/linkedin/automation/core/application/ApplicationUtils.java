@@ -20,6 +20,9 @@ import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
  */
 public final class ApplicationUtils {
 
+    private ApplicationUtils() {
+    }
+
     /**
      * Detect application type based on driver type.
      *
