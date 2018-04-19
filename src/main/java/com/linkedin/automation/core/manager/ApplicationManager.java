@@ -15,9 +15,8 @@ public class ApplicationManager {
     private static File appFile = new File(PropertyLoader.get(PropertyLoader.Property.APP_PATH));
 
     public static String getAbsolutePath() {
-        return "./" + getFileName();
-//        File file = new File(APPIUM_FOLDER + File.separator + getFileName());
-//        return file.getAbsolutePath();
+        File file = new File(APPIUM_FOLDER + File.separator + getFileName());
+        return file.getAbsolutePath();
     }
 
     public static void uploadApp(HostMachine hostMachine) {
@@ -28,6 +27,7 @@ public class ApplicationManager {
             System.out.println(getFileName() + " is already exist in " + APPIUM_FOLDER + " folder on " + hostMachine.getHostname());
         }
     }
+
 
     private static String getFileName() {
         return appFile.getName().replace(" ", "");

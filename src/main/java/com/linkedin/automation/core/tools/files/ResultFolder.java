@@ -60,8 +60,9 @@ public enum ResultFolder {
      * @return absolute path to folder
      */
     public String getPathToFolder(HostMachine hostMachine) {
-        return (hostMachine != null && hostMachine.isRemote()) ? getRemoteDirPath(hostMachine) :
-                getLocalDir().getAbsolutePath();
+        return (hostMachine != null && hostMachine.isRemote())
+                ? getRemoteDirPath(hostMachine)
+                : getLocalDir().getAbsolutePath();
     }
 
     /**
