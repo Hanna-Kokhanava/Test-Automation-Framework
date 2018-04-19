@@ -10,7 +10,5 @@ repositories {
 }
 
 dependencies {
-    compile 'com.linkedin.automation:autotest-mobile-core:1.0.0'
-
-
+    compile 'com.linkedin.automation:automation-mobile-core:1.0.0'
 }

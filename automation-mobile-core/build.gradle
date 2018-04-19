@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.linkedin.automation'
+version = '1.0.0'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+compileJava {
+    options.incremental = true
+}
+
+
+repositories {
+    jcenter()
+    maven {
+        url "http://repo.jenkins-ci.org/releases"
+    }
+}
+
+ext.seleniumVersion = '2.53.0'
+ext.guiceVersion = '4.1.0'
+ext.htmlElementsVersion = '1.12'
+
+dependencies {
+    // Selenium Grid
+    compile "org.seleniumhq.selenium:selenium-server:$seleniumVersion"
+    // Appium
+    compile "io.appium:java-client:5.0.4"
+    // TestNG
+    compile 'org.testng:testng:6.10'
+    // Google Guice
+    compile "com.google.inject:guice:$guiceVersion",
+            "com.google.inject.extensions:guice-multibindings:$guiceVersion",
+            "com.google.inject.extensions:guice-assistedinject:$guiceVersion"
+    compile "ru.yandex.qatools.htmlelements:htmlelements-java:$htmlElementsVersion",
+            "ru.yandex.qatools.htmlelements:htmlelements-matchers:$htmlElementsVersion"
+}
