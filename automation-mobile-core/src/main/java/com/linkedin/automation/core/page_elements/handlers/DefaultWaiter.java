@@ -1,8 +1,8 @@
 package com.linkedin.automation.core.page_elements.handlers;
 
+import com.linkedin.automation.core.tools.files.PropertyLoader;
 import com.linkedin.automation.core.page_elements.interfaces.Availability;
 import com.linkedin.automation.core.page_elements.interfaces.Waiter;
-import com.linkedin.automation.core.tools.files.PropertyLoader;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.FluentWait;

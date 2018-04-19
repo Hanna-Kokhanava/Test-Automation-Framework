@@ -5,7 +5,6 @@ import com.linkedin.automation.core.device.DeviceManager;
 import com.linkedin.automation.core.driver.capabilities.AppiumCapabilities;
 import com.linkedin.automation.core.driver.managers.AppiumServerManager;
 import com.linkedin.automation.core.driver.managers.DriverManager;
-import io.appium.java_client.service.local.AppiumDriverLocalService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**

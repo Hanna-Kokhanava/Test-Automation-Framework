@@ -1,5 +1,5 @@
-group 'com.linkedin'
-version '1.0-SNAPSHOT'
+group 'com.linkedin.automation'
+version '1.0.0'
 
 apply plugin: 'java'
 
@@ -9,21 +9,8 @@ repositories {
     mavenCentral()
 }
 
-ext.seleniumVersion = '2.53.0'
-ext.guiceVersion = '4.1.0'
-ext.htmlElementsVersion = '1.12'
-
 dependencies {
-    // Selenium Grid
-    compile "org.seleniumhq.selenium:selenium-server:$seleniumVersion"
-    // Appium
-    compile "io.appium:java-client:5.0.4"
-    // TestNG
-    compile 'org.testng:testng:6.10'
-    // Google Guice
-    compile "com.google.inject:guice:$guiceVersion",
-            "com.google.inject.extensions:guice-multibindings:$guiceVersion",
-            "com.google.inject.extensions:guice-assistedinject:$guiceVersion"
-    compile "ru.yandex.qatools.htmlelements:htmlelements-java:$htmlElementsVersion",
-            "ru.yandex.qatools.htmlelements:htmlelements-matchers:$htmlElementsVersion"
+    compile 'com.linkedin.automation:autotest-mobile-core:1.0.0'
+
+
 }

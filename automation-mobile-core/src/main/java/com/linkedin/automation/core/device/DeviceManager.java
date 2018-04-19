@@ -1,10 +1,10 @@
 package com.linkedin.automation.core.device;
 
-import com.linkedin.automation.core.driver.managers.DriverManager;
 import com.linkedin.automation.core.tools.commands.Command;
 import com.linkedin.automation.core.tools.commands.CommandExecutor;
 import com.linkedin.automation.core.tools.files.ProjectDir;
 import com.linkedin.automation.core.tools.files.PropertyLoader;
+import com.linkedin.automation.core.driver.managers.DriverManager;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

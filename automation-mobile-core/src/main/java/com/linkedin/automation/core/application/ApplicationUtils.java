@@ -1,19 +1,17 @@
 package com.linkedin.automation.core.application;
 
+import com.google.common.base.Preconditions;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.remote.MobileBrowserType;
+import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.remote.MobilePlatform;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.testng.util.Strings;
 
 import java.util.Objects;
-
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Strings.isNullOrEmpty;
-import static io.appium.java_client.remote.MobileBrowserType.*;
-import static io.appium.java_client.remote.MobileCapabilityType.APP;
-import static io.appium.java_client.remote.MobilePlatform.ANDROID;
-import static io.appium.java_client.remote.MobilePlatform.IOS;
-import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
 
 /**
  * Created on 17.04.2018
@@ -50,9 +48,9 @@ public final class ApplicationUtils {
      */
     private static boolean isNativeAndroidApp(WebDriver driver) {
         String platformName = ((AppiumDriver) driver).getPlatformName();
-        String app = getCapability(driver, APP);
-        return !isNullOrEmpty(app) && Objects.requireNonNull(platformName,
-                "Cannot get platform name from driver capabilities").equalsIgnoreCase(ANDROID);
+        String app = getCapability(driver, MobileCapabilityType.APP);
+        return !Strings.isNullOrEmpty(app) && Objects.requireNonNull(platformName,
+                "Cannot get platform name from driver capabilities").equalsIgnoreCase(MobilePlatform.ANDROID);
     }
 
     /**
@@ -63,9 +61,9 @@ public final class ApplicationUtils {
      */
     private static boolean isNativeIOSApp(WebDriver driver) {
         String platformName = ((AppiumDriver) driver).getPlatformName();
-        String app = getCapability(driver, APP);
-        return !isNullOrEmpty(app) && Objects.requireNonNull(platformName,
-                "Cannot get platform name from driver capabilities").equalsIgnoreCase(IOS);
+        String app = getCapability(driver, MobileCapabilityType.APP);
+        return !Strings.isNullOrEmpty(app) && Objects.requireNonNull(platformName,
+                "Cannot get platform name from driver capabilities").equalsIgnoreCase(MobilePlatform.IOS);
     }
 
     /**
@@ -75,10 +73,10 @@ public final class ApplicationUtils {
      * @return true, if it's web app
      */
     private static boolean isWebApp(WebDriver driver) {
-        String browserName = getCapability(driver, BROWSER_NAME);
-        return browserName.equalsIgnoreCase(CHROME)
-                || browserName.equalsIgnoreCase(CHROMIUM)
-                || browserName.equalsIgnoreCase(BROWSER);
+        String browserName = getCapability(driver, CapabilityType.BROWSER_NAME);
+        return browserName.equalsIgnoreCase(MobileBrowserType.CHROME)
+                || browserName.equalsIgnoreCase(MobileBrowserType.CHROMIUM)
+                || browserName.equalsIgnoreCase(MobileBrowserType.BROWSER);
     }
 
     /**
@@ -90,7 +88,7 @@ public final class ApplicationUtils {
      */
     private static String getCapability(WebDriver driver, String capabilityName) {
         Capabilities caps = ((HasCapabilities) driver).getCapabilities();
-        checkNotNull(caps);
+        Preconditions.checkNotNull(caps);
         return (String) caps.getCapability(capabilityName);
     }
 }

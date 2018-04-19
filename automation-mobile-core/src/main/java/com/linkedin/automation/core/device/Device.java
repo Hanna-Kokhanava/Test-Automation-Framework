@@ -2,8 +2,8 @@ package com.linkedin.automation.core.device;
 
 import com.google.gson.annotations.SerializedName;
 import com.linkedin.automation.core.device.functions.Key;
-import com.linkedin.automation.core.driver.managers.DriverManager;
 import com.linkedin.automation.core.tools.HostMachine;
+import com.linkedin.automation.core.driver.managers.DriverManager;
 import io.appium.java_client.remote.AutomationName;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriverException;
@@ -213,17 +213,17 @@ public class Device {
          *
          * @param actionKeys the action keys sequence
          */
-        public static void press(Key... actionKeys) {
+        public static void press(com.linkedin.automation.core.device.functions.Key... actionKeys) {
             DeviceType os = DeviceManager.getCurrentDevice().getDeviceType().os();
             switch (os) {
                 case ANDROID:
-                    for (Key key : actionKeys) {
+                    for (com.linkedin.automation.core.device.functions.Key key : actionKeys) {
                         DriverManager.getAndroidDriver().pressKeyCode(key.getAndroidCode());
                     }
                     break;
                 case IOS:
                     if (AutomationName.IOS_XCUI_TEST.equalsIgnoreCase(DriverManager.getDriver().getAutomationName())) {
-                        for (Key key : actionKeys) {
+                        for (com.linkedin.automation.core.device.functions.Key key : actionKeys) {
                             DriverManager.getIOSDriver().findElementByIosNsPredicate("name == \""
                                     + key.getIOSName() + "\" AND (type == \"XCUIElementTypeButton\" OR type == \"XCUIElementTypeKey\")").click();
                         }
@@ -231,7 +231,7 @@ public class Device {
                     }
 
                     // For UIAutomation
-                    for (Key key : actionKeys) {
+                    for (com.linkedin.automation.core.device.functions.Key key : actionKeys) {
                         String tapIOSKeyScript =
                                 "UIATarget.localTarget().frontMostApp().keyboard()"
                                         + ".elements().firstWithPredicate(\"name CONTAINS[c] '" + key.getIOSName().toLowerCase() + "'\").tap()";

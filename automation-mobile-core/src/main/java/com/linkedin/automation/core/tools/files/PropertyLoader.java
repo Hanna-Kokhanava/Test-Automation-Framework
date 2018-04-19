@@ -1,13 +1,13 @@
 package com.linkedin.automation.core.tools.files;
 
+import org.testng.util.Strings;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.Properties;
-
-import static com.google.common.base.Strings.isNullOrEmpty;
 
 /**
  * Created on 02.04.2018
@@ -83,15 +83,15 @@ public final class PropertyLoader {
 
     private static String get(String keyName) {
         String envVarValue = System.getenv(keyName);
-        if (!isNullOrEmpty(envVarValue))
+        if (!Strings.isNullOrEmpty(envVarValue))
             return envVarValue;
 
         String sysPropValue = System.getProperty(keyName);
-        if (!isNullOrEmpty(sysPropValue))
+        if (!Strings.isNullOrEmpty(sysPropValue))
             return sysPropValue;
 
         String propFromFile = PropertyLoader.getPropertyFromFile(keyName);
-        if (!isNullOrEmpty(propFromFile))
+        if (!Strings.isNullOrEmpty(propFromFile))
             return propFromFile;
 
         throw new NullPointerException("Unable to resolve '" + keyName + "' property value");
