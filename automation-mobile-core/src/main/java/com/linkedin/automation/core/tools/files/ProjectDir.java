@@ -23,10 +23,9 @@ public class ProjectDir {
      */
     public static File getRootProjectDir() {
         File dir = new File(System.getProperty("user.dir"));
-        //TODO will be necessary when there will be submodule for core
-//        File subProjectDir = getSubProjectDir(FileManager.class);
-//        if (dir.equals(subProjectDir) || !dir.equals(subProjectDir.getParentFile()))
-//            return dir.getParentFile();
+        File subProjectDir = getSubProjectDir(FileManager.class);
+        if (dir.equals(subProjectDir) || !dir.equals(subProjectDir.getParentFile()))
+            return dir.getParentFile();
         return dir;
     }
 

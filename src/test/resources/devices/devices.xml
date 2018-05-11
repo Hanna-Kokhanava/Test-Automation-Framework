@@ -16,12 +16,22 @@
         <appium hostname="localhost" username="" password="" port="4882"/>
     </device>
 
+    <device deviceName="Nexus tablet" deviceType="android-tablet" platformVersion="7.1"
+            udid="HT4ANJT05053">
+        <appium hostname="localhost" username="" password="" port="4884"/>
+    </device>
+
     <device deviceName="Samsung Galaxy S8 emulator" deviceType="android-phone" platformVersion="7.0"
             udid="192.168.56.101:5555">
         <appium hostname="localhost" username="" password="" port="4881"/>
     </device>
 
     <device deviceName="Tablet emulator" deviceType="android-tablet" platformVersion="7.0" udid="192.168.56.102:5555">
+        <appium hostname="localhost" username="" password="" port="4882"/>
+    </device>
+
+    <device deviceName="iPhone 6s 2" deviceType="iphone" platformVersion="10.2.1"
+            udid="774d8b942bf80fb402557ab8f802e4c538dfa1d7">
         <appium hostname="localhost" username="" password="" port="4882"/>
     </device>
 </devices>

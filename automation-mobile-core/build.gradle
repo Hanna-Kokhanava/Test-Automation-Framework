@@ -23,6 +23,7 @@ repositories {
 ext.seleniumVersion = '2.53.0'
 ext.guiceVersion = '4.1.0'
 ext.htmlElementsVersion = '1.12'
+ext.log4jVersion = '2.10.0'
 
 dependencies {
     // Selenium Grid
@@ -37,4 +38,10 @@ dependencies {
             "com.google.inject.extensions:guice-assistedinject:$guiceVersion"
     compile "ru.yandex.qatools.htmlelements:htmlelements-java:$htmlElementsVersion",
             "ru.yandex.qatools.htmlelements:htmlelements-matchers:$htmlElementsVersion"
+    // Log4j
+    compile "org.apache.logging.log4j:log4j-api:$log4jVersion",
+            "org.apache.logging.log4j:log4j-core:$log4jVersion",
+            "org.apache.logging.log4j:log4j-jul:$log4jVersion",
+            "org.apache.logging.log4j:log4j-slf4j-impl:$log4jVersion",
+            "org.apache.logging.log4j:log4j-jcl:$log4jVersion"
 }

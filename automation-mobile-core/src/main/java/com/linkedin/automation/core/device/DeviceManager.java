@@ -1,5 +1,6 @@
 package com.linkedin.automation.core.device;
 
+import com.linkedin.automation.core.logger.Logger;
 import com.linkedin.automation.core.tools.commands.Command;
 import com.linkedin.automation.core.tools.commands.CommandExecutor;
 import com.linkedin.automation.core.tools.files.ProjectDir;
@@ -45,7 +46,7 @@ public class DeviceManager {
     public static void setCurrentDevice(Device device) {
         currentDevice.remove();
         currentDevice.set(device);
-        System.out.println("Set current device: " + device);
+        Logger.info("Set current device: " + device.getDeviceName());
     }
 
     /**

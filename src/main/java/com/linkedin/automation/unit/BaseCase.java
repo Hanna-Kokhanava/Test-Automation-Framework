@@ -2,9 +2,12 @@ package com.linkedin.automation.unit;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.linkedin.automation.configuration.ServicesConfigModule;
 import com.linkedin.automation.core.creators.IDriverCreator;
+import com.linkedin.automation.core.device.DeviceManager;
 import com.linkedin.automation.core.driver.DriverModules;
 import com.linkedin.automation.core.driver.dependencies.IDependencies;
+import com.linkedin.automation.core.driver.managers.AppiumServerManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -22,7 +25,9 @@ public class BaseCase {
     }
 
     private void servicesInject() {
-        Guice.createInjector(new DriverModules())
+        Guice.createInjector(
+                new ServicesConfigModule(),
+                new DriverModules())
                 .injectMembers(this);
     }
 
@@ -39,5 +44,6 @@ public class BaseCase {
     @AfterClass(description = "Quit driver", alwaysRun = true)
     public void tearDown() {
         driverCreator.closeDriver();
+        AppiumServerManager.stopServer(DeviceManager.getCurrentDevice());
     }
 }

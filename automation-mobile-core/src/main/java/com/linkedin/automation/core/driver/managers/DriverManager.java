@@ -2,6 +2,7 @@ package com.linkedin.automation.core.driver.managers;
 
 import com.linkedin.automation.core.device.Device;
 import com.linkedin.automation.core.device.DeviceManager;
+import com.linkedin.automation.core.logger.Logger;
 import com.linkedin.automation.core.tools.HostMachine;
 import com.linkedin.automation.core.tools.files.PropertyLoader;
 import io.appium.java_client.AppiumDriver;
@@ -86,7 +87,7 @@ public class DriverManager {
     }
 
 
-    public static void createDriver(HostMachine host, DesiredCapabilities capabilities) throws Exception {
+    public static void createDriver(DesiredCapabilities capabilities) throws Exception {
         AppiumDriver driver;
         try {
             if (DeviceManager.getDeviceTypeFromConfigFile().os() == Device.DeviceType.ANDROID) {
@@ -97,7 +98,7 @@ public class DriverManager {
                         getDriverHost().getURIBuilder(URI_SCHEME).setPath(WD_SERVER_ROOT).build().toURL(), capabilities);
             }
         } catch (Exception e) {
-            System.out.println("Exception happened with create driver:\n" + e.getMessage());
+            Logger.warn("Exception happened with create driver:\n" + e.getMessage());
             throw e;
         }
         driverPool.set(driver);
@@ -112,7 +113,7 @@ public class DriverManager {
                 driverInstance.quit();
             }
         } catch (WebDriverException e) {
-            e.getStackTrace();
+            Logger.error("Oops, looks like the driver has quited a bit earlier", e);
         }
     }
 }
