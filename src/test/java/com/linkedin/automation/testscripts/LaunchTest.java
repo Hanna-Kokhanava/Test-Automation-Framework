@@ -1,5 +1,7 @@
 package com.linkedin.automation.testscripts;
 
+import com.google.inject.Inject;
+import com.linkedin.automation.pages.LoginPage;
 import com.linkedin.automation.unit.BaseCase;
 import org.testng.annotations.Test;
 
@@ -7,6 +9,8 @@ import org.testng.annotations.Test;
  * Created on 10.03.2018
  */
 public class LaunchTest extends BaseCase {
+    @Inject
+    private LoginPage loginPage;
 
     @Test(description = "Example test")
     public void login() {

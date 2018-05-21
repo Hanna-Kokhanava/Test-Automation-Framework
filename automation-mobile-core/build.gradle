@@ -44,4 +44,8 @@ dependencies {
             "org.apache.logging.log4j:log4j-jul:$log4jVersion",
             "org.apache.logging.log4j:log4j-slf4j-impl:$log4jVersion",
             "org.apache.logging.log4j:log4j-jcl:$log4jVersion"
+    // SSH client
+    compile 'com.jcraft:jsch:0.1.54'
+    // Zip4j
+    compile 'net.lingala.zip4j:zip4j:1.3.2'
 }

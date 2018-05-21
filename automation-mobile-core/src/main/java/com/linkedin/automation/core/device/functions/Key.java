@@ -11,8 +11,22 @@ public enum Key {
 
     /* IOS-specific control keys */
     GO("go", null),
-    HIDE("hide keyboard", null),
-    NEXT("next", null);
+    HIDE("Hide keyboard", null),
+    NEXT("next", null),
+    NUMBERS("more, numbers", null),
+    SYMBOLS("more, symbols", null),
+    LETTERS("more, letters", null),
+
+    /* Common control keys */
+    SHIFT("shift", 59),
+    SHIFT_RIGHT("shift", 60),
+    ENTER("return", 66),
+    DELETE("delete", 67),
+    SEARCH("Search", 84),
+
+    SPACE("space", 62),
+
+    MUTE(null, 164);
 
     /**
      * Android key code

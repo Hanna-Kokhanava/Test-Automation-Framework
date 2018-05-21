@@ -82,4 +82,15 @@ public class ProjectDir {
         String pathBuildClass = clazz.getProtectionDomain().getCodeSource().getLocation().getPath();
         return new File(pathBuildClass.replaceFirst("\\/(build|out)\\/.*", ""));
     }
+
+    /**
+     * Get absolute path to source class
+     *
+     * @param clazz class whose path need to return
+     * @return {@code String} path to source class
+     */
+    public static String getClassPath(Class<?> clazz) {
+        String sourceDirectory = "src.main.java.";
+        return getSubProjectDir(clazz).getAbsolutePath() + File.separator + (sourceDirectory + clazz.getPackage().getName()).replace(".", File.separator);
+    }
 }

@@ -37,11 +37,23 @@ public final class PropertyLoader {
 
         DRIVER_TYPE("driver.type"),
 
+        WAIT_SECONDS_FOR_SERVER_CONDITION("wait.server.condition"),
+
         DEVICE_READY_TIMEOUT("device.ready.timeout"),
 
         NEW_COMMAND_TIMEOUT("new.command.timeout"),
 
-        SCROLL_TIMEOUT("scroll.timeout");
+        SCROLL_TIMEOUT("scroll.timeout"),
+
+        /**
+         * Sign in to developer.apple.com/account, and click Membership in the sidebar.
+         */
+        XCODE_ORG_ID("xcode.org.id"),
+
+        /**
+         * Specifies the name of a code signing identity.
+         */
+        XCODE_SIGNING_ID("xcode.signing.id");
 
         private final String propKey;
 

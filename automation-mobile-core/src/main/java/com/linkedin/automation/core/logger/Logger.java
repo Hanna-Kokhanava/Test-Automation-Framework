@@ -18,6 +18,10 @@ public final class Logger {
         LOGGER.get().info(message, error);
     }
 
+    public static void info(String message, Object... object) {
+        LOGGER.get().info(message, object);
+    }
+
     public static void debug(String message) {
         LOGGER.get().debug(message);
     }
@@ -26,8 +30,16 @@ public final class Logger {
         LOGGER.get().debug(message, error);
     }
 
+    public static void debug(String message, Object... object) {
+        LOGGER.get().debug(message, object);
+    }
+
     public static void warn(String message) {
         LOGGER.get().warn(message);
+    }
+
+    public static void warn(String message, Throwable error) {
+        LOGGER.get().warn(message, error);
     }
 
     public static void warn(String message, Object... object) {
@@ -40,6 +52,10 @@ public final class Logger {
 
     public static void error(String message, Throwable error) {
         LOGGER.get().error(message, error);
+    }
+
+    public static void error(String message, Object... object) {
+        LOGGER.get().error(message, object);
     }
 
 }

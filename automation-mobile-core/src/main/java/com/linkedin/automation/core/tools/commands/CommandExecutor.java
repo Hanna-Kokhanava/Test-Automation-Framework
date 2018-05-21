@@ -2,6 +2,7 @@ package com.linkedin.automation.core.tools.commands;
 
 import com.linkedin.automation.core.tools.HostMachine;
 import com.linkedin.automation.core.tools.OS;
+import com.linkedin.automation.core.tools.files.ResultFolder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -58,6 +59,22 @@ public class CommandExecutor {
             e.printStackTrace();
         }
         return commandOutput;
+    }
+
+    /**
+     * Executes command on machine from folder
+     *
+     * @param hostMachine the HostMachine
+     * @param folderPath  from which folder execute
+     * @param command     the command
+     * @return result string
+     */
+    public static String executeCommandFromFolder(HostMachine hostMachine, String folderPath, String command) {
+        return execute(hostMachine, Command.CD.getCommand(folderPath) + command);
+    }
+
+    public static String executeCommandFromFolder(HostMachine hostMachine, ResultFolder folder, String command) {
+        return executeCommandFromFolder(hostMachine, folder.getPathToFolder(hostMachine), command);
     }
 
     private static OS getOsOfLocalMachine() {

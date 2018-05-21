@@ -1,9 +1,10 @@
 package com.linkedin.automation.core.device;
 
 import com.google.gson.annotations.SerializedName;
-import com.linkedin.automation.core.device.functions.Key;
-import com.linkedin.automation.core.tools.HostMachine;
 import com.linkedin.automation.core.driver.managers.DriverManager;
+import com.linkedin.automation.core.logger.Logger;
+import com.linkedin.automation.core.tools.HostMachine;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.remote.AutomationName;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriverException;
@@ -246,15 +247,17 @@ public class Device {
         public static void hideKeyboard() {
             try {
                 Sleeper.sleepTight(2);
-                DriverManager.getDriver().hideKeyboard();
-            } catch (WebDriverException e1) {
-                try {
-                    if (DeviceManager.getCurrentDevice().isIOS())
-                        press(Key.HIDE);
-                } catch (WebDriverException e2) {
-                    System.out.println("Keyboard already hide");
+                if (DeviceManager.getCurrentDevice().isIPhone()) {
+                    DriverManager.getIOSDriver().
+                            findElementByAccessibilityId("UIKeyboardAutomatic").
+                            findElements(MobileBy.iOSClassChain("**/XCUIElementTypeButton")).
+                            stream().reduce((first, second) -> second).orElseThrow(RuntimeException::new).
+                            click();
+                } else {
+                    DriverManager.getDriver().hideKeyboard();
                 }
-                System.out.println("Keyboard is hide");
+            } catch (WebDriverException e1) {
+                Logger.debug("Keyboard is hide");
             }
         }
     }

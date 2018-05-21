@@ -65,6 +65,13 @@ public class HostMachine {
         return hostname;
     }
 
+    public String getNumericHostname() {
+        if (hostname.equalsIgnoreCase("localhost")) {
+            this.hostname = "127.0.0.1";
+        }
+        return hostname;
+    }
+
     @XmlAttribute(name = "hostname")
     public void setHostname(String hostname) {
         String hostNameOfLocalhost = CommandExecutor.getHostNameOfLocalhost();

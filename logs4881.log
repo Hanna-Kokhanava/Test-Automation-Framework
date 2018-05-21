@@ -1,0 +1,392 @@
+2018-05-21 13:26:01:389 - info: [Appium] Welcome to Appium v1.8.0
+2018-05-21 13:26:01:391 - info: [Appium] Non-default server args:
+2018-05-21 13:26:01:391 - info: [Appium]   address: 127.0.0.1
+2018-05-21 13:26:01:391 - info: [Appium]   port: 4881
+2018-05-21 13:26:01:392 - info: [Appium]   sessionOverride: true
+2018-05-21 13:26:01:392 - info: [Appium]   log: /Users/hanna_kokhanava/Documents/Automated-Testing-Framework/logs4881.log
+2018-05-21 13:26:01:392 - info: [Appium]   defaultCapabilities: {
+2018-05-21 13:26:01:392 - info: [Appium]     platformVersion: 7
+2018-05-21 13:26:01:392 - info: [Appium]     udid: 0815f8330b0f3201
+2018-05-21 13:26:01:392 - info: [Appium]   }
+2018-05-21 13:26:01:393 - info: [Appium] Default capabilities, which will be added to each request unless overridden by desired capabilities:
+2018-05-21 13:26:01:394 - info: [Appium]   platformVersion: 7
+2018-05-21 13:26:01:394 - info: [Appium]   udid: 0815f8330b0f3201
+2018-05-21 13:26:01:419 - info: [Appium] Appium REST http interface listener started on 127.0.0.1:4881
+2018-05-21 13:26:01:695 - info: [HTTP] --> GET /wd/hub/status
+2018-05-21 13:26:01:695 - info: [HTTP] {}
+2018-05-21 13:26:01:697 - info: [debug] [MJSONWP] Calling AppiumDriver.getStatus() with args: []
+2018-05-21 13:26:01:709 - info: [debug] [MJSONWP] Responding to client with driver.getStatus() result: {"build":{"version":"1.8.0","revision":null}}
+2018-05-21 13:26:01:714 - info: [HTTP] <-- GET /wd/hub/status 200 16 ms - 83
+2018-05-21 13:26:01:714 - info: [HTTP] 
+2018-05-21 13:26:03:688 - info: [HTTP] --> POST /wd/hub/session
+2018-05-21 13:26:03:689 - info: [HTTP] {"desiredCapabilities":{"appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"platformVersion":"7.0","automationName":"UIAutomator2","autoGrantPermissions":"true","platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},"requiredCapabilities":{},"capabilities":{"desiredCapabilities":{"appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"platformVersion":"7.0","automationName":"UIAutomator2","autoGrantPermissions":"true","platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},"requiredCapabilities":{},"alwaysMatch":{"platformName":"Android"},"firstMatch":[
+2018-05-21 13:26:03:690 - info: [debug] [MJSONWP] Calling AppiumDriver.createSession() with args: [{"appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"platformVersion":"7.0","automationName":"UIAutomator2","autoGrantPermissions":"true","platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},{},{"desiredCapabilities":{"appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"platformVersion":"7.0","automationName":"UIAutomator2","autoGrantPermissions":"true","platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},"requiredCapabilities":{},"alwaysMatch":{"platformName":"Android"},"firstMatch":[]}]
+2018-05-21 13:26:03:691 - info: [debug] [BaseDriver] Event 'newSessionRequested' logged at 1526909163691 (16:26:03 GMT+0300 (+03))
+2018-05-21 13:26:03:695 - warn: [BaseDriver] The capabilities ["platformVersion","udid"] are not standard capabilities and should have an extension prefix
+2018-05-21 13:26:03:705 - warn: [Appium] Could not parse W3C capabilities: 'deviceName' can't be blank. Falling back to JSONWP protocol.
+2018-05-21 13:26:03:707 - warn: [Appium] The following capabilities were provided in the JSONWP desired capabilities that are missing in W3C capabilities: ["platformVersion","udid","appPackage","appActivity","app","noReset","newCommandTimeout","automationName","autoGrantPermissions","platformName","deviceReadyTimeout","fullReset","deviceName"]. Falling back to JSONWP protocol.
+2018-05-21 13:26:03:710 - info: [Appium] Creating new AndroidUiautomator2Driver (v1.9.0) session
+2018-05-21 13:26:03:710 - info: [Appium] Capabilities:
+2018-05-21 13:26:03:711 - info: [Appium]   platformVersion: 7.0
+2018-05-21 13:26:03:711 - info: [Appium]   udid: 0815f8330b0f3201
+2018-05-21 13:26:03:711 - info: [Appium]   appPackage: com.linkedin.android
+2018-05-21 13:26:03:711 - info: [Appium]   appActivity: com.linkedin.android.authenticator.LaunchActivity
+2018-05-21 13:26:03:712 - info: [Appium]   app: /Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk
+2018-05-21 13:26:03:712 - info: [Appium]   noReset: false
+2018-05-21 13:26:03:712 - info: [Appium]   newCommandTimeout: 1200
+2018-05-21 13:26:03:712 - info: [Appium]   automationName: UIAutomator2
+2018-05-21 13:26:03:713 - info: [Appium]   autoGrantPermissions: true
+2018-05-21 13:26:03:713 - info: [Appium]   platformName: Android
+2018-05-21 13:26:03:713 - info: [Appium]   deviceReadyTimeout: 120
+2018-05-21 13:26:03:713 - info: [Appium]   fullReset: true
+2018-05-21 13:26:03:713 - info: [Appium]   deviceName: ANDROID_PHONE
+2018-05-21 13:26:03:720 - info: [debug] [BaseDriver] Creating session with MJSONWP desired capabilities: {"platformVersion":"7.0","u...
+2018-05-21 13:26:03:724 - warn: [BaseDriver] Capability 'autoGrantPermissions' changed from string to boolean. This may cause unexpected behavior
+2018-05-21 13:26:03:730 - info: [BaseDriver] Session created with session id: d0d953b3-6820-4c56-971c-f8a85a3851a8
+2018-05-21 13:26:03:770 - info: [BaseDriver] Using local app '/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk'
+2018-05-21 13:26:03:772 - info: [debug] [UiAutomator2] Checking whether app is actually present
+2018-05-21 13:26:03:781 - info: [debug] [AndroidDriver] Getting Java version
+2018-05-21 13:26:03:977 - info: [AndroidDriver] Java version is: 1.8.0_172
+2018-05-21 13:26:03:980 - info: [ADB] Checking whether adb is present
+2018-05-21 13:26:03:991 - info: [ADB] Found 3 'build-tools' folders under '/Users/hanna_kokhanava/Library/Android/sdk' (newest first):
+2018-05-21 13:26:03:991 - info: [ADB]     /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2
+2018-05-21 13:26:03:991 - info: [ADB]     /Users/hanna_kokhanava/Library/Android/sdk/build-tools/27.0.2
+2018-05-21 13:26:03:991 - info: [ADB]     /Users/hanna_kokhanava/Library/Android/sdk/build-tools/26.0.1
+2018-05-21 13:26:03:992 - info: [ADB] Using adb from /Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb
+2018-05-21 13:26:03:992 - info: [AndroidDriver] Retrieving device list
+2018-05-21 13:26:03:993 - info: [debug] [ADB] Trying to find a connected android device
+2018-05-21 13:26:03:995 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:04:015 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:04:016 - info: [AndroidDriver] Using device: 0815f8330b0f3201
+2018-05-21 13:26:04:018 - info: [ADB] Checking whether adb is present
+2018-05-21 13:26:04:019 - info: [ADB] Using adb from /Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb
+2018-05-21 13:26:04:019 - info: [debug] [ADB] Setting device id to 0815f8330b0f3201
+2018-05-21 13:26:04:021 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:04:042 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:04:044 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell getprop ro.build.version.sdk'
+2018-05-21 13:26:04:224 - info: [debug] [ADB] Current device property 'ro.build.version.sdk': 24
+2018-05-21 13:26:04:224 - info: [debug] [ADB] Device API level: 24
+2018-05-21 13:26:04:225 - info: [ADB] Getting device platform version
+2018-05-21 13:26:04:225 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:04:241 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:04:241 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell getprop ro.build.version.release'
+2018-05-21 13:26:04:377 - info: [debug] [ADB] Current device property 'ro.build.version.release': 7.0
+2018-05-21 13:26:04:378 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:04:394 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:04:394 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell wm size'
+2018-05-21 13:26:05:894 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:05:919 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:05:920 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell wm density'
+2018-05-21 13:26:06:690 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:06:705 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:06:705 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell getprop ro.product.model'
+2018-05-21 13:26:06:788 - info: [debug] [ADB] Current device property 'ro.product.model': SM-G920F
+2018-05-21 13:26:06:789 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:06:810 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:06:810 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell getprop ro.product.manufacturer'
+2018-05-21 13:26:06:893 - info: [debug] [ADB] Current device property 'ro.product.manufacturer': samsung
+2018-05-21 13:26:06:895 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:06:914 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:06:914 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell am force-stop io.appium.uiautomator2.server'
+2018-05-21 13:26:07:849 - info: [debug] [ADB] Checking app cert for /usr/local/lib/node_modules/appium/node_modules/appium-uiautomator2-server/apks/appium-uiautomator2-server-v1.7.0.apk
+2018-05-21 13:26:07:851 - info: [ADB] Using apksigner from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/apksigner
+2018-05-21 13:26:07:854 - info: [ADB] Using apksigner from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/apksigner
+2018-05-21 13:26:07:855 - info: [debug] [ADB] Starting '/Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/apksigner' with args 'verify,--print-certs,/usr/local/lib/node_modules/appium/node_modules/appium-uiautomator2-server/apks/appium-uiautomator2-server-v1.7.0.apk'
+2018-05-21 13:26:08:352 - info: [debug] [ADB] '/usr/local/lib/node_modules/appium/node_modules/appium-uiautomator2-server/apks/appium-uiautomator2-server-v1.7.0.apk' is already signed.
+2018-05-21 13:26:08:353 - info: [debug] [ADB] Checking app cert for /usr/local/lib/node_modules/appium/node_modules/appium-uiautomator2-server/apks/appium-uiautomator2-server-debug-androidTest.apk
+2018-05-21 13:26:08:355 - info: [ADB] Using apksigner from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/apksigner
+2018-05-21 13:26:08:356 - info: [ADB] Using apksigner from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/apksigner
+2018-05-21 13:26:08:356 - info: [debug] [ADB] Starting '/Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/apksigner' with args 'verify,--print-certs,/usr/local/lib/node_modules/appium/node_modules/appium-uiautomator2-server/apks/appium-uiautomator2-server-debug-androidTest.apk'
+2018-05-21 13:26:08:906 - info: [debug] [ADB] '/usr/local/lib/node_modules/appium/node_modules/appium-uiautomator2-server/apks/appium-uiautomator2-server-debug-androidTest.apk' is already signed.
+2018-05-21 13:26:08:908 - info: [debug] [ADB] Getting install status for io.appium.uiautomator2.server
+2018-05-21 13:26:08:908 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:08:930 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:08:930 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell pm list packages io.appium.uiautomator2.server'
+2018-05-21 13:26:09:770 - info: [debug] [ADB] App is installed
+2018-05-21 13:26:09:772 - info: [debug] [ADB] Getting package info for 'io.appium.uiautomator2.server'
+2018-05-21 13:26:09:772 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:09:794 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:09:794 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell dumpsys package io.appium.uiautomator2.server'
+2018-05-21 13:26:09:851 - info: [ADB] Checking whether aapt is present
+2018-05-21 13:26:09:853 - info: [ADB] Using aapt from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/aapt
+2018-05-21 13:26:09:866 - info: [debug] [ADB] The installed 'io.appium.uiautomator2.server' package does not require upgrade ('1.7.0' >= '1.7.0')
+2018-05-21 13:26:09:867 - info: [debug] [ADB] Getting install status for io.appium.uiautomator2.server.test
+2018-05-21 13:26:09:867 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:09:898 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:09:899 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell pm list packages io.appium.uiautomator2.server.test'
+2018-05-21 13:26:10:811 - info: [debug] [ADB] App is installed
+2018-05-21 13:26:10:811 - info: [debug] [ADB] Getting package info for 'io.appium.uiautomator2.server.test'
+2018-05-21 13:26:10:811 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:10:827 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:10:828 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell dumpsys package io.appium.uiautomator2.server.test'
+2018-05-21 13:26:10:908 - info: [ADB] Checking whether aapt is present
+2018-05-21 13:26:10:910 - info: [ADB] Using aapt from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/aapt
+2018-05-21 13:26:10:919 - warn: [ADB] Cannot read version codes of '/usr/local/lib/node_modules/appium/node_modules/appium-uiautomator2-server/apks/appium-uiautomator2-server-debug-androidTest.apk' and/or 'io.appium.uiautomator2.server.test'
+2018-05-21 13:26:10:920 - warn: [ADB] Cannot read version names of '/usr/local/lib/node_modules/appium/node_modules/appium-uiautomator2-server/apks/appium-uiautomator2-server-debug-androidTest.apk' and/or 'io.appium.uiautomator2.server.test'. Assuming correct app version is already installed
+2018-05-21 13:26:10:920 - info: [debug] [UiAutomator2] Waiting up to 20000ms for instrumentation 'io.appium.uiautomator2.server.test/android.support.test.runner.AndroidJUnitRunner' to be available
+2018-05-21 13:26:10:921 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:10:939 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:10:940 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell pm list instrumentation'
+2018-05-21 13:26:11:760 - info: [debug] [UiAutomator2] Instrumentation 'io.appium.uiautomator2.server.test/android.support.test.runner.AndroidJUnitRunner' available
+2018-05-21 13:26:11:761 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 wait-for-device'
+2018-05-21 13:26:11:776 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:11:792 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:11:793 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell echo ping'
+2018-05-21 13:26:11:854 - info: [debug] [AndroidDriver] Pushing settings apk to device...
+2018-05-21 13:26:11:855 - info: [debug] [ADB] Getting install status for io.appium.settings
+2018-05-21 13:26:11:855 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:11:872 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:11:873 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell pm list packages io.appium.settings'
+2018-05-21 13:26:12:877 - info: [debug] [ADB] App is installed
+2018-05-21 13:26:12:877 - info: [debug] [ADB] Getting package info for 'io.appium.settings'
+2018-05-21 13:26:12:877 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:12:896 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:12:897 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell dumpsys package io.appium.settings'
+2018-05-21 13:26:13:006 - info: [ADB] Checking whether aapt is present
+2018-05-21 13:26:13:009 - info: [ADB] Using aapt from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/aapt
+2018-05-21 13:26:13:019 - info: [debug] [ADB] The installed 'io.appium.settings' package does not require upgrade ('2.3.0' >= '2.3.0')
+2018-05-21 13:26:13:021 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:13:036 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:13:036 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell ps'
+2018-05-21 13:26:13:211 - info: [debug] [ADB] Device API level: 24
+2018-05-21 13:26:13:212 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:13:228 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:13:228 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell am start -W -n io.appium.settings/.Settings -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -f 0x10200000'
+2018-05-21 13:26:14:567 - info: [debug] [ADB] Device API level: 24
+2018-05-21 13:26:14:567 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:14:582 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:14:583 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell appops set io.appium.settings android\:mock_location allow'
+2018-05-21 13:26:14:646 - warn: [AndroidDriver] setDeviceLanguageCountry requires language or country.
+2018-05-21 13:26:14:647 - warn: [AndroidDriver] Got language: 'null' and country: 'null'
+2018-05-21 13:26:14:648 - info: [debug] [Logcat] Starting logcat capture
+2018-05-21 13:26:14:686 - info: [debug] [AndroidDriver] Pushing unlock helper app to device...
+2018-05-21 13:26:14:686 - info: [debug] [ADB] Getting install status for io.appium.unlock
+2018-05-21 13:26:14:686 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:14:707 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:14:707 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell pm list packages io.appium.unlock'
+2018-05-21 13:26:15:442 - info: [debug] [ADB] App is installed
+2018-05-21 13:26:15:443 - info: [debug] [ADB] Getting package info for 'io.appium.unlock'
+2018-05-21 13:26:15:443 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:15:475 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:15:476 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell dumpsys package io.appium.unlock'
+2018-05-21 13:26:15:538 - info: [ADB] Checking whether aapt is present
+2018-05-21 13:26:15:543 - info: [ADB] Using aapt from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/aapt
+2018-05-21 13:26:15:557 - info: [debug] [ADB] The installed 'io.appium.unlock' package does not require upgrade ('2.0.0' >= '2.0.0')
+2018-05-21 13:26:15:558 - info: [debug] [UiAutomator2] Forwarding UiAutomator2 Server port 6790 to 8200
+2018-05-21 13:26:15:559 - info: [debug] [ADB] Forwarding system: 8200 to device: 6790
+2018-05-21 13:26:15:559 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 forward tcp\:8200 tcp\:6790'
+2018-05-21 13:26:15:590 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:15:616 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:15:616 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell rm -rf /data/local/tmp/strings.json'
+2018-05-21 13:26:15:679 - info: [debug] [AndroidDriver] Extracting strings from apk
+2018-05-21 13:26:15:680 - info: [debug] [AndroidDriver] /Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk
+2018-05-21 13:26:15:680 - info: [debug] [AndroidDriver] null
+2018-05-21 13:26:15:680 - info: [debug] [AndroidDriver] /var/folders/h5/wnn6lzv577b83m8v66y1t9fh0qkpmt/T/com.linkedin.android
+2018-05-21 13:26:15:683 - info: [debug] [ADB] Extracting strings for language: default
+2018-05-21 13:26:15:683 - info: [ADB] Checking whether aapt is present
+2018-05-21 13:26:15:688 - info: [ADB] Using aapt from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/aapt
+2018-05-21 13:26:18:172 - info: [ADB] Successfully extracted 5689 strings from '/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk' resources for '(default)' configuration
+2018-05-21 13:26:18:194 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 push /var/folders/h5/wnn6lzv577b83m8v66y1t9fh0qkpmt/T/com.linkedin.android/strings.json /data/local/tmp'
+2018-05-21 13:26:18:254 - info: [debug] [ADB] Uninstalling com.linkedin.android
+2018-05-21 13:26:18:255 - info: [debug] [ADB] Getting install status for com.linkedin.android
+2018-05-21 13:26:18:255 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:18:274 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:18:275 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell pm list packages com.linkedin.android'
+2018-05-21 13:26:19:245 - info: [debug] [ADB] App is not installed
+2018-05-21 13:26:19:245 - info: [ADB] com.linkedin.android was not uninstalled, because it was not present on the device
+2018-05-21 13:26:19:245 - info: [debug] [ADB] Checking app cert for /Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk
+2018-05-21 13:26:19:247 - info: [ADB] Using apksigner from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/apksigner
+2018-05-21 13:26:19:248 - info: [ADB] Using apksigner from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/apksigner
+2018-05-21 13:26:19:248 - info: [debug] [ADB] Starting '/Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/apksigner' with args 'verify,--print-certs,/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk'
+2018-05-21 13:26:20:817 - info: [debug] [ADB] '/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk' is not signed with debug cert.
+2018-05-21 13:26:20:819 - info: [ADB] Using apksigner from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/apksigner
+2018-05-21 13:26:20:821 - info: [debug] [ADB] Zip-aligning '/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk'
+2018-05-21 13:26:20:821 - info: [ADB] Checking whether zipalign is present
+2018-05-21 13:26:20:822 - info: [ADB] Using zipalign from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/zipalign
+2018-05-21 13:26:21:094 - info: [debug] [ADB] Signing '/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk' with default cert
+2018-05-21 13:26:21:096 - info: [ADB] Using apksigner from /Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/apksigner
+2018-05-21 13:26:21:096 - info: [debug] [ADB] Starting '/Users/hanna_kokhanava/Library/Android/sdk/build-tools/28.0.0-rc2/apksigner' with args 'sign,--key,/usr/local/lib/node_modules/appium/node_modules/appium-adb/keys/testkey.pk8,--cert,/usr/local/lib/node_modules/appium/node_modules/appium-adb/keys/testkey.x509.pem,/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk'
+2018-05-21 13:26:23:909 - info: [debug] [ADB] Getting install status for com.linkedin.android
+2018-05-21 13:26:23:909 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:23:931 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:23:931 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell pm list packages com.linkedin.android'
+2018-05-21 13:26:24:941 - info: [debug] [ADB] App is not installed
+2018-05-21 13:26:24:941 - info: [debug] [AndroidDriver] Running full reset on 'com.linkedin.android' (reinstall)
+2018-05-21 13:26:24:942 - info: [debug] [ADB] Device API level: 24
+2018-05-21 13:26:24:943 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 install -r -g /Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk'
+2018-05-21 13:26:39:453 - info: [debug] [ADB] Install command stdout: Success
+2018-05-21 13:26:39:455 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:39:473 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:39:474 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell am force-stop io.appium.uiautomator2.server'
+2018-05-21 13:26:40:441 - info: [UiAutomator2] Starting uiautomator2 server 1.7.0
+2018-05-21 13:26:40:443 - info: [UiAutomator2] Using UIAutomator2 server from '/usr/local/lib/node_modules/appium/node_modules/appium-uiautomator2-server/apks/appium-uiautomator2-server-v1.7.0.apk' and test from '/usr/local/lib/node_modules/appium/node_modules/appium-uiautomator2-server/apks/appium-uiautomator2-server-debug-androidTest.apk'
+2018-05-21 13:26:40:444 - info: [UiAutomator2] Running command: 'adb -s 0815f8330b0f3201 shell am instrument -w io.appium.uiautomator2.server.test/android.support.test.runner.AndroidJUnitRunner'
+2018-05-21 13:26:40:447 - info: [UiAutomator2] Waiting up to 20000ms for UiAutomator2 to be online...
+2018-05-21 13:26:40:450 - info: [debug] [JSONWP Proxy] Proxying [GET /status] to [GET http://localhost:8200/wd/hub/status] with no body
+2018-05-21 13:26:41:507 - info: [debug] [JSONWP Proxy] Proxying [GET /status] to [GET http://localhost:8200/wd/hub/status] with no body
+2018-05-21 13:26:42:513 - info: [debug] [JSONWP Proxy] Proxying [GET /status] to [GET http://localhost:8200/wd/hub/status] with no body
+2018-05-21 13:26:43:528 - info: [debug] [JSONWP Proxy] Proxying [GET /status] to [GET http://localhost:8200/wd/hub/status] with no body
+2018-05-21 13:26:44:535 - info: [debug] [JSONWP Proxy] Proxying [GET /status] to [GET http://localhost:8200/wd/hub/status] with no body
+2018-05-21 13:26:44:574 - info: [debug] [JSONWP Proxy] Got response with status 200: "{\"sessionId\":\"SESSIONID\",\"status\":0,\"value\":\"Status Invoked\"}"
+2018-05-21 13:26:44:574 - info: [debug] [JSONWP Proxy] Proxying [POST /session] to [POST http://localhost:8200/wd/hub/session] with body: {"desiredCapabilities":{"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","autoGrantPermissions":true,"platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","autoGrantPermissions":true,"platformNa...
+2018-05-21 13:26:44:597 - info: [debug] [JSONWP Proxy] Got response with status 200: {"sessionId":"3b146b21-99d6-4703-858d-63e35af49be3","status":0,"value":"Created Session"}
+2018-05-21 13:26:44:598 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:44:619 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:44:620 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell dumpsys window'
+2018-05-21 13:26:44:685 - info: [AndroidDriver] Screen already unlocked, doing nothing
+2018-05-21 13:26:44:685 - info: [UiAutomator2] UiAutomator2 did not start the activity we were waiting for, 'com.linkedin.android/com.linkedin.android.authenticator.LaunchActivity'. Starting it ourselves
+2018-05-21 13:26:44:686 - info: [debug] [ADB] Device API level: 24
+2018-05-21 13:26:44:686 - info: [debug] [ADB] Getting connected devices...
+2018-05-21 13:26:44:705 - info: [debug] [ADB] 1 device(s) connected
+2018-05-21 13:26:44:705 - info: [debug] [ADB] Running '/Users/hanna_kokhanava/Library/Android/sdk/platform-tools/adb -P 5037 -s 0815f8330b0f3201 shell am start -W -n com.linkedin.android/com.linkedin.android.authenticator.LaunchActivity -S -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -f 0x10200000'
+2018-05-21 13:26:46:965 - info: [debug] [JSONWP Proxy] Proxying [GET /appium/device/pixel_ratio] to [GET http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3/appium/device/pixel_ratio] with body: {}
+2018-05-21 13:26:46:984 - info: [debug] [JSONWP Proxy] Got response with status 200: "{\"sessionId\":\"3b146b21-99d6-4703-858d-63e35af49be3\",\"status\":0,\"value\":4}"
+2018-05-21 13:26:46:985 - info: [debug] [JSONWP Proxy] Proxying [GET /appium/device/system_bars] to [GET http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3/appium/device/system_bars] with body: {}
+2018-05-21 13:26:47:003 - info: [debug] [JSONWP Proxy] Got response with status 200: "{\"sessionId\":\"3b146b21-99d6-4703-858d-63e35af49be3\",\"status\":0,\"value\":{\"statusBar\":96}}"
+2018-05-21 13:26:47:007 - info: [debug] [JSONWP Proxy] Proxying [GET /window/current/size] to [GET http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3/window/current/size] with body: {}
+2018-05-21 13:26:47:032 - info: [debug] [JSONWP Proxy] Got response with status 200: "{\"sessionId\":\"3b146b21-99d6-4703-858d-63e35af49be3\",\"status\":0,\"value\":{\"height\":2560,\"width\":1440}}"
+2018-05-21 13:26:47:033 - info: [Appium] New AndroidUiautomator2Driver session created successfully, session d0d953b3-6820-4c56-971c-f8a85a3851a8 added to master session list
+2018-05-21 13:26:47:034 - info: [debug] [BaseDriver] Event 'newSessionStarted' logged at 1526909207034 (16:26:47 GMT+0300 (+03))
+2018-05-21 13:26:47:035 - info: [debug] [MJSONWP] Responding to client with driver.createSession() result: {"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","autoGrantPermissions":true,"platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","autoGrantPermissions":true,"platformName":"Android","deviceRe...
+2018-05-21 13:26:47:038 - info: [HTTP] <-- POST /wd/hub/session 200 43347 ms - 1399
+2018-05-21 13:26:47:038 - info: [HTTP] 
+2018-05-21 13:26:47:128 - info: [HTTP] --> POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/timeouts
+2018-05-21 13:26:47:128 - info: [HTTP] {"type":"implicit","ms":0}
+2018-05-21 13:26:47:132 - info: [debug] [W3C] Bad parameters: BadParametersError: Parameters were incorrect. We wanted "W3C protocol expects any of script, pageLoad or implicit to be set" and you sent {"type":"implicit","ms":0}
+2018-05-21 13:26:47:145 - info: [HTTP] <-- POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/timeouts 400 17 ms - 4189
+2018-05-21 13:26:47:147 - info: [HTTP] 
+2018-05-21 13:30:50:321 - info: [HTTP] --> GET /wd/hub/sessions
+2018-05-21 13:30:50:321 - info: [HTTP] {}
+2018-05-21 13:30:50:321 - info: [debug] [W3C] Calling AppiumDriver.getSessions() with args: []
+2018-05-21 13:30:50:323 - info: [debug] [W3C] Responding to client with driver.getSessions() result: [{"id":"d0d953b3-6820-4c56-971c-f8a85a3851a8","capabilities":{"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","autoGrantPermissions":true,"platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","...
+2018-05-21 13:30:50:324 - info: [HTTP] <-- GET /wd/hub/sessions 200 3 ms - 1400
+2018-05-21 13:30:50:324 - info: [HTTP] 
+2018-05-21 13:30:50:705 - info: [HTTP] --> GET /wd/hub/sessions
+2018-05-21 13:30:50:705 - info: [HTTP] {}
+2018-05-21 13:30:50:705 - info: [debug] [W3C] Calling AppiumDriver.getSessions() with args: []
+2018-05-21 13:30:50:707 - info: [debug] [W3C] Responding to client with driver.getSessions() result: [{"id":"d0d953b3-6820-4c56-971c-f8a85a3851a8","capabilities":{"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","autoGrantPermissions":true,"platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","...
+2018-05-21 13:30:50:709 - info: [HTTP] <-- GET /wd/hub/sessions 200 3 ms - 1400
+2018-05-21 13:30:50:709 - info: [HTTP] 
+2018-05-21 13:30:50:710 - info: [HTTP] --> GET /wd/hub/sessions
+2018-05-21 13:30:50:710 - info: [HTTP] {}
+2018-05-21 13:30:50:711 - info: [debug] [W3C] Calling AppiumDriver.getSessions() with args: []
+2018-05-21 13:30:50:712 - info: [debug] [W3C] Responding to client with driver.getSessions() result: [{"id":"d0d953b3-6820-4c56-971c-f8a85a3851a8","capabilities":{"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","autoGrantPermissions":true,"platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","...
+2018-05-21 13:30:50:713 - info: [HTTP] <-- GET /wd/hub/sessions 200 3 ms - 1400
+2018-05-21 13:30:50:713 - info: [HTTP] 
+2018-05-21 13:30:52:428 - info: [HTTP] --> GET /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8
+2018-05-21 13:30:52:428 - info: [HTTP] {}
+2018-05-21 13:30:52:429 - info: [debug] [W3C] Calling AppiumDriver.getSession() with args: ["d0d953b3-6820-4c56-971c-f8a85a3851a8"]
+2018-05-21 13:30:52:440 - info: [debug] [UiAutomator2] Getting session details from server to mix in
+2018-05-21 13:30:52:441 - info: [debug] [JSONWP Proxy] Proxying [GET /] to [GET http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3] with body: {}
+2018-05-21 13:30:52:476 - info: [debug] [JSONWP Proxy] Got response with status 200: "{\"sessionId\":\"3b146b21-99d6-4703-858d-63e35af49be3\",\"status\":0,\"value\":{}}"
+2018-05-21 13:30:52:478 - info: [debug] [W3C] Responding to client with driver.getSession() result: {"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","autoGrantPermissions":true,"platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","autoGrantPermissions":true,"platformName":"Android","deviceRe...
+2018-05-21 13:30:52:479 - info: [HTTP] <-- GET /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8 200 50 ms - 1399
+2018-05-21 13:30:52:481 - info: [HTTP] 
+2018-05-21 13:30:53:089 - info: [HTTP] --> GET /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/source
+2018-05-21 13:30:53:089 - info: [HTTP] {}
+2018-05-21 13:30:53:091 - info: [W3C] Driver proxy active, passing request on via HTTP proxy
+2018-05-21 13:30:53:093 - info: [debug] [JSONWP Proxy] Proxying [GET /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/source] to [GET http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3/source] with body: {}
+2018-05-21 13:30:53:485 - info: [debug] [JSONWP Proxy] Got response with status 200: "{\"sessionId\":\"3b146b21-99d6-4703-858d-63e35af49be3\",\"status\":0,\"value\":\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?><hierarchy rotation=\\\"0\\\"><android.widget.FrameLayout index=\\\"0\\\" text=\\\"\\\" class=\\\"android.widget.FrameLayout\\\" package=\\\"com.linkedin.android\\\" content-desc=\\\"\\\" checkable=\\\"false\\\" checked=\\\"false\\\" clickable=\\\"false\\\" enabled=\\\"true\\\" focusable=\\\"false\\\" focused=\\\"false\\\" scrollable=\\\"false\\\" long-clickable=\\\"false\\\" password=\\\"false\\\" selected=\\\"false\\\" bounds=\\\"[0,0][1440,2560]\\\" resource-id=\\\"\\\" instance=\\\"0\\\"><android.widget.LinearLayout index=\\\"0\\\" text=\\\"\\\" class=\\\"android.widget.LinearLayout\\\" package=\\\"com.linkedin.android\\\" content-desc=\\\"\\\" checkable=\\\"false\\\" checked=\\\"false\\\" clickable=\\\"false\\\" enabled=\\\"true\\\" focusable=\\\"false\\\" focused=\\\"false\\\" scrollable=\\\"false\\\" long-clickable=\\\"false\\\" password=\\\"false\\\" selected=\\\"false...
+2018-05-21 13:30:53:486 - info: [JSONWP Proxy] Replacing sessionId 3b146b21-99d6-4703-858d-63e35af49be3 with d0d953b3-6820-4c56-971c-f8a85a3851a8
+2018-05-21 13:30:53:487 - info: [HTTP] <-- GET /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/source 200 397 ms - 15313
+2018-05-21 13:30:53:487 - info: [HTTP] 
+2018-05-21 13:30:53:500 - info: [HTTP] --> GET /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/screenshot
+2018-05-21 13:30:53:501 - info: [HTTP] {}
+2018-05-21 13:30:53:501 - info: [debug] [W3C] Calling AppiumDriver.getScreenshot() with args: ["d0d953b3-6820-4c56-971c-f8a85a3851a8"]
+2018-05-21 13:30:53:502 - info: [debug] [JSONWP Proxy] Proxying [GET /screenshot] to [GET http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3/screenshot] with no body
+2018-05-21 13:30:54:200 - info: [debug] [JSONWP Proxy] Got response with status 200: "{\"sessionId\":\"3b146b21-99d6-4703-858d-63e35af49be3\",\"status\":0,\"value\":\"iVBORw0KGgoAAAANSUhEUgAABaAAAAoACAIAAADIlhKYAAAAA3NCSVQICAjb4U\\/gAAAgAElEQVR4\\nnOzdeXhU1d0H8N+5d\\/bsC0kIJIQ17DvKJgQVXEHcq7UKYq1Vq1jbqq1WtH1buljR+lbbVwXrVpcq\\nYLUsKlEBZd8hbElISMi+J7Pee94\\/bjK5s2aSzJKB7+fx6TNzc+fOSc6Q5nzvOb\\/DaMnLBAAAAAAA\\nAAAQzYRINwAAAAAAAAAAoLcQcAAAAAAAAABA1EPAAQAAAAAAAABRDwEHAAAAAAAAAEQ9BBwAAAAA\\nAAAAEPUQcAAAAAAAAABA1EPAAQAAAAAAAABRDwEHAAAAAAAAAEQ9BBwAAAAAAAAAEPUQcAAAAAAA\\nAABA1EPAAQAAAAAAAABRDwEHAAAAAAAAAEQ9BBwAAAAAAAAAEPUQcAAAAAAAAABA1EPAAQAAAAAA\\nAABRDwEHAAAAAAAAAEQ9BBwAAAAAAAAAEPUQcAAAAAAAAABA1EPAAQAAAAAAAABRDwEHAAAAAAAA\\nAEQ9BBwAAAAAAAAAEPUQcAAAAAAAAABA1NNEugEAAAAAANC1ubmZOalxOalxE7NTEk169Zca2qz7\\nS2qLa5qLa5q\\/Ol4eqRaG38Ts1P0lNZFuBfik14gpsYYAT65pMdscckjbA+c9BBwAAAAAAO6WzM6d\\nm5u59LUtkW1GTmrcdZNyFk8enDcy0\\/+ZiycPdj7OLyhfu7do3b7i4prmEDcwkpbMzl0yOzdv5fpI\\nNwR8Wjw5518\\/nh\\/gyde9uGH9vuJQNgfOfwg4ekgjCDF6DWMsgm3gnLdaHQ4ZMScAAACcnxJN+oY2\\na29evnpZ3uLJg59Zt3vF2t2Bv3DJ7NzVy+YpjyOScSSa9NdNylm+YN...
+2018-05-21 13:30:54:207 - info: [debug] [W3C] Responding to client with driver.getScreenshot() result: "iVBORw0KGgoAAAANSUhEUgAABaAAAAoACAIAAADIlhKYAAAAA3NCSVQICAjb4U/gAAAgAElEQVR4\nnOzdeXhU1d0H8N+5d/bsC0kIJIQ17DvKJgQVXEHcq7UKYq1Vq1jbqq1WtH1buljR+lbbVwXrVpcq\nYLUsKlEBZd8hbElISMi+J7Pee94/bjK5s2aSzJKB7+fx6TNzc+fOSc6Q5nzvOb/DaMnLBAAAAAAA\nAAAQzYRINwAAAAAAAAAAoLcQcAAAAAAAAABA1EPAAQAAAAAAAABRDwEHAAAAAAAAAEQ9BBwAAAAA\nAAAAEPUQcAAAAAAAAABA1EPAAQAAAAAAAABRDwEHAAAAAAAAAEQ9BBwAAAAAAAAAEPUQcAAAAAAA\nAABA1EPAAQAAAAAAAABRDwEHAAAAAAAAAEQ9BBwAAAAAAAAAEPUQcAAAAAAAAABA1EPAAQAAAAAA\nAABRDwEHAAAAAAAAAEQ9BBwAAAAAAAAAEPUQcAAAAAAAAABA1EPAAQAAAAAAAABRDwEHAAAAAAAA\nAEQ9BBwAAAAAAAAAEPUQcAAAAAAAAABA1NNEugEAAAAAANC1ubmZOalxOalxE7NTEk169Zca2qz7\nS2qLa5qLa5q/Ol4eqRaG38Ts1P0lNZFuBfik14gpsYYAT65pMdscckjbA+c9BBwAAAAAAO6WzM6d\nm5u59LUtkW1GTmrcdZNyFk8enDcy0/+ZiycPdj7OLyhfu7do3b7i4prmEDcwkpbMzl0yOzdv5fpI\nNwR8Wjw5518/nh/gyde9uGH9vuJQNgfOfwg4ekgjCDF6DWMsgm3gnLdaHQ4ZMScAAACcnxJN+oY2\na29evnpZ3uLJg59Zt3vF2t2Bv3DJ7NzVy+YpjyOScSSa9NdNylm+YNzE7NQevDxvZGbeyMxVt8/a\nX1KzatOhN7YdD3oLI07powtqugoAdCmKA46kGP38MQMnZaemxRttDvlsfcuO01XfnDhndUhhePfc\n/okrFk...
+2018-05-21 13:30:54:215 - info: [HTTP] <-- GET /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/screenshot 200 713 ms - 349232
+2018-05-21 13:30:54:216 - info: [HTTP] 
+2018-05-21 13:31:30:157 - info: [HTTP] --> POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/elements
+2018-05-21 13:31:30:157 - info: [HTTP] {"using":"id","value":"com.linkedin.android:id/action_bar_root"}
+2018-05-21 13:31:30:158 - info: [debug] [W3C] Calling AppiumDriver.findElements() with args: ["id","com.linkedin.android:id/action_bar_root","d0d953b3-6820-4c56-971c-f8a85a3851a8"]
+2018-05-21 13:31:30:159 - info: [debug] [BaseDriver] Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+2018-05-21 13:31:30:160 - info: [debug] [BaseDriver] Waiting up to 0 ms for condition
+2018-05-21 13:31:30:161 - info: [debug] [JSONWP Proxy] Proxying [POST /elements] to [POST http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3/elements] with body: {"strategy":"id","selector":"com.linkedin.android:id/action_bar_root","context":"","multiple":true}
+2018-05-21 13:31:30:266 - info: [debug] [JSONWP Proxy] Got response with status 200: {"sessionId":"3b146b21-99d6-4703-858d-63e35af49be3","status":0,"value":[{"ELEMENT":"c58df628-c4cf-41b4-9c2f-266cddd52db5"}]}
+2018-05-21 13:31:30:267 - info: [debug] [W3C] Responding to client with driver.findElements() result: [{"ELEMENT":"c58df628-c4cf-41b4-9c2f-266cddd52db5"}]
+2018-05-21 13:31:30:267 - info: [HTTP] <-- POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/elements 200 110 ms - 124
+2018-05-21 13:31:30:268 - info: [HTTP] 
+2018-05-21 13:31:32:650 - info: [HTTP] --> POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/elements
+2018-05-21 13:31:32:650 - info: [HTTP] {"using":"id","value":"com.linkedin.android:id/growth_prereg_v2_linkedin_logo_container"}
+2018-05-21 13:31:32:651 - info: [debug] [W3C] Calling AppiumDriver.findElements() with args: ["id","com.linkedin.android:id/growth_prereg_v2_linkedin_logo_container","d0d953b3-6820-4c56-971c-f8a85a3851a8"]
+2018-05-21 13:31:32:651 - info: [debug] [BaseDriver] Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+2018-05-21 13:31:32:652 - info: [debug] [BaseDriver] Waiting up to 0 ms for condition
+2018-05-21 13:31:32:652 - info: [debug] [JSONWP Proxy] Proxying [POST /elements] to [POST http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3/elements] with body: {"strategy":"id","selector":"com.linkedin.android:id/growth_prereg_v2_linkedin_logo_container","context":"","multiple":true}
+2018-05-21 13:31:32:744 - info: [debug] [JSONWP Proxy] Got response with status 200: {"sessionId":"3b146b21-99d6-4703-858d-63e35af49be3","status":0,"value":[{"ELEMENT":"c300488c-387c-4be0-8705-c98dec5da965"}]}
+2018-05-21 13:31:32:745 - info: [debug] [W3C] Responding to client with driver.findElements() result: [{"ELEMENT":"c300488c-387c-4be0-8705-c98dec5da965"}]
+2018-05-21 13:31:32:746 - info: [HTTP] <-- POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/elements 200 95 ms - 124
+2018-05-21 13:31:32:746 - info: [HTTP] 
+2018-05-21 13:31:34:506 - info: [HTTP] --> POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/elements
+2018-05-21 13:31:34:506 - info: [HTTP] {"using":"xpath","value":"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout[2]"}
+2018-05-21 13:31:34:507 - info: [debug] [W3C] Calling AppiumDriver.findElements() with args: ["xpath","/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout[2]","d0d953b3-6820-4c56-971c-f8a85a3851a8"]
+2018-05-21 13:31:34:507 - info: [debug] [BaseDriver] Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+2018-05-21 13:31:34:507 - info: [debug] [BaseDriver] Waiting up to 0 ms for condition
+2018-05-21 13:31:34:508 - info: [debug] [JSONWP Proxy] Proxying [POST /elements] to [POST http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3/elements] with body: {"strategy":"xpath","selector":"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout[2]","context":"","multiple":true}
+2018-05-21 13:31:34:697 - info: [debug] [JSONWP Proxy] Got response with status 200: {"sessionId":"3b146b21-99d6-4703-858d-63e35af49be3","status":0,"value":[{"ELEMENT":"20d4792f-2d71-4891-9a64-fd19c429c79b"}]}
+2018-05-21 13:31:34:700 - info: [debug] [W3C] Responding to client with driver.findElements() result: [{"ELEMENT":"20d4792f-2d71-4891-9a64-fd19c429c79b"}]
+2018-05-21 13:31:34:700 - info: [HTTP] <-- POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/elements 200 194 ms - 124
+2018-05-21 13:31:34:701 - info: [HTTP] 
+2018-05-21 13:31:37:729 - info: [HTTP] --> POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/elements
+2018-05-21 13:31:37:729 - info: [HTTP] {"using":"id","value":"com.linkedin.android:id/growth_prereg_v2_fragment_navigation_container"}
+2018-05-21 13:31:37:730 - info: [debug] [W3C] Calling AppiumDriver.findElements() with args: ["id","com.linkedin.android:id/growth_prereg_v2_fragment_navigation_container","d0d953b3-6820-4c56-971c-f8a85a3851a8"]
+2018-05-21 13:31:37:732 - info: [debug] [BaseDriver] Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+2018-05-21 13:31:37:732 - info: [debug] [BaseDriver] Waiting up to 0 ms for condition
+2018-05-21 13:31:37:733 - info: [debug] [JSONWP Proxy] Proxying [POST /elements] to [POST http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3/elements] with body: {"strategy":"id","selector":"com.linkedin.android:id/growth_prereg_v2_fragment_navigation_container","context":"","multiple":true}
+2018-05-21 13:31:37:805 - info: [debug] [JSONWP Proxy] Got response with status 200: {"sessionId":"3b146b21-99d6-4703-858d-63e35af49be3","status":0,"value":[{"ELEMENT":"829a19b2-536a-4f9c-b575-1671d5402082"}]}
+2018-05-21 13:31:37:805 - info: [debug] [W3C] Responding to client with driver.findElements() result: [{"ELEMENT":"829a19b2-536a-4f9c-b575-1671d5402082"}]
+2018-05-21 13:31:37:806 - info: [HTTP] <-- POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/elements 200 77 ms - 124
+2018-05-21 13:31:37:806 - info: [HTTP] 
+2018-05-21 13:31:42:395 - info: [HTTP] --> GET /wd/hub/sessions
+2018-05-21 13:31:42:395 - info: [HTTP] {}
+2018-05-21 13:31:42:396 - info: [debug] [W3C] Calling AppiumDriver.getSessions() with args: []
+2018-05-21 13:31:42:396 - info: [debug] [W3C] Responding to client with driver.getSessions() result: [{"id":"d0d953b3-6820-4c56-971c-f8a85a3851a8","capabilities":{"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","autoGrantPermissions":true,"platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","...
+2018-05-21 13:31:42:397 - info: [HTTP] <-- GET /wd/hub/sessions 200 1 ms - 1400
+2018-05-21 13:31:42:397 - info: [HTTP] 
+2018-05-21 13:31:42:397 - info: [HTTP] --> GET /wd/hub/sessions
+2018-05-21 13:31:42:398 - info: [HTTP] {}
+2018-05-21 13:31:42:398 - info: [debug] [W3C] Calling AppiumDriver.getSessions() with args: []
+2018-05-21 13:31:42:400 - info: [debug] [W3C] Responding to client with driver.getSessions() result: [{"id":"d0d953b3-6820-4c56-971c-f8a85a3851a8","capabilities":{"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","autoGrantPermissions":true,"platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","...
+2018-05-21 13:31:42:401 - info: [HTTP] <-- GET /wd/hub/sessions 200 3 ms - 1400
+2018-05-21 13:31:42:401 - info: [HTTP] 
+2018-05-21 13:31:42:402 - info: [HTTP] --> GET /wd/hub/sessions
+2018-05-21 13:31:42:402 - info: [HTTP] {}
+2018-05-21 13:31:42:402 - info: [debug] [W3C] Calling AppiumDriver.getSessions() with args: []
+2018-05-21 13:31:42:402 - info: [debug] [W3C] Responding to client with driver.getSessions() result: [{"id":"d0d953b3-6820-4c56-971c-f8a85a3851a8","capabilities":{"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","autoGrantPermissions":true,"platformName":"Android","deviceReadyTimeout":120,"fullReset":true,"deviceName":"ANDROID_PHONE"},"platformVersion":"7.0","udid":"0815f8330b0f3201","appPackage":"com.linkedin.android","appActivity":"com.linkedin.android.authenticator.LaunchActivity","app":"/Users/hanna_kokhanava/Documents/Automated-Testing-Framework/appium/Linkedin.apk","noReset":false,"newCommandTimeout":1200,"automationName":"UIAutomator2","...
+2018-05-21 13:31:42:403 - info: [HTTP] <-- GET /wd/hub/sessions 200 1 ms - 1400
+2018-05-21 13:31:42:403 - info: [HTTP] 
+2018-05-21 13:31:45:013 - info: [HTTP] --> POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/elements
+2018-05-21 13:31:45:013 - info: [HTTP] {"using":"id","value":"com.linkedin.android:id/growth_prereg_v2_fragment_join_button_secondary"}
+2018-05-21 13:31:45:013 - info: [debug] [W3C] Calling AppiumDriver.findElements() with args: ["id","com.linkedin.android:id/growth_prereg_v2_fragment_join_button_secondary","d0d953b3-6820-4c56-971c-f8a85a3851a8"]
+2018-05-21 13:31:45:014 - info: [debug] [BaseDriver] Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+2018-05-21 13:31:45:014 - info: [debug] [BaseDriver] Waiting up to 0 ms for condition
+2018-05-21 13:31:45:014 - info: [debug] [JSONWP Proxy] Proxying [POST /elements] to [POST http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3/elements] with body: {"strategy":"id","selector":"com.linkedin.android:id/growth_prereg_v2_fragment_join_button_secondary","context":"","multiple":true}
+2018-05-21 13:31:45:099 - info: [debug] [JSONWP Proxy] Got response with status 200: {"sessionId":"3b146b21-99d6-4703-858d-63e35af49be3","status":0,"value":[{"ELEMENT":"d0928601-1aef-4910-9964-36b0ec209fe8"}]}
+2018-05-21 13:31:45:100 - info: [debug] [W3C] Responding to client with driver.findElements() result: [{"ELEMENT":"d0928601-1aef-4910-9964-36b0ec209fe8"}]
+2018-05-21 13:31:45:101 - info: [HTTP] <-- POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/elements 200 88 ms - 124
+2018-05-21 13:31:45:101 - info: [HTTP] 
+2018-05-21 13:31:46:820 - info: [HTTP] --> POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/elements
+2018-05-21 13:31:46:821 - info: [HTTP] {"using":"id","value":"com.linkedin.android:id/growth_prereg_v2_fragment_account_exists"}
+2018-05-21 13:31:46:823 - info: [debug] [W3C] Calling AppiumDriver.findElements() with args: ["id","com.linkedin.android:id/growth_prereg_v2_fragment_account_exists","d0d953b3-6820-4c56-971c-f8a85a3851a8"]
+2018-05-21 13:31:46:825 - info: [debug] [BaseDriver] Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+2018-05-21 13:31:46:825 - info: [debug] [BaseDriver] Waiting up to 0 ms for condition
+2018-05-21 13:31:46:825 - info: [debug] [JSONWP Proxy] Proxying [POST /elements] to [POST http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3/elements] with body: {"strategy":"id","selector":"com.linkedin.android:id/growth_prereg_v2_fragment_account_exists","context":"","multiple":true}
+2018-05-21 13:31:46:929 - info: [debug] [JSONWP Proxy] Got response with status 200: {"sessionId":"3b146b21-99d6-4703-858d-63e35af49be3","status":0,"value":[{"ELEMENT":"1a8fa0b9-40f7-4c7a-be4a-542a0ccef512"}]}
+2018-05-21 13:31:46:930 - info: [debug] [W3C] Responding to client with driver.findElements() result: [{"ELEMENT":"1a8fa0b9-40f7-4c7a-be4a-542a0ccef512"}]
+2018-05-21 13:31:46:931 - info: [HTTP] <-- POST /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8/elements 200 111 ms - 124
+2018-05-21 13:31:46:931 - info: [HTTP] 
+2018-05-21 13:31:50:096 - info: [HTTP] --> DELETE /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8
+2018-05-21 13:31:50:096 - info: [HTTP] {}
+2018-05-21 13:31:50:097 - info: [debug] [W3C] Calling AppiumDriver.deleteSession() with args: ["d0d953b3-6820-4c56-971c-f8a85a3851a8"]
+2018-05-21 13:31:50:097 - info: [debug] [BaseDriver] Event 'quitSessionRequested' logged at 1526909510097 (16:31:50 GMT+0300 (+03))
+2018-05-21 13:31:50:098 - info: [Appium] Removing session d0d953b3-6820-4c56-971c-f8a85a3851a8 from our master session list
+2018-05-21 13:31:50:101 - info: [debug] [UiAutomator2] Deleting UiAutomator2 session
+2018-05-21 13:31:50:104 - info: [debug] [UiAutomator2] Deleting UiAutomator2 server session
+2018-05-21 13:31:50:106 - info: [debug] [JSONWP Proxy] Proxying [DELETE /] to [DELETE http://localhost:8200/wd/hub/session/3b146b21-99d6-4703-858d-63e35af49be3] with no body
+2018-05-21 13:31:50:154 - info: [Appium] Received SIGINT - shutting down
+2018-05-21 13:31:50:159 - error: [Logcat] Logcat terminated with code null, signal SIGINT
+2018-05-21 13:31:50:538 - info: [HTTP] <-- DELETE /wd/hub/session/d0d953b3-6820-4c56-971c-f8a85a3851a8 - - ms - -
+2018-05-21 13:31:50:538 - info: [HTTP] 
+2018-05-21 13:31:50:542 - error: uncaughtException: write EPIPE date=Mon May 21 2018 16:31:50 GMT+0300 (+03), pid=3896, uid=24730266, gid=221186715, cwd=/Users/hanna_kokhanava/Documents/Automated-Testing-Framework, execPath=/usr/local/Cellar/node/10.0.0/bin/node, version=v9.8.0, argv=[/usr/local/Cellar/node/10.0.0/bin/node, /usr/local/lib/node_modules/appium/build/lib/main.js, --port, 4881, --address, 127.0.0.1, --log, /Users/hanna_kokhanava/Documents/Automated-Testing-Framework/logs4881.log, --log-level, debug, --session-override, --default-capabilities, {"platformVersion": 7.0, "udid": "0815f8330b0f3201"}], rss=256077824, heapTotal=163020800, heapUsed=154396512, external=176940, loadavg=[2.9990234375, 3.0732421875, 3.296875], uptime=29071, trace=[column=14, file=net.js, function=WriteWrap.afterWrite, line=841, method=afterWrite, native=false], stack=[Error: write EPIPE,     at WriteWrap.afterWrite (net.js:841:14)]
+2018-05-21 13:31:50:544 - error: uncaughtException: write EPIPE date=Mon May 21 2018 16:31:50 GMT+0300 (+03), pid=3896, uid=24730266, gid=221186715, cwd=/Users/hanna_kokhanava/Documents/Automated-Testing-Framework, execPath=/usr/local/Cellar/node/10.0.0/bin/node, version=v9.8.0, argv=[/usr/local/Cellar/node/10.0.0/bin/node, /usr/local/lib/node_modules/appium/build/lib/main.js, --port, 4881, --address, 127.0.0.1, --log, /Users/hanna_kokhanava/Documents/Automated-Testing-Framework/logs4881.log, --log-level, debug, --session-override, --default-capabilities, {"platformVersion": 7.0, "udid": "0815f8330b0f3201"}], rss=256217088, heapTotal=163020800, heapUsed=154550856, external=185156, loadavg=[2.9990234375, 3.0732421875, 3.296875], uptime=29071, trace=[column=14, file=net.js, function=WriteWrap.afterWrite, line=841, method=afterWrite, native=false], stack=[Error: write EPIPE,     at WriteWrap.afterWrite (net.js:841:14)]
