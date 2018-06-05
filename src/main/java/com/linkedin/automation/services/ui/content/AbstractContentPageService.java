@@ -15,13 +15,9 @@ import com.linkedin.automation.services.ui.PageProvider;
 import com.linkedin.automation.services.ui.handlers.AbstractBarHandler;
 import com.linkedin.automation.services.ui.handlers.AbstractBlockHandler;
 import com.linkedin.automation.services.ui.handlers.IPageVerifier;
-import com.linkedin.automation.services.ui.listeners.IPageEventListener;
-import com.linkedin.automation.services.ui.listeners.PageEvent;
-import com.linkedin.automation.services.ui.listeners.PageEventNotifier;
 import org.openqa.selenium.support.ui.Clock;
 import org.openqa.selenium.support.ui.SystemClock;
 
-import java.util.Set;
 import java.util.function.Function;
 
 public abstract class AbstractContentPageService<
@@ -39,10 +35,6 @@ public abstract class AbstractContentPageService<
     private Provider<NavigationBarHandler> navigationBarHandlerProvider;
     @Inject
     private Provider<ContentHandlerType> contentHandlerProvider;
-    @Inject
-    private Set<IPageEventListener> pageEventListeners;
-    @Inject
-    private PageEventNotifier pageEventNotifier;
 
     protected ContentHandlerType getContentHandler() {
         ContentHandlerType contentHandler = contentHandlerProvider.get();
@@ -65,10 +57,6 @@ public abstract class AbstractContentPageService<
         NavigationBarHandler navigationBarHandler = navigationBarHandlerProvider.get();
         navigationBarHandler.setBar(getPage().getMainNavigationBar());
         return navigationBarHandler;
-    }
-
-    protected PageEventNotifier getPageEventNotifier() {
-        return pageEventNotifier;
     }
 
     @Override
@@ -98,9 +86,7 @@ public abstract class AbstractContentPageService<
             return;
         }
 
-        if (getNavigationBarHandler().itemActionPerform(barItem)) {
-            getPageEventNotifier().notifyAllListeners(new PageEvent(getPage().getContentBlock(), PageEvent.Type.CONTENT_CHANGE));
-        } else {
+        if (!getNavigationBarHandler().itemActionPerform(barItem)) {
             throw new RuntimeException(String.format("Cannot perform action over the Bar Item component '%s'", barItem.getName()));
         }
     }
