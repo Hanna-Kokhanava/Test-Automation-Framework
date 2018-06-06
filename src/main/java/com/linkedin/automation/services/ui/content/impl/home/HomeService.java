@@ -8,7 +8,4 @@ import com.linkedin.automation.services.ui.content.AbstractContentPageService;
 public class HomeService extends AbstractContentPageService<ContentTopBar, HomeTopBarHandler,
         HomeContentBlock, HomePage, HomeContentHandler> {
 
-    public void check() {
-        getPage().getHomeBlock();
-    }
 }
