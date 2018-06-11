@@ -13,13 +13,13 @@ import java.util.List;
 
 public abstract class TopBar extends MobileBlock implements IBar<Button, NavigationItems.BarItem> {
 
-    @AndroidFindBy(id = "toolbar_menu_image_view")
-    private Button menuButton;
+    @AndroidFindBy(id = "home_app_launcher")
+    private Button homeButton;
 
-    @AndroidFindBy(id = "toolbar_back_image_view")
-    private Button backButton;
+    @AndroidFindBy(id = "me_launcher")
+    private Button profileButton;
 
-    @AndroidFindBy(id = "toolbar_search_image_view")
+    @AndroidFindBy(id = "search_bar")
     private Button searchButton;
 
     private List<Button> barItemList;
@@ -29,16 +29,16 @@ public abstract class TopBar extends MobileBlock implements IBar<Button, Navigat
         super(element);
     }
 
-    protected Button getMenuButton() {
-        return menuButton;
-    }
-
-    public Button getBackButton() {
-        return backButton;
+    protected Button getHomeButton() {
+        return homeButton;
     }
 
     protected Button getSearchButton() {
         return searchButton;
+    }
+
+    public Button getProfileButton() {
+        return profileButton;
     }
 
     @Nullable
@@ -46,11 +46,11 @@ public abstract class TopBar extends MobileBlock implements IBar<Button, Navigat
     public Button getBarItem(NavigationItems.BarItem item) {
         Button targetButton;
         switch (item) {
-            case MENU:
-                targetButton = getMenuButton();
+            case HOME_APP:
+                targetButton = getHomeButton();
                 break;
-            case BACK:
-                targetButton = getBackButton();
+            case PROFILE:
+                targetButton = getProfileButton();
                 break;
             case SEARCH:
                 targetButton = getSearchButton();

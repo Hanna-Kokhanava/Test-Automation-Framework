@@ -6,21 +6,8 @@ import com.linkedin.automation.pages.content.elements.AbstractMainBar;
 import com.linkedin.automation.pages.resources.NavigationItems;
 import com.linkedin.automation.services.ui.handlers.AbstractBarHandler;
 
-import java.util.Objects;
-
 public class NavigationBarHandler extends AbstractBarHandler<NavigationItems.BarItem, AbstractMainBar> {
     private final String actionMatcherString = "%s bar action performed";
-    /**
-     * Checks that for Android it is visible and expanded
-     *
-     * @return is expanded
-     */
-    public boolean isBarExpanded() {
-        return isAvailableType(NavigationItems.BarItem.MENU) &&
-                isBarPresents() &&
-                !Objects.requireNonNull(getCheckedBar().getBarItem(NavigationItems.BarItem.MENU), "MENU item did not find").isDisplayed();
-    }
-
     /**
      * Checks that for Android and iOS it is visible
      *

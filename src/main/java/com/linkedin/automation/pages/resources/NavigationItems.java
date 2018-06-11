@@ -4,11 +4,10 @@ public class NavigationItems {
 
     public enum BarItem implements NavigationItem {
         SEARCH("SEARCH"),
-        MENU("MENU"),
-        BACK("BACK"),
-        LOGOUT("LOGOUT"),
+        HOME_APP("HOME_APP"),
+        PROFILE(""),
 
-        HOME("Feed"),
+        HOME("Home"),
         NETWORK("My network"),
         MESSAGING("Messaging"),
         NOTIFICATIONS("Notifications"),

@@ -14,10 +14,10 @@ import java.util.Objects;
 
 public class AndroidNavigationBar extends AbstractMainBar {
 
-    @AndroidFindBy(xpath = "//android.widget.HorizontalScrollView[contains(@resource-id, 'home_tab_strip')]/android.support.v7.app.ActionBar$Tab")
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[contains(@resource-id, 'tab')]")
     private List<Button> contentNavigationButtonList;
 
-    @AndroidFindBy(xpath = "///android.widget.HorizontalScrollView[contains(@resource-id, 'home_tab_strip')]/android.support.v7.app.ActionBar$Tab[@selected='true']")
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[contains(@resource-id, 'tab') and @selected='true']")
     private Button activeButton;
 
     public AndroidNavigationBar(WebElement element) {

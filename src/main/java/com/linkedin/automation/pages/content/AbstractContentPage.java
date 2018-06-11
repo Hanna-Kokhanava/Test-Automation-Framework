@@ -11,7 +11,7 @@ import io.appium.java_client.pagefactory.OverrideWidget;
 public abstract class AbstractContentPage<TopBarType extends TopBar, ContentBlockType extends AbstractContentBlock> extends DefaultMobilePage {
 
     @OverrideWidget(androidUIAutomator = AndroidNavigationBar.class)
-    @AndroidFindBy(id = "home_tab_strip")
+    @AndroidFindBy(id = "bb_bottom_bar_item_container")
     private AbstractMainBar mainNavigationBar;
 
     public abstract TopBarType getTopBar();

@@ -79,10 +79,10 @@ public abstract class AbstractContentPageService<
         }
 
         if (!getNavigationBarHandler().isBarPresents()) {
-            goTo(NavigationItems.BarItem.MENU);// it is invoke for Android Phone only
+            goTo(NavigationItems.BarItem.HOME_APP);// it is invoke for Android Phone only
         }
 
-        if (NavigationItems.BarItem.MENU == barItem && getNavigationBarHandler().isBarExpanded()) {
+        if (NavigationItems.BarItem.HOME_APP == barItem) {
             return;
         }
 
@@ -99,7 +99,7 @@ public abstract class AbstractContentPageService<
         Clock clock = new SystemClock();
         long end = clock.laterBy(DefaultWaiter.DEFAULT_TIMEOUT.toMillis());
         while (checker.apply(null) && clock.isNowBefore(end)) {
-            goTo(NavigationItems.BarItem.MENU);
+            goTo(NavigationItems.BarItem.HOME_APP);
         }
     }
 

@@ -1,14 +1,14 @@
 package com.linkedin.automation.pages.content.elements.impl.home;
 
-import com.linkedin.automation.controls.Button;
 import com.linkedin.automation.pages.content.elements.AbstractContentBlock;
+import com.linkedin.automation.services.ui.content.impl.home.elements.FeedItem;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 
 public class HomeContentBlock extends AbstractContentBlock {
 
-    @AndroidFindBy(id = "growth_prereg_fragment_sign_in_button")
-    private Button home;
+    @AndroidFindBy(id = "feed_item_update_card")
+    private FeedItem firstFeedItem;
 
     public HomeContentBlock(WebElement element) {
         super(element);
@@ -16,10 +16,11 @@ public class HomeContentBlock extends AbstractContentBlock {
 
     @Override
     public boolean isCorrect() {
-        return false;
+        return firstFeedItem.isDisplayed()
+                && firstFeedItem.isCorrect();
     }
 
-    public Button getHome() {
-        return home;
+    public FeedItem getFirstFeedItem() {
+        return firstFeedItem;
     }
 }

@@ -10,8 +10,7 @@ import org.openqa.selenium.WebElement;
 public class ContentTopBar extends TopBar {
     {
         availableTypeList.add(NavigationItems.BarItem.SEARCH);
-        availableTypeList.add(NavigationItems.BarItem.BACK);
-        availableTypeList.add(NavigationItems.BarItem.MENU);
+        availableTypeList.add(NavigationItems.BarItem.HOME_APP);
     }
 
     public ContentTopBar(WebElement element) {
