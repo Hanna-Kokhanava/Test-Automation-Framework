@@ -7,10 +7,10 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 
 public class HomePage extends AbstractContentPage<ContentTopBar, HomeContentBlock> {
 
-    @AndroidFindBy(id = "home_view_pager")
+    @AndroidFindBy(id = "feed_main_content")
     private HomeContentBlock homeContentBlock;
 
-    @AndroidFindBy(id = "home_top_bar")
+    @AndroidFindBy(id = "home_bottom_bar")
     private ContentTopBar topBar;
 
     @Override

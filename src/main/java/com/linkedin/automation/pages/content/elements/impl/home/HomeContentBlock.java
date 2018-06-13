@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class HomeContentBlock extends AbstractContentBlock {
 
-    @AndroidFindBy(id = "feed_item_update_card")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id, 'feed_item')]")
     private FeedItem firstFeedItem;
 
     public HomeContentBlock(WebElement element) {
