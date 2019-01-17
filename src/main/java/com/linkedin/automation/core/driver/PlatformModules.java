@@ -13,5 +13,6 @@ public class PlatformModules extends AbstractModule {
     @Override
     protected void configure() {
         bind(IPlatformConfig.class).to(AndroidPlatformConfig.class).in(Scopes.SINGLETON);
+        //TODO need to separate logic for different types of automation
     }
 }

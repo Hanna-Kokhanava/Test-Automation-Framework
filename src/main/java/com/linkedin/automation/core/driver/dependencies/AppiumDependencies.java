@@ -13,7 +13,7 @@ public class AppiumDependencies implements IDependencies {
 
     @Override
     public void configureDependencies() {
-        Device device = DeviceManager.getDevice(PropertyLoader.get(PropertyLoader.Property.DEVICE_UDID));
+        Device device = DeviceManager.getDevice(PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_UDID));
         DeviceManager.setCurrentDevice(device);
 
         if (!AppiumServerManager.checkIfServerIsRunning(device.getAppiumHostMachine().getPortInt())) {

@@ -44,7 +44,7 @@ public class DriverManager {
     }
 
     private static final DriverType driverType = DriverType
-            .findByValue(PropertyLoader.get(PropertyLoader.Property.DRIVER_TYPE, "appium"));
+            .findByValue(PropertyLoader.get(PropertyLoader.MobileProperty.DRIVER_TYPE, "appium"));
     private static HostMachine driverHost;
 
     private static final String URI_SCHEME = "http";
@@ -56,7 +56,7 @@ public class DriverManager {
         switch (getDriverType()) {
             case GRID:
                 if (driverHost == null) {
-                    driverHost = new HostMachine(PropertyLoader.get(PropertyLoader.Property.MULTY_TREAD_DRIVER_URL));
+                    driverHost = new HostMachine(PropertyLoader.get(PropertyLoader.MobileProperty.MULTY_TREAD_DRIVER_URL));
                 }
                 return driverHost;
             case APPIUM:

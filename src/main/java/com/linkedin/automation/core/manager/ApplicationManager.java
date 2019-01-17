@@ -12,7 +12,7 @@ import static com.linkedin.automation.core.tools.files.ResultFolder.APPIUM_FOLDE
  * Created on 02.04.2018
  */
 public class ApplicationManager {
-    private static File appFile = new File(PropertyLoader.get(PropertyLoader.Property.APP_PATH));
+    private static File appFile = new File(PropertyLoader.get(PropertyLoader.MobileProperty.APP_PATH));
 
     public static String getAbsolutePath() {
         File file = new File(APPIUM_FOLDER + File.separator + getFileName());

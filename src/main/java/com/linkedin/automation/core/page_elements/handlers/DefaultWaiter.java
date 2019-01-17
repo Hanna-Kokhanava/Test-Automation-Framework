@@ -18,7 +18,7 @@ public class DefaultWaiter implements Waiter {
     public enum ComparisonOperator {EQUAL, NOT_EQUAL, LESS, LESS_EQUAL, GREATER, GREATER_EQUAL}
 
     public static final Duration DEFAULT_TIMEOUT = Duration.ofMillis(Integer.parseInt(
-            PropertyLoader.get(PropertyLoader.Property.DEFAULT_TIMEOUT, "30000")));
+            PropertyLoader.get(PropertyLoader.MobileProperty.DEFAULT_TIMEOUT, "30000")));
 
     private Availability availabilityElement;
     private Object[] params;

@@ -8,6 +8,7 @@ import com.linkedin.automation.core.page_elements.handlers.DefaultWaiter;
 import com.linkedin.automation.core.page_elements.interfaces.*;
 import io.appium.java_client.pagefactory.Widget;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.WrapsElement;
 
 import java.time.Duration;
 
@@ -30,9 +31,9 @@ public abstract class MobileBlock
 
     public MobileBlock(WebElement element) {
         super(element);
-        availabilityHandler = new DefaultAvailabilityHandler(this);
+        availabilityHandler = new DefaultAvailabilityHandler((WrapsElement) this);
         waiter = new DefaultWaiter(availabilityHandler);
-        validatorHandler = new DefaultValidatorHandler(this);
+        validatorHandler = new DefaultValidatorHandler((WrapsElement) this);
         resizeableHandler = new AbstractResizeableHandler() {
         }; //TODO it is stub
     }

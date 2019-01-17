@@ -14,8 +14,38 @@ import static com.google.common.base.Strings.isNullOrEmpty;
  */
 public final class PropertyLoader {
 
-    // Property keys from .properties file
-    public enum Property {
+    public enum GeneralProperty implements IProperty {
+        AUTOMATION_TYPE("automation.type");
+
+        private final String propKey;
+
+        GeneralProperty(String key) {
+            propKey = key;
+        }
+
+        public String getKey() {
+            return propKey;
+        }
+    }
+
+    //BrowserPropery keys from browser.properties
+
+    public enum BrowserProperty implements IProperty {
+        BROWSER_TYPE("browser.type");
+
+        private final String propKey;
+
+        BrowserProperty(String key) {
+            propKey = key;
+        }
+
+        public String getKey() {
+            return propKey;
+        }
+    }
+
+    // MobileProperty keys from mobile.properties file
+    public enum MobileProperty implements IProperty {
 
         APP_PATH("app.path"),
 
@@ -45,56 +75,57 @@ public final class PropertyLoader {
 
         private final String propKey;
 
-        Property(String key) {
+        MobileProperty(String key) {
             propKey = key;
         }
 
         public String getKey() {
             return propKey;
         }
-
-        @Override
-        public String toString() {
-            return propKey;
-        }
     }
 
-    private static final String TEST_PROPERTIES_PATH = "test.properties";
+    private static final String MOBILE_TEST_PROPERTIES_PATH = "mobile.properties";
+    private static final String BROWSER_TEST_PROPERTIES_PATH = "browser.properties";
     private static Properties testProperties;
 
     private PropertyLoader() {
     }
 
-    public static String get(Property key) {
-        return get(key.getKey());
-    }
-
-    public static String get(Property key, String defaultValue) {
-        return get(key.getKey(), defaultValue);
-    }
-
-    private static String get(String keyName, String defaultValue) {
+    /**
+     * Gets test property, otherwise use default value
+     *
+     * @param key          the property key
+     * @param defaultValue the default value
+     * @return property value
+     */
+    public static String get(MobileProperty key, String defaultValue) {
         try {
-            return PropertyLoader.get(keyName);
+            return PropertyLoader.get(key);
         } catch (NullPointerException e) {
             return defaultValue;
         }
     }
 
-    private static String get(String keyName) {
-        String envVarValue = System.getenv(keyName);
+    /**
+     * Gets test property using the first available source
+     *
+     * @param key the property key
+     * @return the property value
+     */
+    public static String get(MobileProperty key) {
+        String envVarValue = System.getenv(key.getKey());
         if (!isNullOrEmpty(envVarValue))
             return envVarValue;
 
-        String sysPropValue = System.getProperty(keyName);
+        String sysPropValue = System.getProperty(key.getKey());
         if (!isNullOrEmpty(sysPropValue))
             return sysPropValue;
 
-        String propFromFile = PropertyLoader.getPropertyFromFile(keyName);
+        String propFromFile = PropertyLoader.getPropertyFromFile(key);
         if (!isNullOrEmpty(propFromFile))
             return propFromFile;
 
-        throw new NullPointerException("Unable to resolve '" + keyName + "' property value");
+        throw new NullPointerException("Unable to resolve '" + key + "' property value");
     }
 
     /**
@@ -102,10 +133,10 @@ public final class PropertyLoader {
      *
      * @param keyName - property key
      */
-    private static String getPropertyFromFile(String keyName) {
+    private static String getPropertyFromFile(MobileProperty keyName) {
         if (testProperties == null)
-            testProperties = PropertyLoader.loadPropertiesFromFile(ProjectDir.getProjectResource(TEST_PROPERTIES_PATH));
-        return testProperties.getProperty(keyName);
+            testProperties = PropertyLoader.loadPropertiesFromFile(ProjectDir.getProjectResource(MOBILE_TEST_PROPERTIES_PATH));
+        return testProperties.getProperty(keyName.getKey());
     }
 
     /**

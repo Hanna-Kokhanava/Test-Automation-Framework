@@ -24,13 +24,13 @@ public class DeviceManager {
      * Gets list of all {@link Device} items from devices.xml
      */
     private static final List<Device> actualDevicesList = ProjectDir.readFromResource(Devices.class,
-            PropertyLoader.get(PropertyLoader.Property.DEVICES_XML)).devicesList;
+            PropertyLoader.get(PropertyLoader.MobileProperty.DEVICES_XML)).devicesList;
 
     private static final ThreadLocal<Device> currentDevice = new ThreadLocal<>();
 
     public static Device getCurrentDevice() {
         if (currentDevice.get() == null && DriverManager.getDriverType() == DriverManager.DriverType.APPIUM) {
-            String udid = PropertyLoader.get(PropertyLoader.Property.DEVICE_UDID, "");
+            String udid = PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_UDID, "");
             if (!udid.equals(""))
                 setCurrentDevice(DeviceManager.getDevice(udid));
         }
@@ -77,7 +77,7 @@ public class DeviceManager {
     public static Device.DeviceType getDeviceTypeFromConfigFile() {
         if (deviceTypeFromConfig == null) {
 
-            String deviceType = PropertyLoader.get(PropertyLoader.Property.DEVICE_TYPE).toLowerCase();
+            String deviceType = PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_TYPE).toLowerCase();
 
             Device.DeviceType mostLikely = null;
             String previousMatch = null;
