@@ -6,7 +6,10 @@
 * Install it and set **JAVA_HOME** to JDK's bin folder.
 
 ## Git
-* [Git](https://git-scm.com/download)
+* Download [Git](https://git-scm.com/download)
+
+## IntelliJ IDEA
+* Download [Community Edition](https://www.jetbrains.com/idea/download/#section=windows)
 
 ## Android SDK tools
 * Download SDK from [Android SDK](https://developer.android.com/studio/index.html).
