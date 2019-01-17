@@ -8,14 +8,14 @@
 ## Git
 * Download [Git](https://git-scm.com/download)
 
-## IntelliJ IDEA
-* Download and install [Community Edition](https://www.jetbrains.com/idea/download/#section=windows)
-
 ## Node
 * Install [NodeJS](https://nodejs.org/en/download/) 
 
 ## Appium
 * npm install -g appium
+
+## IntelliJ IDEA
+* Download and install [Community Edition](https://www.jetbrains.com/idea/download/#section=windows)
 
 ## Android SDK tools
 * Download SDK from [Android SDK](https://developer.android.com/studio/index.html).
@@ -36,13 +36,19 @@ To get information about the name of the package and the first activity that has
 3. Find **package** (in the beginning of logs) and **launchable-activity** parameters
 
 
-## Installation errors
+## Appium installation errors
 ### **Proxy issue** SELF_SIGNED_CERT_IN_CHAIN request to https://registry.npmjs.org/appium failed, reason: self signed certificate in certificate chain
 **Solution** 
 
 npm config set registry http://registry.npmjs.org/ (not recommended?)
 
-### **Chromedriver installation issue**
+### **Chromedriver installation proxy issue**
 **Solution**
 
 Install from mirror - add **chromedriver_cdnurl=http://npm.taobao.org/mirrors/chromedriver** property to the  **..\nodejs\node_modules\npm\npmrc** file
+
+### **Downloading Python failed - self signed certificate in certificate chain** 
+**Solution**
+
+* Install [Python](https://www.python.org/downloads/) manually 
+* Set path (Windows) - path %path%;C:\Python
