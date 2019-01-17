@@ -5,6 +5,9 @@
 * Download Java JDK from [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 * Install it and set **JAVA_HOME** to JDK's bin folder.
 
+## Git
+* [Git](https://git-scm.com/download)
+
 ## Android SDK tools
 * Download SDK from [Android SDK](https://developer.android.com/studio/index.html).
 * Run the *android* tool (included in the SDK/tools folder) and make sure an API Level 17 or greater SDK platform, Google Driver, SDK Tools and SDK platform-tools are installed.
