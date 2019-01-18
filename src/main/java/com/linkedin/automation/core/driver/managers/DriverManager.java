@@ -56,7 +56,7 @@ public class DriverManager {
         switch (getDriverType()) {
             case GRID:
                 if (driverHost == null) {
-                    driverHost = new HostMachine(PropertyLoader.get(PropertyLoader.MobileProperty.MULTY_TREAD_DRIVER_URL));
+                    driverHost = new HostMachine(PropertyLoader.get(PropertyLoader.MobileProperty.DRIVER_URL));
                 }
                 return driverHost;
             case APPIUM:

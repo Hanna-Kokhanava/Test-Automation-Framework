@@ -13,9 +13,10 @@ import com.linkedin.automation.core.tools.files.PropertyLoader;
  * Created on 15.03.2018
  */
 public class DriverModules extends AbstractModule {
+
     @Override
     protected void configure() {
-        if (PropertyLoader.GeneralProperty.AUTOMATION_TYPE.getKey().equalsIgnoreCase("mobile")) {
+        if (PropertyLoader.getGeneralTestProperty(PropertyLoader.GeneralProperty.AUTOMATION_TYPE).equalsIgnoreCase("mobile")) {
             bind(IProperty.class).to(PropertyLoader.MobileProperty.class).in(Scopes.SINGLETON);
             bind(IDriverCreator.class).to(AppiumDriverCreator.class).in(Scopes.SINGLETON);
             bind(IDependencies.class).to(AppiumDependencies.class).in(Scopes.SINGLETON);

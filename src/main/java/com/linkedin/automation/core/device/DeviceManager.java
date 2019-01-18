@@ -76,7 +76,6 @@ public class DeviceManager {
      */
     public static Device.DeviceType getDeviceTypeFromConfigFile() {
         if (deviceTypeFromConfig == null) {
-
             String deviceType = PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_TYPE).toLowerCase();
 
             Device.DeviceType mostLikely = null;
