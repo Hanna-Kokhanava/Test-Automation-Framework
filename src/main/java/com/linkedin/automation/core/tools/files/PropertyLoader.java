@@ -1,5 +1,7 @@
 package com.linkedin.automation.core.tools.files;
 
+import com.google.inject.Inject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -37,6 +39,7 @@ public final class PropertyLoader {
 
         private final String propKey;
 
+        @Inject
         BrowserProperty(String key) {
             propKey = key;
         }
@@ -80,6 +83,7 @@ public final class PropertyLoader {
 
         private final String propKey;
 
+        @Inject
         MobileProperty(String key) {
             propKey = key;
         }
@@ -97,7 +101,7 @@ public final class PropertyLoader {
     private static Properties generalProperties;
     private static Properties testProperties;
 
-    private PropertyLoader() {
+    public PropertyLoader() {
     }
 
     /**

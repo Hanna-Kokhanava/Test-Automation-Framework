@@ -1,11 +1,11 @@
-package com.linkedin.automation.core.creators;
+package com.linkedin.automation.core.creators.mobile;
 
+import com.linkedin.automation.core.creators.IDriverCreator;
 import com.linkedin.automation.core.device.Device;
 import com.linkedin.automation.core.device.DeviceManager;
 import com.linkedin.automation.core.driver.capabilities.AppiumCapabilities;
 import com.linkedin.automation.core.driver.managers.AppiumServerManager;
 import com.linkedin.automation.core.driver.managers.DriverManager;
-import io.appium.java_client.service.local.AppiumDriverLocalService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
