@@ -1,4 +1,4 @@
-package com.linkedin.automation.core.driver.managers;
+package com.linkedin.automation.core.driver.managers.mobile;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

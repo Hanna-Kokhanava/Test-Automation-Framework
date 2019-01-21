@@ -1,6 +1,6 @@
 package com.linkedin.automation.core.device;
 
-import com.linkedin.automation.core.driver.managers.DriverManager;
+import com.linkedin.automation.core.driver.managers.mobile.MobileDriverManager;
 import com.linkedin.automation.core.tools.commands.Command;
 import com.linkedin.automation.core.tools.commands.CommandExecutor;
 import com.linkedin.automation.core.tools.files.ProjectDir;
@@ -29,7 +29,7 @@ public class DeviceManager {
     private static final ThreadLocal<Device> currentDevice = new ThreadLocal<>();
 
     public static Device getCurrentDevice() {
-        if (currentDevice.get() == null && DriverManager.getDriverType() == DriverManager.DriverType.APPIUM) {
+        if (currentDevice.get() == null && MobileDriverManager.getDriverType() == MobileDriverManager.DriverType.APPIUM) {
             String udid = PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_UDID, "");
             if (!udid.equals(""))
                 setCurrentDevice(DeviceManager.getDevice(udid));

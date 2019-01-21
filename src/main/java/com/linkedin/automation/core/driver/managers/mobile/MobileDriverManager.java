@@ -1,4 +1,4 @@
-package com.linkedin.automation.core.driver.managers;
+package com.linkedin.automation.core.driver.managers.mobile;
 
 import com.linkedin.automation.core.device.Device;
 import com.linkedin.automation.core.device.DeviceManager;
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created on 10.03.2018
  */
-public class DriverManager {
+public class MobileDriverManager {
 
     public enum DriverType {
         APPIUM("appium"),
@@ -66,7 +66,7 @@ public class DriverManager {
     }
 
 
-    private DriverManager() {
+    private MobileDriverManager() {
     }
 
     public static DriverType getDriverType() {
@@ -86,7 +86,7 @@ public class DriverManager {
     }
 
 
-    public static void createDriver(HostMachine host, DesiredCapabilities capabilities) throws Exception {
+    public static void createDriver(DesiredCapabilities capabilities) throws Exception {
         AppiumDriver driver;
         try {
             if (DeviceManager.getDeviceTypeFromConfigFile().os() == Device.DeviceType.ANDROID) {

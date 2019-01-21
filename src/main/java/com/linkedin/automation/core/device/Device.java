@@ -2,7 +2,7 @@ package com.linkedin.automation.core.device;
 
 import com.google.gson.annotations.SerializedName;
 import com.linkedin.automation.core.device.functions.Key;
-import com.linkedin.automation.core.driver.managers.DriverManager;
+import com.linkedin.automation.core.driver.managers.mobile.MobileDriverManager;
 import com.linkedin.automation.core.tools.HostMachine;
 import io.appium.java_client.remote.AutomationName;
 import org.openqa.selenium.Dimension;
@@ -202,7 +202,7 @@ public class Device {
          * @return the size
          */
         public static Dimension getSize() {
-            return DriverManager.getDriver().manage().window().getSize();
+            return MobileDriverManager.getDriver().manage().window().getSize();
         }
     }
 
@@ -218,13 +218,13 @@ public class Device {
             switch (os) {
                 case ANDROID:
                     for (Key key : actionKeys) {
-                        DriverManager.getAndroidDriver().pressKeyCode(key.getAndroidCode());
+                        MobileDriverManager.getAndroidDriver().pressKeyCode(key.getAndroidCode());
                     }
                     break;
                 case IOS:
-                    if (AutomationName.IOS_XCUI_TEST.equalsIgnoreCase(DriverManager.getDriver().getAutomationName())) {
+                    if (AutomationName.IOS_XCUI_TEST.equalsIgnoreCase(MobileDriverManager.getDriver().getAutomationName())) {
                         for (Key key : actionKeys) {
-                            DriverManager.getIOSDriver().findElementByIosNsPredicate("name == \""
+                            MobileDriverManager.getIOSDriver().findElementByIosNsPredicate("name == \""
                                     + key.getIOSName() + "\" AND (type == \"XCUIElementTypeButton\" OR type == \"XCUIElementTypeKey\")").click();
                         }
                         break;
@@ -235,7 +235,7 @@ public class Device {
                         String tapIOSKeyScript =
                                 "UIATarget.localTarget().frontMostApp().keyboard()"
                                         + ".elements().firstWithPredicate(\"name CONTAINS[c] '" + key.getIOSName().toLowerCase() + "'\").tap()";
-                        DriverManager.getDriver().executeScript(tapIOSKeyScript);
+                        MobileDriverManager.getDriver().executeScript(tapIOSKeyScript);
                     }
                     break;
                 default:
@@ -246,7 +246,7 @@ public class Device {
         public static void hideKeyboard() {
             try {
                 Sleeper.sleepTight(2);
-                DriverManager.getDriver().hideKeyboard();
+                MobileDriverManager.getDriver().hideKeyboard();
             } catch (WebDriverException e1) {
                 try {
                     if (DeviceManager.getCurrentDevice().isIOS())

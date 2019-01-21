@@ -2,7 +2,7 @@ package com.linkedin.automation.core.driver.dependencies;
 
 import com.linkedin.automation.core.device.Device;
 import com.linkedin.automation.core.device.DeviceManager;
-import com.linkedin.automation.core.driver.managers.AppiumServerManager;
+import com.linkedin.automation.core.driver.managers.mobile.AppiumServerManager;
 import com.linkedin.automation.core.manager.ApplicationManager;
 import com.linkedin.automation.core.tools.files.PropertyLoader;
 

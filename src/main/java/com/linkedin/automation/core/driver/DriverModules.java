@@ -26,7 +26,6 @@ public class DriverModules extends AbstractModule {
             bind(IProperty.class).to(PropertyLoader.BrowserProperty.class).in(Scopes.SINGLETON);
             bind(IDriverCreator.class).to(WebDriverCreator.class).in(Scopes.SINGLETON);
             bind(IDependencies.class).to(WebDependencies.class).in(Scopes.SINGLETON);
-            //TODO WebDriver creator for Web
         }
     }
 }
