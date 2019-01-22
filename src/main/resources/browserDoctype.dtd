@@ -1,0 +1,14 @@
+<!ELEMENT browsers (browser*) >
+        <!ELEMENT browser (host) >
+        <!ATTLIST browser
+                browserName CDATA #REQUIRED
+                platformName CDATA #REQUIRED
+                >
+
+        <!ELEMENT host EMPTY >
+        <!ATTLIST host
+                hostname CDATA #REQUIRED
+                username CDATA #REQUIRED
+                password CDATA #REQUIRED
+                port CDATA #REQUIRED
+                >

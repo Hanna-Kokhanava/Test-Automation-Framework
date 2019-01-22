@@ -3,6 +3,7 @@
 <!DOCTYPE devices PUBLIC "ROOT-VALUE"
         "src/main/resources/deviceDoctype.dtd">
 
+<!-- Attributes names are from MobileCapabilityType -->
 <devices>
     <device deviceName="Xiaomi Note" deviceType="android-phone" platformVersion="7.0" udid="288a31960804">
         <appium hostname="localhost" username="" password="" port="4881"/>
