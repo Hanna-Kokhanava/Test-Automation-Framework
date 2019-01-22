@@ -9,6 +9,7 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 
 public enum SupportedPlatforms {
+
     CHROME(getChromeOptions()),
 
     FIREFOX(getFirefoxOptions()),

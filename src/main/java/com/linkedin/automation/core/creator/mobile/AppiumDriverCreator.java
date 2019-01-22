@@ -1,6 +1,6 @@
-package com.linkedin.automation.core.creators.mobile;
+package com.linkedin.automation.core.creator.mobile;
 
-import com.linkedin.automation.core.creators.IDriverCreator;
+import com.linkedin.automation.core.creator.IDriverCreator;
 import com.linkedin.automation.core.device.Device;
 import com.linkedin.automation.core.device.DeviceManager;
 import com.linkedin.automation.core.driver.capabilities.AppiumCapabilities;

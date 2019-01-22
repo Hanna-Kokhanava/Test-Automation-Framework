@@ -1,4 +1,4 @@
-package com.linkedin.automation.core.creators;
+package com.linkedin.automation.core.creator;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 

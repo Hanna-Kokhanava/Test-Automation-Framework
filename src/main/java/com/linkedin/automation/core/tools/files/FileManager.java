@@ -5,13 +5,19 @@ import com.linkedin.automation.core.tools.HostMachine;
 import javax.annotation.Nonnull;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created on 01.04.2018
@@ -31,6 +37,39 @@ public abstract class FileManager {
             managerMap.put(hostMachine, instance);
         }
         return managerMap.get(hostMachine);
+    }
+
+    /**
+     * Downloads file from the specified URL
+     *
+     * @param url      file url
+     * @param filePath path to file in local system
+     */
+    public void downloadFileFromUrl(String url, String filePath) {
+        ReadableByteChannel channel = null;
+        FileOutputStream outputStream = null;
+
+        Path path = Paths.get(filePath);
+        if (!Files.exists(path)) {
+            try {
+                channel = Channels.newChannel(new URL(url).openStream());
+                outputStream = new FileOutputStream(filePath);
+                outputStream.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (Objects.nonNull(outputStream)) {
+                        outputStream.close();
+                    }
+                    if (Objects.nonNull(channel)) {
+                        channel.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /**

@@ -2,7 +2,7 @@ package com.linkedin.automation.unit;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.linkedin.automation.core.creators.IDriverCreator;
+import com.linkedin.automation.core.creator.IDriverCreator;
 import com.linkedin.automation.core.driver.DriverModules;
 import com.linkedin.automation.core.driver.dependencies.IDependencies;
 import org.testng.annotations.AfterClass;
@@ -26,7 +26,7 @@ public class BaseCase {
                 .injectMembers(this);
     }
 
-    @BeforeClass(description = "Configure dependencies and start Appium server", alwaysRun = true)
+    @BeforeClass(description = "Configure dependencies (and start Appium server in case of mobile testing)", alwaysRun = true)
     public void configDependencies() {
         dependencies.configureDependencies();
     }
