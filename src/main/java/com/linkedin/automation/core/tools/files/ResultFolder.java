@@ -14,6 +14,7 @@ import java.util.Objects;
 public enum ResultFolder {
 
     APPIUM_FOLDER("appium"),
+    DRIVERS_FOLDER("drivers"),
     ROOT_FOLDER(".");
 
     private String folderName;

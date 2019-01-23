@@ -14,6 +14,7 @@ public enum Command {
     ADB_DEVICES_UDID_LIST("adb devices | awk '!/grep/{print $1}' | grep -v 'List'"),
     IOS_IDEVICE_UDID_LIST("idevice_id --list"),
 
+    UNZIP_FILE("unzip -u %s"),
     CD("cd %s; ");
 
     private String macCommand;

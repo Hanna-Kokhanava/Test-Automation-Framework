@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <root>
     <windows>
-        <driver id="googlechrome">
+        <driver id="chromedriver">
             <version id="2.25">
                 <filelocation>http://chromedriver.storage.googleapis.com/2.25/chromedriver_win32.zip</filelocation>
             </version>
@@ -23,7 +23,7 @@
         </driver>
     </windows>
     <linux>
-        <driver id="googlechrome">
+        <driver id="chromedriver">
             <version id="2.25">
                 <filelocation>http://chromedriver.storage.googleapis.com/2.25/chromedriver_linux64.zip</filelocation>
             </version>

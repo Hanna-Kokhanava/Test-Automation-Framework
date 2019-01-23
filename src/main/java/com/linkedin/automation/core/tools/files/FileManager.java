@@ -3,10 +3,7 @@ package com.linkedin.automation.core.tools.files;
 import com.linkedin.automation.core.tools.HostMachine;
 
 import javax.annotation.Nonnull;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
@@ -18,6 +15,8 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * Created on 01.04.2018
@@ -69,7 +68,72 @@ public abstract class FileManager {
                     e.printStackTrace();
                 }
             }
+        } else {
+            System.out.println("This driver version is already exists in folder");
         }
+    }
+
+    /**
+     * Unzip files into the destination folder
+     * Also works with the subdirectories
+     *
+     * @param zipFilePath path to zip file
+     * @param destPath    destination path for unzipped files
+     */
+    public void unzipFile(String zipFilePath, String destPath) {
+        FileInputStream fileInputStream = null;
+        ZipInputStream zipInputStream = null;
+        ZipEntry zipEntry;
+
+        try {
+            fileInputStream = new FileInputStream(zipFilePath);
+            zipInputStream = new ZipInputStream(fileInputStream);
+            zipEntry = zipInputStream.getNextEntry();
+            while (Objects.nonNull(zipEntry)) {
+                String filePath = destPath + File.separator + zipEntry.getName();
+                File newFile = new File(destPath + File.separator + filePath);
+                if (!zipEntry.isDirectory()) {
+                    new File(newFile.getParent()).mkdirs();
+                    extractFile(zipInputStream, filePath);
+                } else {
+                    new File(filePath).mkdirs();
+                }
+
+                zipInputStream.closeEntry();
+                zipEntry = zipInputStream.getNextEntry();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (Objects.nonNull(zipInputStream)) {
+                    zipInputStream.closeEntry();
+                    zipInputStream.close();
+                }
+                if (Objects.nonNull(fileInputStream)) {
+                    fileInputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Extract files in specified directory
+     *
+     * @param zipInputStream {@link ZipInputStream} instance
+     * @param filePath       path to zip entry
+     * @throws IOException
+     */
+    private static void extractFile(ZipInputStream zipInputStream, String filePath) throws IOException {
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(filePath));
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = zipInputStream.read(buffer)) > 0) {
+            bufferedOutputStream.write(buffer, 0, len);
+        }
+        bufferedOutputStream.close();
     }
 
     /**

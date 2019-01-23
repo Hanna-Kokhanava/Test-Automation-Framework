@@ -6,6 +6,6 @@
 <!-- Browser attributes names are from CapabilityType -->
 <browsers>
     <browser browserName="chrome" platformName="ANY">
-        <host hostname="localhost" username="" password="" port="8000"/>
+        <host hostname="HKOKHANAVA-NB" username="" password="" port="8000"/>
     </browser>
 </browsers>
