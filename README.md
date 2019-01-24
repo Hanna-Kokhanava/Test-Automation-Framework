@@ -2,10 +2,9 @@
 
 ## Installations
 ## Java JDK
-* Download Java JDK from [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and install it.
+* Download [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and install it.
 * Set **JAVA** env. variable to JDK's **bin** folder.
 * Set **JAVA_HOME** env. variable to **JDK** folder.
-
 
 ## Git
 * Download [Git](https://git-scm.com/download)
