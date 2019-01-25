@@ -3,7 +3,7 @@
 <suite name="Launch" verbose="1">
     <test name="Launch test">
         <classes>
-            <class name="com.linkedin.automation.testscripts.LaunchTest"/>
+            <class name="com.kokhanava.automation.testscripts.LaunchTest"/>
         </classes>
     </test>
 </suite>
