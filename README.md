@@ -1,4 +1,5 @@
-# Automated Testing Framework
+# Test Automation Framework
+The main purpose of this project is to combine base functionality implementation (driver creation, capabilities setting, etc) in universal solution.
 
 ## Installations
 ## Java JDK
