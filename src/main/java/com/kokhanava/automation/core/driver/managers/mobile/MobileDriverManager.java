@@ -1,13 +1,12 @@
 package com.kokhanava.automation.core.driver.managers.mobile;
 
+import com.kokhanava.automation.core.device.Device;
 import com.kokhanava.automation.core.device.DeviceManager;
 import com.kokhanava.automation.core.tools.HostMachine;
 import com.kokhanava.automation.core.tools.files.property.PropertyLoader;
-import com.kokhanava.automation.core.device.Device;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 

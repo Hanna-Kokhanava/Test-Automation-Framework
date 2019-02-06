@@ -10,7 +10,6 @@ public class LaunchTest extends BaseCase {
 
     @Test(description = "Example test")
     public void login() {
-        System.out.println("Test was launched");
-        System.out.println("What???");
+        System.out.println("Test to check base configuration was launched");
     }
 }
