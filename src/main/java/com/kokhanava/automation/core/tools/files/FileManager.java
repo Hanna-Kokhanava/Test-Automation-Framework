@@ -55,34 +55,30 @@ public abstract class FileManager {
      * @param filePath path to file in local system
      */
     public void downloadFileFromUrl(String fileUrl, String filePath) {
-        if (!Files.exists(Paths.get(filePath))) {
-            ReadableByteChannel channel = null;
-            FileOutputStream outputStream = null;
+        ReadableByteChannel channel = null;
+        FileOutputStream outputStream = null;
 
+        try {
+            channel = Channels.newChannel(new URL(fileUrl).openStream());
+            outputStream = new FileOutputStream(filePath);
+            outputStream.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
+        } catch (SSLHandshakeException e) {
+            System.out.println("SSL Exception was thrown, execute stub to disable certificates validation and try to download once again");
+            disableCertificateValidation();
+            downloadFileFromUrl(fileUrl, filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
             try {
-                channel = Channels.newChannel(new URL(fileUrl).openStream());
-                outputStream = new FileOutputStream(filePath);
-                outputStream.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
-            } catch (SSLHandshakeException e) {
-                System.out.println("SSL Exception was thrown, execute stub to disable certificates validation and try to download once again");
-                disableCertificateValidation();
-                downloadFileFromUrl(fileUrl, filePath);
+                if (Objects.nonNull(outputStream)) {
+                    outputStream.close();
+                }
+                if (Objects.nonNull(channel)) {
+                    channel.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    if (Objects.nonNull(outputStream)) {
-                        outputStream.close();
-                    }
-                    if (Objects.nonNull(channel)) {
-                        channel.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
-        } else {
-            System.out.println("This driver version executable file is already exists in folder");
         }
     }
 
@@ -130,19 +126,21 @@ public abstract class FileManager {
         FileInputStream fileInputStream = null;
         ZipInputStream zipInputStream = null;
         ZipEntry zipEntry;
+        String filePath;
+        File newFile;
 
         try {
             fileInputStream = new FileInputStream(zipFilePath);
             zipInputStream = new ZipInputStream(fileInputStream);
             zipEntry = zipInputStream.getNextEntry();
             while (Objects.nonNull(zipEntry)) {
-                String filePath = destPath + File.separator + zipEntry.getName();
-                File newFile = new File(destPath + File.separator + filePath);
-                if (!zipEntry.isDirectory()) {
+                filePath = destPath + File.separator + zipEntry.getName();
+                newFile = new File(filePath);
+                if (zipEntry.isDirectory()) {
+                    new File(filePath).mkdirs();
+                } else {
                     new File(newFile.getParent()).mkdirs();
                     extractFile(zipInputStream, filePath);
-                } else {
-                    new File(filePath).mkdirs();
                 }
 
                 zipInputStream.closeEntry();

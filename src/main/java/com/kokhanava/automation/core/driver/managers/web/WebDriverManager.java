@@ -44,11 +44,11 @@ public class WebDriverManager {
         if (Objects.isNull(driver)) {
             switch (platform) {
                 case CHROME:
-                    System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, getDriverExecutablePath("chromedriver"));
+                    System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, getDriverExecutableFilePath("chromedriver"));
                     driver = new ChromeDriver((ChromeOptions) options);
                     break;
                 case FIREFOX:
-                    System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, getDriverExecutablePath("geckodriver"));
+                    System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, getDriverExecutableFilePath("geckodriver"));
                     driver = new FirefoxDriver((FirefoxOptions) options);
                     break;
                 case IE10:
@@ -97,7 +97,7 @@ public class WebDriverManager {
      * @param driverName name of required driver
      * @return driver executable file
      */
-    private static String getDriverExecutablePath(String driverName) {
+    private static String getDriverExecutableFilePath(String driverName) {
         HostMachine host = BrowserManager.getCurrentBrowser().getHost();
         FileManager fileManager = FileManager.getInstance(host);
 

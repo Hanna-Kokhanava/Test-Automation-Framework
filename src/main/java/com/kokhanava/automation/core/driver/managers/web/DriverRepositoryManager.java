@@ -28,7 +28,7 @@ public class DriverRepositoryManager {
             "driver-repositories.xml").driverList;
 
     /**
-     * Returns url for driver downloading
+     * Returns URL for driver exe downloading
      *
      * @param hostMachine {@link HostMachine} isntance
      * @param driverName  name of driver
@@ -51,6 +51,12 @@ public class DriverRepositoryManager {
                 + osName + "] was not found").getFileLocation();
     }
 
+    /**
+     * Returns {@link DriverRepository} instance by its driver ID
+     *
+     * @param driverName name of driver
+     * @return {@link DriverRepository}
+     */
     public static DriverRepository getRepositoryObjectById(String driverName) {
         if (driverList.isEmpty()) {
             throw new RuntimeException("List of driver repositories is empty!");

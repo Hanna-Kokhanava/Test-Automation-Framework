@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE browsers PUBLIC "ROOT-VALUE"
+        "src/main/resources/browserDoctype.dtd">
+
+<!-- Browser attributes names are from CapabilityType -->
+<browsers>
+    <browser browserName="chrome" platformName="ANY">
+        <host hostname="AniaK" username="" password="" port="8000"/>
+    </browser>
+
+    <browser browserName="firefox" platformName="ANY">
+        <host hostname="AniaK" username="" password="" port="8000"/>
+    </browser>
+</browsers>
