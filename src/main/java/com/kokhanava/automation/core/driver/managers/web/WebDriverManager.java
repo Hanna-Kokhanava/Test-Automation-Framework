@@ -107,7 +107,7 @@ public class WebDriverManager {
 
         if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(zipFilePath), fileDriverName)) {
             //TODO get path from driver-repositories.xml
-            fileManager.downloadFileFromUrl("http://chromedriver.storage.googleapis.com/2.25/chromedriver_win32.zip", zipFilePath);
+            fileManager.downloadFileFromUrl(DriverRepositoryManager.getFileLocation(host, driverName), zipFilePath);
             fileManager.unzipFile(zipFilePath, DRIVERS_FOLDER.getPathToFolder(host));
         }
         return DRIVERS_FOLDER + File.separator + driverName + ".exe";

@@ -4,6 +4,7 @@ import com.kokhanava.automation.core.tools.HostMachine;
 import com.kokhanava.automation.core.tools.OS;
 import com.kokhanava.automation.core.tools.files.ResultFolder;
 
+import javax.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -113,6 +114,7 @@ public class CommandExecutor {
      * @param machine the HostMachine
      * @return type OS
      */
+    @Nullable
     public static OS getOsOfMachine(HostMachine machine) {
         String result;
         if (machine.isRemote()) {
@@ -129,6 +131,7 @@ public class CommandExecutor {
         return null;
     }
 
+    @Nullable
     private static OS getOsOfLocalMachine() {
         String result = System.getProperty(OS_NAME_PROPERTY).toLowerCase();
         if (result.contains(OS.WINDOWS.toString())) {
