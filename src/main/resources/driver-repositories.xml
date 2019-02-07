@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 
 <repositories>
-    <driver id="chromedriver">
+    <driver name="chromedriver">
         <version>2.25</version>
         <os>windows</os>
         <fileLocation>http://chromedriver.storage.googleapis.com/2.25/chromedriver_win32.zip</fileLocation>
     </driver>
 
-    <driver id="chromedriver">
+    <driver name="chromedriver">
         <version>2.25</version>
         <os>mac</os>
         <fileLocation>http://chromedriver.storage.googleapis.com/2.25/chromedriver_mac64.zip</fileLocation>

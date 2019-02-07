@@ -111,8 +111,8 @@ public class CommandExecutor {
     /**
      * Get type OS on machine
      *
-     * @param machine the HostMachine
-     * @return type OS
+     * @param machine {@link HostMachine} instance
+     * @return type of {@link OS}
      */
     @Nullable
     public static OS getOsOfMachine(HostMachine machine) {
@@ -121,13 +121,19 @@ public class CommandExecutor {
             result = executeRemotely(machine, Command.SYSTEM_GET_OS_NAME.getCommandTemplate(OS.MAC)).toLowerCase();
             if (!result.contains(OS.MAC.toString()))
                 result = executeRemotely(machine, Command.SYSTEM_GET_OS_NAME.getCommandTemplate(OS.WINDOWS)).toLowerCase();
-            else return OS.MAC;
-        } else result = System.getProperty(OS_NAME_PROPERTY).toLowerCase();
+            else {
+                return OS.MAC;
+            }
+        } else {
+            result = System.getProperty(OS_NAME_PROPERTY).toLowerCase();
+        }
 
-        if (result.contains(OS.WINDOWS.toString()))
+        if (result.contains(OS.WINDOWS.toString())) {
             return OS.WINDOWS;
-        if (result.contains(OS.MAC.toString()))
+        }
+        if (result.contains(OS.MAC.toString())) {
             return OS.MAC;
+        }
         return null;
     }
 

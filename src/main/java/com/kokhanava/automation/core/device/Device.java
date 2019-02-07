@@ -215,17 +215,17 @@ public class Device {
          *
          * @param actionKeys the action keys sequence
          */
-        public static void press(com.kokhanava.automation.core.device.functions.Key... actionKeys) {
+        public static void press(Key... actionKeys) {
             DeviceType os = DeviceManager.getCurrentDevice().getDeviceType().os();
             switch (os) {
                 case ANDROID:
-                    for (com.kokhanava.automation.core.device.functions.Key key : actionKeys) {
+                    for (Key key : actionKeys) {
                         MobileDriverManager.getAndroidDriver().pressKeyCode(key.getAndroidCode());
                     }
                     break;
                 case IOS:
                     if (AutomationName.IOS_XCUI_TEST.equalsIgnoreCase(MobileDriverManager.getDriver().getAutomationName())) {
-                        for (com.kokhanava.automation.core.device.functions.Key key : actionKeys) {
+                        for (Key key : actionKeys) {
                             MobileDriverManager.getIOSDriver().findElementByIosNsPredicate("name == \""
                                     + key.getIOSName() + "\" AND (type == \"XCUIElementTypeButton\" OR type == \"XCUIElementTypeKey\")").click();
                         }
@@ -233,7 +233,7 @@ public class Device {
                     }
 
                     // For UIAutomation
-                    for (com.kokhanava.automation.core.device.functions.Key key : actionKeys) {
+                    for (Key key : actionKeys) {
                         String tapIOSKeyScript =
                                 "UIATarget.localTarget().frontMostApp().keyboard()"
                                         + ".elements().firstWithPredicate(\"name CONTAINS[c] '" + key.getIOSName().toLowerCase() + "'\").tap()";

@@ -101,15 +101,18 @@ public class WebDriverManager {
         HostMachine host = BrowserManager.getCurrentBrowser().getHost();
         FileManager fileManager = FileManager.getInstance(host);
 
-        //TODO get information from driver-repositories.xml -> filepath - driver id + version id + .zip
-        String fileDriverName = driverName + ".zip";
-        String zipFilePath = DRIVERS_FOLDER + File.separator + fileDriverName;
+        DriverRepository repository = DriverRepositoryManager.getRepositoryObjectById(driverName);
+        String driverFileName = repository.getName() + repository.getVersion();
+        String zipFileDriverName = driverFileName + ".zip";
+        String zipFilePath = DRIVERS_FOLDER + File.separator + zipFileDriverName;
 
-        if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(zipFilePath), fileDriverName)) {
-            //TODO get path from driver-repositories.xml
-            fileManager.downloadFileFromUrl(DriverRepositoryManager.getFileLocation(host, driverName), zipFilePath);
+        if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(zipFilePath), zipFileDriverName)) {
+            String driverRepositoryUrl = DriverRepositoryManager.getRepositoryURL(host, driverName);
+            fileManager.downloadFileFromUrl(driverRepositoryUrl, zipFilePath);
             fileManager.unzipFile(zipFilePath, DRIVERS_FOLDER.getPathToFolder(host));
+            //TODO !!! while unzipping - need to add version to name !!!
         }
-        return DRIVERS_FOLDER + File.separator + driverName + ".exe";
+
+        return DRIVERS_FOLDER + File.separator + driverFileName + ".exe";
     }
 }

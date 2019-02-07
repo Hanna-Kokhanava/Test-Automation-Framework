@@ -6,12 +6,13 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
 /**
+ * Driver Repository instance to hold specific information
  * Created on 07.02.2019
  */
-public class Driver {
+public class DriverRepository {
 
     @XmlAttribute
-    private String id;
+    private String name;
 
     @XmlElement
     private String version;
@@ -22,8 +23,8 @@ public class Driver {
     @XmlElement
     private String fileLocation;
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
     public String getVersion() {
