@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -43,12 +44,11 @@ public class WebDriverManager {
         if (Objects.isNull(driver)) {
             switch (platform) {
                 case CHROME:
-                    //TODO change property value constant string to dynamic from getDriverExecutablePath()
-                    System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, DRIVERS_FOLDER + File.separator + "chromedriver.exe");
+                    System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, getDriverExecutablePath("chromedriver"));
                     driver = new ChromeDriver((ChromeOptions) options);
                     break;
                 case FIREFOX:
-                    //TODO set system property with driver exe path
+                    System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, getDriverExecutablePath("geckodriver"));
                     driver = new FirefoxDriver((FirefoxOptions) options);
                     break;
                 case IE10:
@@ -92,25 +92,24 @@ public class WebDriverManager {
 
     /**
      * Download and unzip an appropriate driver
+     * SSL problem is temporary solved via certificate validation ignorance
      *
      * @param driverName name of required driver
      * @return driver executable file
      */
-    //TODO Frozen for some time while problem with "https" certificates while downloading
     private static String getDriverExecutablePath(String driverName) {
         HostMachine host = BrowserManager.getCurrentBrowser().getHost();
         FileManager fileManager = FileManager.getInstance(host);
 
         //TODO get information from driver-repositories.xml -> filepath - driver id + version id + .zip
-        String fileName = "chromedriver" + ".zip";
-        String zipFilePath = DRIVERS_FOLDER + File.separator + fileName;
+        String fileDriverName = driverName + ".zip";
+        String zipFilePath = DRIVERS_FOLDER + File.separator + fileDriverName;
 
-        if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(zipFilePath), fileName)) {
+        if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(zipFilePath), fileDriverName)) {
+            //TODO get path from driver-repositories.xml
             fileManager.downloadFileFromUrl("http://chromedriver.storage.googleapis.com/2.25/chromedriver_win32.zip", zipFilePath);
             fileManager.unzipFile(zipFilePath, DRIVERS_FOLDER.getPathToFolder(host));
         }
-
-        //TODO need to implement "driver id... exe" file searching
-        return DRIVERS_FOLDER + File.separator;
+        return DRIVERS_FOLDER + File.separator + driverName + ".exe";
     }
 }

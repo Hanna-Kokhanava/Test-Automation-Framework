@@ -14,9 +14,8 @@ ext.guiceVersion = '4.1.0'
 ext.htmlElementsVersion = '1.12'
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    // Selenium Java
     compile 'org.seleniumhq.selenium:selenium-java:3.141.59'
-
     // Selenium Grid
     compile "org.seleniumhq.selenium:selenium-server:$seleniumVersion"
     // Appium

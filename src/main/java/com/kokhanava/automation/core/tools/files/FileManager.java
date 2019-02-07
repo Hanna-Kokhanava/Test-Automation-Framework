@@ -3,6 +3,7 @@ package com.kokhanava.automation.core.tools.files;
 import com.kokhanava.automation.core.tools.HostMachine;
 
 import javax.annotation.Nonnull;
+import javax.net.ssl.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.channels.Channels;
@@ -10,8 +11,10 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
-import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.GeneralSecurityException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -46,20 +49,24 @@ public abstract class FileManager {
 
     /**
      * Downloads file from the specified URL
+     * If URL is secured (HTTPS) - TEMPORARY solution is to disable certificates validation
      *
-     * @param url      file url
+     * @param fileUrl  file url
      * @param filePath path to file in local system
      */
-    public void downloadFileFromUrl(String url, String filePath) {
-        ReadableByteChannel channel = null;
-        FileOutputStream outputStream = null;
+    public void downloadFileFromUrl(String fileUrl, String filePath) {
+        if (!Files.exists(Paths.get(filePath))) {
+            ReadableByteChannel channel = null;
+            FileOutputStream outputStream = null;
 
-        Path path = Paths.get(filePath);
-        if (!Files.exists(path)) {
             try {
-                channel = Channels.newChannel(new URL(url).openStream());
+                channel = Channels.newChannel(new URL(fileUrl).openStream());
                 outputStream = new FileOutputStream(filePath);
                 outputStream.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
+            } catch (SSLHandshakeException e) {
+                System.out.println("SSL Exception was thrown, execute stub to disable certificates validation and try to download once again");
+                disableCertificateValidation();
+                downloadFileFromUrl(fileUrl, filePath);
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
@@ -75,9 +82,42 @@ public abstract class FileManager {
                 }
             }
         } else {
-            System.out.println("This driver version is already exists in folder");
+            System.out.println("This driver version executable file is already exists in folder");
         }
     }
+
+    /**
+     * Disables all certificate validation
+     * IS NOT RECOMMENDED!!!
+     */
+    //TODO to be removed in the future as it's not perfect solution
+    private void disableCertificateValidation() {
+        TrustManager[] trustAllCerts = new TrustManager[]{
+                new X509TrustManager() {
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return new X509Certificate[0];
+                    }
+
+                    public void checkClientTrusted(
+                            X509Certificate[] certs, String authType) {
+                    }
+
+                    public void checkServerTrusted(
+                            X509Certificate[] certs, String authType) {
+                    }
+                }
+        };
+
+        // Install the all-trusting trust manager
+        try {
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        } catch (GeneralSecurityException e) {
+            System.out.println("Security exception is occured during SSL certificates installation");
+        }
+    }
+
 
     /**
      * Unzip files into the destination folder
