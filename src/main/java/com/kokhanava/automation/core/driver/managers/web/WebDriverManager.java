@@ -2,6 +2,7 @@ package com.kokhanava.automation.core.driver.managers.web;
 
 import com.kokhanava.automation.core.browser.BrowserManager;
 import com.kokhanava.automation.core.driver.SupportedWebPlatforms;
+import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
 import com.kokhanava.automation.core.tools.files.FileManager;
 import com.kokhanava.automation.core.tools.files.property.PropertyLoader;
@@ -63,6 +64,7 @@ public class WebDriverManager {
             driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT_TIMEOUT, TimeUnit.SECONDS);
         } else {
             //TODO while async is not implemented
+            Logger.error("Driver has already been initialized");
             throw new IllegalStateException("Driver has already been initialized");
         }
     }
@@ -76,6 +78,7 @@ public class WebDriverManager {
         if (Objects.nonNull(driver)) {
             return driver;
         } else {
+            Logger.error("Driver hasn't been initialized yet. createDriver() should be called first");
             throw new IllegalStateException("Driver hasn't been initialized yet. createDriver() should be called first");
         }
     }
@@ -98,6 +101,7 @@ public class WebDriverManager {
      * @return driver executable file
      */
     private static String getDriverExecutablePath(String driverName) {
+        Logger.debug("Getting executable file path for [" + driverName + "]");
         HostMachine host = BrowserManager.getCurrentBrowser().getHost();
         FileManager fileManager = FileManager.getInstance(host);
 
@@ -106,6 +110,7 @@ public class WebDriverManager {
         String zipFilePath = DRIVERS_FOLDER + File.separator + fileDriverName;
 
         if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(zipFilePath), fileDriverName)) {
+            Logger.debug("Start to download and unzip driver executable file");
             //TODO get path from driver-repositories.xml
             fileManager.downloadFileFromUrl("http://chromedriver.storage.googleapis.com/2.25/chromedriver_win32.zip", zipFilePath);
             fileManager.unzipFile(zipFilePath, DRIVERS_FOLDER.getPathToFolder(host));

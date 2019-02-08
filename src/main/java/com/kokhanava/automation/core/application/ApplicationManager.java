@@ -1,5 +1,6 @@
 package com.kokhanava.automation.core.application;
 
+import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
 import com.kokhanava.automation.core.tools.files.FileManager;
 import com.kokhanava.automation.core.tools.files.property.PropertyLoader;
@@ -33,9 +34,9 @@ public class ApplicationManager {
     public static void uploadApp(HostMachine hostMachine) {
         if (!FileManager.getInstance(hostMachine).isFileExist(APPIUM_FOLDER, appFile, getFileName())) {
             FileManager.getInstance(hostMachine).copyFile(APPIUM_FOLDER, appFile, getFileName());
-            System.out.println(getFileName() + " is uploaded in " + APPIUM_FOLDER + " folder on " + hostMachine.getHostname());
+            Logger.debug(getFileName() + " is uploaded in " + APPIUM_FOLDER + " folder on " + hostMachine.getHostname());
         } else {
-            System.out.println(getFileName() + " is already exist in " + APPIUM_FOLDER + " folder on " + hostMachine.getHostname());
+            Logger.debug(getFileName() + " is already exist in " + APPIUM_FOLDER + " folder on " + hostMachine.getHostname());
         }
     }
 

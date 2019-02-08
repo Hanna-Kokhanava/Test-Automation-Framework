@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.kokhanava.automation.core.device.Device;
 import com.kokhanava.automation.core.driver.PlatformModules;
+import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
 import com.kokhanava.automation.core.driver.config.IPlatformConfig;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -29,6 +30,7 @@ public class AppiumServerManager {
      * @param device {@link Device}
      */
     public static void startServer(Device device) {
+        Logger.debug("Start Appium server on " + device.getAppiumHostMachine().getHostname());
         DesiredCapabilities desiredCapabilities = platformConfig.getDefaultCapabilitiesForDevice(device);
         HostMachine host = device.getAppiumHostMachine();
 
@@ -49,9 +51,9 @@ public class AppiumServerManager {
      * @param device {@link Device}
      */
     public static void stopServer(Device device) {
-        System.out.println("Stopping appium server on " + device.getAppiumHostMachine());
+        Logger.debug("Stopping appium server on " + device.getAppiumHostMachine());
         if (checkIfServerIsRunning(device.getAppiumHostMachine().getPortInt())) {
-            System.out.println("Appium server already stopped");
+            Logger.warn("Appium server is already stopped");
         } else {
             service.stop();
         }
@@ -63,7 +65,7 @@ public class AppiumServerManager {
      * @param device {@link Device}
      */
     public static void restartServer(Device device) {
-        System.out.println("Restart Appium server");
+        Logger.debug("Restarting Appium server");
         stopServer(device);
         Sleeper.sleepTight(2);
         startServer(device);
@@ -76,6 +78,7 @@ public class AppiumServerManager {
      * @return true if server currently runs
      */
     public static boolean checkIfServerIsRunning(int port) {
+        Logger.debug("Check if Appium server is running now");
         boolean isServerRunning = false;
         ServerSocket serverSocket;
         try {

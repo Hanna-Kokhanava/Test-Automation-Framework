@@ -1,8 +1,10 @@
 package com.kokhanava.automation.core.tools.files;
 
+import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
 import org.testng.ITestResult;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.util.Objects;
 
@@ -34,7 +36,8 @@ public enum ResultFolder {
      * @return {@link File} of folder
      */
     public File getLocalDir() {
-        return getFolderInLocalDir(ProjectDir.getRootProjectDir());
+        return Objects.requireNonNull(getFolderInLocalDir(ProjectDir.getRootProjectDir()),
+                "Destination folder is not found");
     }
 
     /**
@@ -44,10 +47,12 @@ public enum ResultFolder {
      * @param targetDir {@link File} directory, where folder must be
      * @return {@link File} of folder
      */
+    @Nullable
     public File getFolderInLocalDir(File targetDir) {
         File directory = new File(targetDir, this.toString());
         if (!directory.exists() && !directory.mkdirs()) {
-            System.out.println(String.format("Unable to create destination folder: '%1$s'", targetDir.toString() + this.toString()));
+            Logger.error(String.format("Unable to create destination folder: '%1$s'",
+                    targetDir.toString() + this.toString()));
             return null;
         }
         return directory;

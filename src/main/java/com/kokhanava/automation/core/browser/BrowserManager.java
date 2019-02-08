@@ -1,5 +1,6 @@
 package com.kokhanava.automation.core.browser;
 
+import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.files.ProjectDir;
 import com.kokhanava.automation.core.tools.files.property.PropertyLoader;
 
@@ -46,9 +47,9 @@ public class BrowserManager {
      * @param Browser instance
      */
     public static void setCurrentBrowser(Browser browser) {
+        Logger.debug("Set current Browser instance with name : " + browser.getBrowserName());
         currentBrowser.remove();
         currentBrowser.set(browser);
-        System.out.println("Set current browser: " + browser);
     }
 
     /**
@@ -63,6 +64,7 @@ public class BrowserManager {
                 return browser;
             }
         }
+        Logger.error("Browser with name [" + browserName + "] was not found");
         throw new RuntimeException("Browser with name [" + browserName + "] was not found");
     }
 }

@@ -1,7 +1,9 @@
 package com.kokhanava.automation.core.tools.files.property;
 
 import com.google.inject.Inject;
+import com.kokhanava.automation.core.logger.Logger;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -166,6 +168,7 @@ public final class PropertyLoader {
         }
         String propertyValue = generalProperties.getProperty(generalProperty.getKey());
         Objects.requireNonNull(propertyValue, "Unable to resolve '" + propertyValue + "' property value");
+        Logger.debug("General test property value for [" + generalProperty + "] key is [" + propertyValue + "]");
         return propertyValue;
     }
 
@@ -195,10 +198,11 @@ public final class PropertyLoader {
             if (Objects.nonNull(stream)) {
                 result.load(stream);
             } else {
-                System.out.println("File " + path + " could not be found");
+                Logger.error("File with path [" + path + "] could not be found");
+                throw new FileNotFoundException("File with path [" + path + "] could not be found");
             }
         } catch (IOException e) {
-            System.out.println("Error while reading properties from " + path);
+            Logger.error("Error while reading properties from path [" + path + "]");
         }
         return result;
     }

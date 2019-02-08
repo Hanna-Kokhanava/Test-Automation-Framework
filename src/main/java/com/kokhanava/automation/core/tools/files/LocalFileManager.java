@@ -1,5 +1,6 @@
 package com.kokhanava.automation.core.tools.files;
 
+import com.kokhanava.automation.core.logger.Logger;
 import org.apache.commons.io.FileUtils;
 
 import javax.annotation.Nonnull;
@@ -29,7 +30,7 @@ public class LocalFileManager extends FileManager {
             dest.delete();
             FileUtils.copyFile(sourceFile, dest);
         } catch (IOException e) {
-            System.out.println("Error while trying to copy file...");
+            Logger.error("Error while trying to copy file...");
         }
     }
 
