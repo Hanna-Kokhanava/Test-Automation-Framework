@@ -1,5 +1,6 @@
 package com.kokhanava.automation.core.device;
 
+import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.commands.Command;
 import com.kokhanava.automation.core.tools.commands.CommandExecutor;
 import com.kokhanava.automation.core.tools.files.ProjectDir;
@@ -39,6 +40,7 @@ public class DeviceManager {
      * @return {@link Device} instance
      */
     public static Device getCurrentDevice() {
+        Logger.debug("Get current Device instance");
         if (Objects.isNull(currentDevice.get()) && MobileDriverManager.getDriverType() == MobileDriverManager.DriverType.APPIUM) {
             String udid = PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_UDID, "");
             if (!udid.equals(""))
@@ -53,9 +55,9 @@ public class DeviceManager {
      * @param device {@link Device} instance
      */
     public static void setCurrentDevice(Device device) {
+        Logger.debug("Set current Device instance with name : " + device.getDeviceName());
         currentDevice.remove();
         currentDevice.set(device);
-        System.out.println("Set current device: " + device);
     }
 
     /**
@@ -69,6 +71,7 @@ public class DeviceManager {
                 return device;
             }
         }
+        Logger.error("Device with UDID [" + udid + "] was not found");
         throw new RuntimeException("Device with UDID [" + udid + "] was not found");
     }
 
@@ -110,6 +113,7 @@ public class DeviceManager {
             if (Objects.nonNull(mostLikely)) {
                 deviceTypeFromConfig = mostLikely;
             } else {
+                Logger.error(String.format("Unable to detect device by name '%s'", deviceType));
                 throw new RuntimeException(String.format("Unable to detect device by name '%s'", deviceType));
             }
         }

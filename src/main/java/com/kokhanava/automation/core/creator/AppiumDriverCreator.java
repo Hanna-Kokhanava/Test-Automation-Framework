@@ -5,6 +5,7 @@ import com.kokhanava.automation.core.device.DeviceManager;
 import com.kokhanava.automation.core.driver.capabilities.AppiumCapabilities;
 import com.kokhanava.automation.core.driver.managers.mobile.AppiumServerManager;
 import com.kokhanava.automation.core.driver.managers.mobile.MobileDriverManager;
+import com.kokhanava.automation.core.logger.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Objects;
@@ -41,11 +42,12 @@ public class AppiumDriverCreator implements IDriverCreator {
             capabilities.merge(customCapabilities);
         }
 
-        System.out.println("Creating driver...");
+        Logger.debug("Creating driver for [" + device.getDeviceName() + "] device on [" +
+                device.getAppiumHostMachine().getHostname() + "] host");
         try {
             MobileDriverManager.createDriver(capabilities);
         } catch (Exception er) {
-            System.out.println("Exception happened with create driver. Look at appium log for additional information.\n");
+            Logger.warn("Exception happened with create driver. Look at appium log for additional information.\n");
             AppiumServerManager.restartServer(device);
             MobileDriverManager.createDriver(capabilities);
         }
@@ -57,6 +59,7 @@ public class AppiumDriverCreator implements IDriverCreator {
      */
     @Override
     public void closeDriver() {
+        Logger.debug("Quitting driver");
         MobileDriverManager.closeDriver();
     }
 
@@ -67,6 +70,8 @@ public class AppiumDriverCreator implements IDriverCreator {
      * @return {@link DesiredCapabilities} instance
      */
     private DesiredCapabilities createCapabilitiesForAppium(Device device) {
+        Logger.debug("Create base capabilities for [" + device.getDeviceName() + "] device on [" +
+                device.getAppiumHostMachine().getHostname() + "] host");
         AppiumCapabilities appiumCapabilities = new AppiumCapabilities(device.getDeviceType());
         DesiredCapabilities caps = appiumCapabilities.createBaseCapabilities();
         caps.merge(appiumCapabilities.getMobilePlatformCapabilities(device));
