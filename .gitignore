@@ -2,6 +2,7 @@
 ### Gradle template
 .gradle
 /build/
+/out
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -20,5 +21,7 @@ gradle/
 /gradlew
 gradlew.bat
 
-/out
+# Ignore custom files
 /certificates
+/drivers
+/logs
