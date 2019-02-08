@@ -1,10 +1,7 @@
 package com.kokhanava.automation.core.driver.managers.web;
 
-import com.kokhanava.automation.core.browser.BrowserManager;
 import com.kokhanava.automation.core.driver.SupportedWebPlatforms;
 import com.kokhanava.automation.core.logger.Logger;
-import com.kokhanava.automation.core.tools.HostMachine;
-import com.kokhanava.automation.core.tools.files.FileManager;
 import com.kokhanava.automation.core.tools.files.property.PropertyLoader;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
@@ -18,11 +15,8 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.io.File;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
-import static com.kokhanava.automation.core.tools.files.ResultFolder.DRIVERS_FOLDER;
 
 /**
  * Created on 21.01.2019
@@ -45,11 +39,13 @@ public class WebDriverManager {
         if (Objects.isNull(driver)) {
             switch (platform) {
                 case CHROME:
-                    System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, getDriverExecutableFilePath("chromedriver"));
+                    System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY,
+                            DriverRepositoryManager.getDriverExecutableFilePath("chromedriver"));
                     driver = new ChromeDriver((ChromeOptions) options);
                     break;
                 case FIREFOX:
-                    System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, getDriverExecutableFilePath("geckodriver"));
+                    System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY,
+                            DriverRepositoryManager.getDriverExecutableFilePath("geckodriver"));
                     driver = new FirefoxDriver((FirefoxOptions) options);
                     break;
                 case IE10:
@@ -91,33 +87,5 @@ public class WebDriverManager {
             driver.quit();
             driver = null;
         }
-    }
-
-    /**
-     * Download and unzip an appropriate driver
-     * SSL problem is temporary solved via certificate validation ignorance
-     *
-     * @param driverName name of required driver
-     * @return driver executable file
-     */
-    private static String getDriverExecutableFilePath(String driverName) {
-        Logger.debug("Getting executable file path for [" + driverName + "]");
-        HostMachine host = BrowserManager.getCurrentBrowser().getHost();
-        FileManager fileManager = FileManager.getInstance(host);
-
-        DriverRepository repository = DriverRepositoryManager.getRepositoryObjectById(driverName);
-        String driverFileName = repository.getName() + repository.getVersion();
-        String zipFileDriverName = driverFileName + ".zip";
-        String zipFilePath = DRIVERS_FOLDER + File.separator + zipFileDriverName;
-
-        if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(zipFilePath), zipFileDriverName)) {
-            Logger.debug("Start to download and unzip driver executable file");
-            String driverRepositoryUrl = DriverRepositoryManager.getRepositoryURL(host, driverName);
-            fileManager.downloadFileFromUrl(driverRepositoryUrl, zipFilePath);
-            fileManager.unzipFile(zipFilePath, DRIVERS_FOLDER.getPathToFolder(host));
-            //TODO !!! while unzipping - need to add version to name !!!
-        }
-
-        return DRIVERS_FOLDER + File.separator + driverFileName + ".exe";
     }
 }

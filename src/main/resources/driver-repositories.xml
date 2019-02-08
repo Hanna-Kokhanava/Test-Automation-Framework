@@ -13,4 +13,16 @@
         <fileLocation>http://chromedriver.storage.googleapis.com/2.25/chromedriver_mac64.zip</fileLocation>
     </driver>
 
+    <driver name="geckodriver">
+        <version>0.24.0</version>
+        <os>windows</os>
+        <fileLocation>https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-win64.zip</fileLocation>
+    </driver>
+
+    <driver name="geckodriver">
+        <version>0.24.0</version>
+        <os>mac</os>
+        <fileLocation>https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-macos.tar.gz</fileLocation>
+    </driver>
+
 </repositories>
