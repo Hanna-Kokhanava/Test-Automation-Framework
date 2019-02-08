@@ -1,5 +1,6 @@
 package com.kokhanava.automation.core.tools.files;
 
+import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
 
 import javax.annotation.Nonnull;
@@ -55,30 +56,35 @@ public abstract class FileManager {
      * @param filePath path to file in local system
      */
     public void downloadFileFromUrl(String fileUrl, String filePath) {
-        ReadableByteChannel channel = null;
-        FileOutputStream outputStream = null;
+        if (!Files.exists(Paths.get(filePath))) {
+            Logger.debug("Downloading file from " + fileUrl);
+            ReadableByteChannel channel = null;
+            FileOutputStream outputStream = null;
 
-        try {
-            channel = Channels.newChannel(new URL(fileUrl).openStream());
-            outputStream = new FileOutputStream(filePath);
-            outputStream.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
-        } catch (SSLHandshakeException e) {
-            System.out.println("SSL Exception was thrown, execute stub to disable certificates validation and try to download once again");
-            disableCertificateValidation();
-            downloadFileFromUrl(fileUrl, filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
             try {
-                if (Objects.nonNull(outputStream)) {
-                    outputStream.close();
-                }
-                if (Objects.nonNull(channel)) {
-                    channel.close();
-                }
+                channel = Channels.newChannel(new URL(fileUrl).openStream());
+                outputStream = new FileOutputStream(filePath);
+                outputStream.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
+            } catch (SSLHandshakeException e) {
+                Logger.warn("SSL Exception was thrown, execute stub to disable certificates validation and try to download once again");
+                disableCertificateValidation();
+                downloadFileFromUrl(fileUrl, filePath);
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    if (Objects.nonNull(outputStream)) {
+                        outputStream.close();
+                    }
+                    if (Objects.nonNull(channel)) {
+                        channel.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+        } else {
+            Logger.warn("File [" + filePath + "] is already exists in the folder");
         }
     }
 
@@ -110,7 +116,7 @@ public abstract class FileManager {
             sc.init(null, trustAllCerts, new SecureRandom());
             HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
         } catch (GeneralSecurityException e) {
-            System.out.println("Security exception is occured during SSL certificates installation");
+            Logger.error("Security exception is occurred during SSL certificates installation");
         }
     }
 
@@ -123,6 +129,7 @@ public abstract class FileManager {
      * @param destPath    destination path for unzipped files
      */
     public void unzipFile(String zipFilePath, String destPath) {
+        Logger.debug("Unzipping file " + zipFilePath);
         FileInputStream fileInputStream = null;
         ZipInputStream zipInputStream = null;
         ZipEntry zipEntry;
@@ -221,7 +228,7 @@ public abstract class FileManager {
 
     public static BufferedWriter getFileWriter(File file, OpenOption... options) throws IOException {
         if (Objects.isNull(file) || file.isDirectory()) {
-            System.out.println("Cannot append to file");
+            Logger.error("Cannot append to file");
             throw new RuntimeException("File is failed");
         }
         return Files.newBufferedWriter(Paths.get(file.toURI()), Charset.forName("UTF8"), options);

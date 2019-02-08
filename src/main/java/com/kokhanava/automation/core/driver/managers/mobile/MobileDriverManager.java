@@ -2,6 +2,7 @@ package com.kokhanava.automation.core.driver.managers.mobile;
 
 import com.kokhanava.automation.core.device.Device;
 import com.kokhanava.automation.core.device.DeviceManager;
+import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
 import com.kokhanava.automation.core.tools.files.property.PropertyLoader;
 import io.appium.java_client.AppiumDriver;
@@ -115,14 +116,18 @@ public class MobileDriverManager {
         Device.DeviceType type = DeviceManager.getDeviceTypeFromConfigFile().os();
         AppiumDriver driver = null;
 
-        switch (type) {
-            case ANDROID:
-                driver = new AndroidDriver(
-                        getDriverHost().getURIBuilder(URI_SCHEME).setPath(WD_SERVER_ROOT).build().toURL(), capabilities);
-                break;
-            case IOS:
-                driver = new IOSDriver(
-                        getDriverHost().getURIBuilder(URI_SCHEME).setPath(WD_SERVER_ROOT).build().toURL(), capabilities);
+        try {
+            switch (type) {
+                case ANDROID:
+                    driver = new AndroidDriver(
+                            getDriverHost().getURIBuilder(URI_SCHEME).setPath(WD_SERVER_ROOT).build().toURL(), capabilities);
+                    break;
+                case IOS:
+                    driver = new IOSDriver(
+                            getDriverHost().getURIBuilder(URI_SCHEME).setPath(WD_SERVER_ROOT).build().toURL(), capabilities);
+            }
+        } catch (Exception e) {
+            Logger.error("Exception happened during driver creation :\n" + e.getMessage());
         }
         Objects.requireNonNull(driver, "Exception happened with create driver");
 
@@ -142,7 +147,7 @@ public class MobileDriverManager {
                 driverInstance.quit();
             }
         } catch (WebDriverException e) {
-            System.out.println("Oops, looks like the driver has quited a bit earlier");
+            Logger.error("Oops, looks like the driver has quited a bit earlier");
         }
     }
 }

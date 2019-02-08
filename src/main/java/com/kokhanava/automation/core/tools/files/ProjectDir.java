@@ -1,5 +1,7 @@
 package com.kokhanava.automation.core.tools.files;
 
+import com.kokhanava.automation.core.logger.Logger;
+
 import javax.annotation.Nullable;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -40,11 +42,11 @@ public class ProjectDir {
     public static File getProjectResource(String identifier) {
         URL resourceURL = Objects.requireNonNull(ClassLoader.getSystemClassLoader().getResource(identifier),
                 String.format("Not found '%s' resource", identifier));
-        File resourceFile;
+        File resourceFile = null;
         try {
             resourceFile = new File(resourceURL.toURI());
         } catch (URISyntaxException e) {
-            resourceFile = null;
+            Logger.error("Error is occured while resource file creation");
         }
         return resourceFile;
     }

@@ -1,5 +1,6 @@
 package com.kokhanava.automation.core.waiters;
 
+import com.kokhanava.automation.core.logger.Logger;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
@@ -33,7 +34,7 @@ public class Waiter {
             retMeth = Waiter.value.getClass().cast(meth.invoke(element, Waiter.params));
         } catch (Exception e) {
             Throwable cause = null != e.getCause() ? e.getCause() : e;
-            System.out.println("Error in Waiter: " + cause.getMessage());
+            Logger.error("Error in Waiter: " + cause.getMessage());
             cause.printStackTrace();
             return false;
         }
@@ -52,7 +53,7 @@ public class Waiter {
                 retVal = (compare(retMeth, Waiter.value) > 0);
                 break;
             default:
-                System.out.println("Unsupported operator: " + Waiter.operator);
+                Logger.error("Unsupported operator: " + Waiter.operator);
                 break;
         }
         return retVal;
@@ -63,7 +64,7 @@ public class Waiter {
         try {
             return ((Comparable<Object>) c1).compareTo(c2);
         } catch (ClassCastException e) {
-            System.out.println("Cannot compare objects of type " + c1.getClass().getSimpleName());
+            Logger.error("Cannot compare objects of type " + c1.getClass().getSimpleName());
             throw e;
         }
     }

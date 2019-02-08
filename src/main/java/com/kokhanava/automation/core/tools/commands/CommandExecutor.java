@@ -1,5 +1,6 @@
 package com.kokhanava.automation.core.tools.commands;
 
+import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
 import com.kokhanava.automation.core.tools.OS;
 import com.kokhanava.automation.core.tools.files.ResultFolder;
@@ -37,6 +38,7 @@ public class CommandExecutor {
      * @return result string
      */
     public static String execute(HostMachine machine, String command) {
+        Logger.debug("Executing command [" + command + "] on " + machine.getHostname() + " host");
         OS os = getOsOfMachine(machine);
         command = os != OS.WINDOWS
                 ? Command.SYSTEM_SOURCE_ENVIRONMENT.getCommandTemplate(Objects.requireNonNull(os)) + " " + command

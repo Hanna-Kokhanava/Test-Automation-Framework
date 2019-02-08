@@ -3,6 +3,7 @@ package com.kokhanava.automation.core.device;
 import com.google.gson.annotations.SerializedName;
 import com.kokhanava.automation.core.device.functions.Key;
 import com.kokhanava.automation.core.driver.managers.mobile.MobileDriverManager;
+import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
 import io.appium.java_client.remote.AutomationName;
 import org.openqa.selenium.Dimension;
@@ -241,6 +242,7 @@ public class Device {
                     }
                     break;
                 default:
+                    Logger.error("Pressing keys is not implemented for " + os);
                     throw new RuntimeException("Pressing keys is not implemented for " + os);
             }
         }
@@ -251,12 +253,13 @@ public class Device {
                 MobileDriverManager.getDriver().hideKeyboard();
             } catch (WebDriverException e1) {
                 try {
-                    if (DeviceManager.getCurrentDevice().isIOS())
+                    if (DeviceManager.getCurrentDevice().isIOS()) {
                         press(Key.HIDE);
+                    }
                 } catch (WebDriverException e2) {
-                    System.out.println("Keyboard already hide");
+                    Logger.warn("Keyboard already hide");
                 }
-                System.out.println("Keyboard is hide");
+                Logger.debug("Keyboard is hided");
             }
         }
     }
