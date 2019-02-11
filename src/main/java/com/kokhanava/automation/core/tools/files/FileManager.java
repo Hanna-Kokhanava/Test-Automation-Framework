@@ -4,6 +4,7 @@ import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.net.ssl.*;
 import java.io.*;
 import java.net.URL;
@@ -16,9 +17,7 @@ import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -172,6 +171,28 @@ public abstract class FileManager {
         }
 
         new File(zipFilePath).delete();
+    }
+
+    /**
+     * Search recursively for file by its name
+     *
+     * @param rootDirectory {@link File} root directory to search
+     * @param fileName      name of file to find
+     * @return absolute path to file
+     */
+    @Nullable
+    public String getPathToFile(File rootDirectory, String fileName) {
+        File[] files = rootDirectory.listFiles();
+        Objects.requireNonNull(files, "Files are not found in [" + rootDirectory + "] directory");
+        String filePath = null;
+        for (File file : files) {
+            if (file.isFile() && file.getName().equalsIgnoreCase(fileName)) {
+                return file.getAbsolutePath();
+            } else if (file.isDirectory()) {
+                filePath = getPathToFile(file, fileName);
+            }
+        }
+        return filePath;
     }
 
     /**

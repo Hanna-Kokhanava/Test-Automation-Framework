@@ -48,6 +48,7 @@ public class DriverRepositoryManager {
 
         String directoryPath = DRIVERS_FOLDER + File.separator + repository.getName()
                 + File.separator + repository.getVersion();
+        String driverExeFileName = driverName + ".exe";
 
         if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(driverName), driverName)) {
             Logger.debug("Start to download and unzip driver executable file");
@@ -58,8 +59,9 @@ public class DriverRepositoryManager {
             fileManager.unzipFile(zipFilePath, directoryPath);
         }
 
-        Logger.debug("Got executable file path for [" + driverName + "] with version [" + repository.getVersion() + "]");
-        return directoryPath + File.separator + driverName + ".exe";
+        Logger.debug("Got executable file path for [" + driverExeFileName + "] with version [" + repository.getVersion() + "]");
+        String filePath = fileManager.getPathToFile(new File(directoryPath), driverExeFileName);
+        return Objects.requireNonNull(filePath, "Driver executable file is not found!");
     }
 
     /**
