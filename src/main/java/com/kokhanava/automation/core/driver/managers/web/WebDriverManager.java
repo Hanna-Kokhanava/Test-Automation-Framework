@@ -26,6 +26,10 @@ public class WebDriverManager {
     private static final long IMPLICIT_WAIT_TIMEOUT = 5;
     private static WebDriver driver;
 
+    //Need to coincide with driver-repositories.xml configuration file
+    private static final String CHROME_DRIVER_NAME = "chromedriver";
+    private static final String FIREFOX_DRIVER_NAME = "geckodriver";
+
     /**
      * Creates driver depends on current browser type
      *
@@ -40,12 +44,12 @@ public class WebDriverManager {
             switch (platform) {
                 case CHROME:
                     System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY,
-                            DriverRepositoryManager.getDriverExecutableFilePath("chromedriver"));
+                            DriverRepositoryManager.getDriverExecutableFilePath(CHROME_DRIVER_NAME));
                     driver = new ChromeDriver((ChromeOptions) options);
                     break;
                 case FIREFOX:
                     System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY,
-                            DriverRepositoryManager.getDriverExecutableFilePath("geckodriver"));
+                            DriverRepositoryManager.getDriverExecutableFilePath(FIREFOX_DRIVER_NAME));
                     driver = new FirefoxDriver((FirefoxOptions) options);
                     break;
                 case IE10:

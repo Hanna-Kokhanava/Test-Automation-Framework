@@ -42,28 +42,24 @@ public class DriverRepositoryManager {
      * @return driver executable file
      */
     public static String getDriverExecutableFilePath(String driverName) {
-        Logger.debug("Getting executable file path for [" + driverName + "]");
+        DriverRepository repository = getRepositoryObjectById(driverName);
         HostMachine host = BrowserManager.getCurrentBrowser().getHost();
         FileManager fileManager = FileManager.getInstance(host);
 
-        DriverRepository repository = getRepositoryObjectById(driverName);
-        String driverFileName = repository.getName() + repository.getVersion();
-        String zipFileDriverName = driverFileName + ".zip";
-        String zipFilePath = DRIVERS_FOLDER + File.separator + zipFileDriverName;
+        String directoryPath = DRIVERS_FOLDER + File.separator + repository.getName()
+                + File.separator + repository.getVersion();
 
-        if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(zipFilePath), zipFileDriverName)) {
+        if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(driverName), driverName)) {
             Logger.debug("Start to download and unzip driver executable file");
-            String driverRepositoryUrl = getRepositoryURL(host, driverName);
-            fileManager.downloadFileFromUrl(driverRepositoryUrl, zipFilePath);
-            fileManager.unzipFile(zipFilePath, DRIVERS_FOLDER.getPathToFolder(host));
+            String zipFilePath = directoryPath + File.separator + driverName + ".zip";
+
+            fileManager.createSubDirectories(directoryPath);
+            fileManager.downloadFileFromUrl(getRepositoryURL(host, driverName), zipFilePath);
+            fileManager.unzipFile(zipFilePath, directoryPath);
         }
 
-        return DRIVERS_FOLDER + File.separator + driverFileName + ".exe";
-    }
-
-    public static void manageDriverExeFilesName() {
-        //TODO implement name set up - "driver + version"
-        //TODO not in unzip method to don't mix logic
+        Logger.debug("Got executable file path for [" + driverName + "] with version [" + repository.getVersion() + "]");
+        return directoryPath + File.separator + driverName + ".exe";
     }
 
     /**
@@ -73,7 +69,7 @@ public class DriverRepositoryManager {
      * @param driverName  name of driver
      * @return url string
      */
-    public static String getRepositoryURL(HostMachine hostMachine, String driverName) {
+    private static String getRepositoryURL(HostMachine hostMachine, String driverName) {
         if (driverList.isEmpty()) {
             throw new RuntimeException("List of driver repositories is empty!");
         }
@@ -96,7 +92,7 @@ public class DriverRepositoryManager {
      * @param driverName name of driver
      * @return {@link DriverRepository}
      */
-    public static DriverRepository getRepositoryObjectById(String driverName) {
+    private static DriverRepository getRepositoryObjectById(String driverName) {
         if (driverList.isEmpty()) {
             throw new RuntimeException("List of driver repositories is empty!");
         }
@@ -104,6 +100,8 @@ public class DriverRepositoryManager {
                 .filter(driver -> driver.getName().equalsIgnoreCase(driverName))
                 .findFirst()
                 .orElse(null);
-        return Objects.requireNonNull(driverRepository, "Driver with ID [" + driverName + "] was not found");
+
+        return Objects.requireNonNull(driverRepository,
+                "Driver with name [" + driverName + "] was not found in configuration file");
     }
 }

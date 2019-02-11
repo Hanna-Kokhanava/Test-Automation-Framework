@@ -56,35 +56,34 @@ public abstract class FileManager {
      * @param filePath path to file in local system
      */
     public void downloadFileFromUrl(String fileUrl, String filePath) {
-        if (!Files.exists(Paths.get(filePath))) {
-            Logger.debug("Downloading file from " + fileUrl);
-            ReadableByteChannel channel = null;
-            FileOutputStream outputStream = null;
+        Logger.debug("Downloading file from [" + fileUrl + "]");
+        ReadableByteChannel channel = null;
+        FileOutputStream outputStream = null;
 
+        try {
+            channel = Channels.newChannel(new URL(fileUrl).openStream());
+            outputStream = new FileOutputStream(new File(filePath));
+            outputStream.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
+        } catch (SSLHandshakeException e) {
+            //TODO infinite recursive call ?
+            Logger.warn("SSL Exception was thrown, execute stub to disable certificates validation and try to download once again");
+            disableCertificateValidation();
+            downloadFileFromUrl(fileUrl, filePath);
+        } catch (IOException e) {
+            Logger.error("Exception occurred while channel creation\n" + e.getMessage());
+            e.printStackTrace();
+        } finally {
             try {
-                channel = Channels.newChannel(new URL(fileUrl).openStream());
-                outputStream = new FileOutputStream(filePath);
-                outputStream.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
-            } catch (SSLHandshakeException e) {
-                Logger.warn("SSL Exception was thrown, execute stub to disable certificates validation and try to download once again");
-                disableCertificateValidation();
-                downloadFileFromUrl(fileUrl, filePath);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (Objects.nonNull(outputStream)) {
-                        outputStream.close();
-                    }
-                    if (Objects.nonNull(channel)) {
-                        channel.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (Objects.nonNull(outputStream)) {
+                    outputStream.close();
                 }
+                if (Objects.nonNull(channel)) {
+                    channel.close();
+                }
+            } catch (IOException e) {
+                Logger.error("Exception occurred during streams closing\n" + e.getMessage());
+                e.printStackTrace();
             }
-        } else {
-            Logger.warn("File [" + filePath + "] is already exists in the folder");
         }
     }
 
@@ -137,23 +136,25 @@ public abstract class FileManager {
         File newFile;
 
         try {
-            fileInputStream = new FileInputStream(zipFilePath);
+            fileInputStream = new FileInputStream(new File(zipFilePath));
             zipInputStream = new ZipInputStream(fileInputStream);
             zipEntry = zipInputStream.getNextEntry();
+
             while (Objects.nonNull(zipEntry)) {
                 filePath = destPath + File.separator + zipEntry.getName();
                 newFile = new File(filePath);
+
                 if (zipEntry.isDirectory()) {
                     new File(filePath).mkdirs();
                 } else {
                     new File(newFile.getParent()).mkdirs();
                     extractFile(zipInputStream, filePath);
                 }
-
                 zipInputStream.closeEntry();
                 zipEntry = zipInputStream.getNextEntry();
             }
         } catch (IOException e) {
+            Logger.error("Exception occurred while unzipping process\n" + e.getMessage());
             e.printStackTrace();
         } finally {
             try {
@@ -165,9 +166,12 @@ public abstract class FileManager {
                     fileInputStream.close();
                 }
             } catch (IOException e) {
+                Logger.error("Exception occurred while streams closing\n" + e.getMessage());
                 e.printStackTrace();
             }
         }
+
+        new File(zipFilePath).delete();
     }
 
     /**
@@ -185,6 +189,20 @@ public abstract class FileManager {
             bufferedOutputStream.write(buffer, 0, len);
         }
         bufferedOutputStream.close();
+    }
+
+    /**
+     * Creates nonexistent parent directories
+     *
+     * @param pathToDirectory directories to create
+     */
+    public void createSubDirectories(String pathToDirectory) {
+        try {
+            Files.createDirectories(Paths.get(pathToDirectory));
+        } catch (IOException e) {
+            Logger.error("Unable to create nonexistent parent directories\n" + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**

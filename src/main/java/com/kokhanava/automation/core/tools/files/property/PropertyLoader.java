@@ -34,7 +34,7 @@ public final class PropertyLoader {
     }
 
     /**
-     * Browser properties keys from browser.properties file
+     * Browser properties keys from web.properties file
      */
     public enum BrowserProperty implements IProperty {
         BROWSER_TYPE("browser.type"),
@@ -102,7 +102,7 @@ public final class PropertyLoader {
 
     private static final String GENERAL_TEST_PROPERTIES_PATH = "general.properties";
     private static final String MOBILE_TEST_PROPERTIES_PATH = "mobile.properties";
-    private static final String BROWSER_TEST_PROPERTIES_PATH = "browser.properties";
+    private static final String WEB_TEST_PROPERTIES_PATH = "web.properties";
 
     private static Properties generalProperties;
     private static Properties testProperties;
@@ -150,7 +150,7 @@ public final class PropertyLoader {
         if (property.getClass().equals(MobileProperty.class)) {
             propFromFile = PropertyLoader.getPropertyFromFile(property.getKey(), MOBILE_TEST_PROPERTIES_PATH);
         } else {
-            propFromFile = PropertyLoader.getPropertyFromFile(property.getKey(), BROWSER_TEST_PROPERTIES_PATH);
+            propFromFile = PropertyLoader.getPropertyFromFile(property.getKey(), WEB_TEST_PROPERTIES_PATH);
         }
         Objects.requireNonNull(propFromFile, "Unable to resolve '" + propFromFile + "' property value");
         return propFromFile;
