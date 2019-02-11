@@ -13,6 +13,9 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaDriverService;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Objects;
@@ -29,6 +32,7 @@ public class WebDriverManager {
     //Need to coincide with driver-repositories.xml configuration file
     private static final String CHROME_DRIVER_NAME = "chromedriver";
     private static final String FIREFOX_DRIVER_NAME = "geckodriver";
+    private static final String OPERA_DRIVER_NAME = "operadriver";
 
     /**
      * Creates driver depends on current browser type
@@ -51,6 +55,11 @@ public class WebDriverManager {
                     System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY,
                             DriverRepositoryManager.getDriverExecutableFilePath(FIREFOX_DRIVER_NAME));
                     driver = new FirefoxDriver((FirefoxOptions) options);
+                    break;
+                case OPERA:
+                    System.setProperty(OperaDriverService.OPERA_DRIVER_EXE_PROPERTY,
+                            DriverRepositoryManager.getDriverExecutableFilePath(OPERA_DRIVER_NAME));
+                    driver = new OperaDriver((OperaOptions) options);
                     break;
                 case IE10:
                     //TODO set system property with driver exe path

@@ -12,4 +12,8 @@
     <browser browserName="firefox" platformName="ANY">
         <host hostname="AniaK" username="" password="" port="8000"/>
     </browser>
+
+    <browser browserName="opera" platformName="ANY">
+        <host hostname="AniaK" username="" password="" port="8000"/>
+    </browser>
 </browsers>

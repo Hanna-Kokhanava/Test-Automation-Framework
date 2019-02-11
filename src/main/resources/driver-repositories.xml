@@ -25,4 +25,16 @@
         <fileLocation>https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-macos.tar.gz</fileLocation>
     </driver>
 
+    <driver name="operadriver">
+        <version>2.42</version>
+        <os>windows</os>
+        <fileLocation>https://github.com/operasoftware/operachromiumdriver/releases/download/v.2.42/operadriver_win64.zip</fileLocation>
+    </driver>
+
+    <driver name="operadriver">
+        <version>2.42</version>
+        <os>mac</os>
+        <fileLocation>https://github.com/operasoftware/operachromiumdriver/releases/download/v.2.42/operadriver_mac64.zip</fileLocation>
+    </driver>
+
 </repositories>
