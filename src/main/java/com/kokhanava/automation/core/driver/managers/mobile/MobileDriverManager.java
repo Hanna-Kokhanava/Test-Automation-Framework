@@ -125,12 +125,13 @@ public class MobileDriverManager {
                 case IOS:
                     driver = new IOSDriver(
                             getDriverHost().getURIBuilder(URI_SCHEME).setPath(WD_SERVER_ROOT).build().toURL(), capabilities);
+                    break;
             }
         } catch (Exception e) {
             Logger.error("Exception happened during driver creation :\n" + e.getMessage());
         }
-        Objects.requireNonNull(driver, "Exception happened with create driver");
 
+        Objects.requireNonNull(driver, "Exception happened with create driver");
         driverPool.set(driver);
         driverPool.get().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     }

@@ -40,13 +40,14 @@ public class ProjectDir {
      */
     @Nullable
     public static File getProjectResource(String identifier) {
-        URL resourceURL = Objects.requireNonNull(ClassLoader.getSystemClassLoader().getResource(identifier),
-                String.format("Not found '%s' resource", identifier));
+        URL resourceURL = ClassLoader.getSystemClassLoader().getResource(identifier);
+        Objects.requireNonNull(resourceURL, String.format("Not found '%s' resource", identifier));
+
         File resourceFile = null;
         try {
             resourceFile = new File(resourceURL.toURI());
         } catch (URISyntaxException e) {
-            Logger.error("Error is occured while resource file creation");
+            Logger.error("URL is not formatted strictly and cannot be converted to a URI.");
         }
         return resourceFile;
     }

@@ -111,14 +111,13 @@ public class HostMachine {
 
     public URIBuilder getURIBuilder(String uriScheme) {
         URIBuilder uriBuilder = new URIBuilder().setScheme(uriScheme);
+        uriBuilder.setHost(getHostname());
 
         if (uriScheme.equals("https")) {
             uriBuilder.setUserInfo(username, password);
         } else {
             uriBuilder.setPort(getPortInt());
         }
-
-        uriBuilder.setHost(getHostname());
 
         return uriBuilder;
     }

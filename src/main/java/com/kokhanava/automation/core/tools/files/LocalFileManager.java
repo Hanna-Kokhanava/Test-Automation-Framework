@@ -43,7 +43,7 @@ public class LocalFileManager extends FileManager {
         }
 
         for (File folderFile : files) {
-            if (folderFile.length() == file.length() && folderFile.getName().equals(filename)) {
+            if (folderFile.length() == file.length() && folderFile.getName().equalsIgnoreCase(filename)) {
                 return true;
             }
         }

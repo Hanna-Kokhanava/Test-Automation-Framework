@@ -34,7 +34,7 @@ public class BrowserManager {
     public static Browser getCurrentBrowser() {
         if (Objects.isNull(currentBrowser.get())) {
             String browserName = PropertyLoader.get(PropertyLoader.BrowserProperty.BROWSER_TYPE, "");
-            if (!browserName.equals("")) {
+            if (!browserName.isEmpty()) {
                 setCurrentBrowser(getBrowserByName(browserName));
             }
         }
@@ -59,12 +59,10 @@ public class BrowserManager {
      * @return {@link Browser} instance
      */
     public static Browser getBrowserByName(String browserName) {
-        for (Browser browser : actualBrowsersList) {
-            if (browser.getBrowserName().equalsIgnoreCase(browserName)) {
-                return browser;
-            }
-        }
-        Logger.error("Browser with name [" + browserName + "] was not found");
-        throw new RuntimeException("Browser with name [" + browserName + "] was not found");
+        Browser foundBrowser = actualBrowsersList.stream()
+                .filter(browser -> browser.getBrowserName().equalsIgnoreCase(browserName))
+                .findFirst()
+                .orElse(null);
+        return Objects.requireNonNull(foundBrowser, "Browser with name [" + browserName + "] was not found");
     }
 }

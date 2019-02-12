@@ -41,9 +41,10 @@ public class DeviceManager {
      */
     public static Device getCurrentDevice() {
         Logger.debug("Get current Device instance");
-        if (Objects.isNull(currentDevice.get()) && MobileDriverManager.getDriverType() == MobileDriverManager.DriverType.APPIUM) {
+        if (Objects.isNull(currentDevice.get())
+                && MobileDriverManager.getDriverType() == MobileDriverManager.DriverType.APPIUM) {
             String udid = PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_UDID, "");
-            if (!udid.equals(""))
+            if (!udid.isEmpty())
                 setCurrentDevice(DeviceManager.getDevice(udid));
         }
         return currentDevice.get();
@@ -66,13 +67,11 @@ public class DeviceManager {
      * @param udid device UDID
      */
     public static Device getDevice(String udid) {
-        for (Device device : actualDevicesList) {
-            if (device.getDeviceUDID().equalsIgnoreCase(udid)) {
-                return device;
-            }
-        }
-        Logger.error("Device with UDID [" + udid + "] was not found");
-        throw new RuntimeException("Device with UDID [" + udid + "] was not found");
+        Device foundDevice = actualDevicesList.stream()
+                .filter(device -> device.getDeviceUDID().equalsIgnoreCase(udid))
+                .findFirst()
+                .orElse(null);
+        return Objects.requireNonNull(foundDevice, "Device with UDID [" + udid + "] was not found");
     }
 
     /**
@@ -96,26 +95,21 @@ public class DeviceManager {
 
             for (Device.DeviceType device : Device.DeviceType.values()) {
                 for (String matcher : device.getPartOfDeviceName()) {
-                    if ("".equals(matcher)) {
+                    if (matcher.isEmpty()) {
                         continue;
                     }
                     matcher = matcher.toLowerCase();
                     if (isExactMatch(deviceType, matcher)) {
                         return device;
                     }
-                    if (isCurrentDevice(deviceType, matcher)
-                            && isBetterMatch(previousMatch, matcher)) {
+                    if (isCurrentDevice(deviceType, matcher) && isBetterMatch(previousMatch, matcher)) {
                         previousMatch = matcher;
                         mostLikely = device;
                     }
                 }
             }
-            if (Objects.nonNull(mostLikely)) {
-                deviceTypeFromConfig = mostLikely;
-            } else {
-                Logger.error(String.format("Unable to detect device by name '%s'", deviceType));
-                throw new RuntimeException(String.format("Unable to detect device by name '%s'", deviceType));
-            }
+            deviceTypeFromConfig = Objects.requireNonNull(mostLikely,
+                    "Unable to detect device by name [" + deviceType + "]");
         }
         return deviceTypeFromConfig;
     }

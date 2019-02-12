@@ -32,6 +32,7 @@ public enum SupportedWebPlatforms {
     private static ChromeOptions getChromeOptions() {
         String currentUserName = System.getProperty("user.name");
         ChromeOptions options = new ChromeOptions();
+        //TODO change depending on OS
         options.addArguments("user-data-dir=C:/Users/" + currentUserName + "/AppData/Local/Google/Chrome/User Data/Default");
         options.addArguments("--start-maximized");
         return options;

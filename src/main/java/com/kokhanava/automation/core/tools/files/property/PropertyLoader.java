@@ -3,7 +3,7 @@ package com.kokhanava.automation.core.tools.files.property;
 import com.google.inject.Inject;
 import com.kokhanava.automation.core.logger.Logger;
 
-import java.io.FileNotFoundException;
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -166,6 +166,8 @@ public final class PropertyLoader {
         if (Objects.isNull(generalProperties)) {
             generalProperties = loadPropertiesFromFile(GENERAL_TEST_PROPERTIES_PATH);
         }
+        Objects.requireNonNull(generalProperties, "Unable to get general properties from file");
+
         String propertyValue = generalProperties.getProperty(generalProperty.getKey());
         Objects.requireNonNull(propertyValue, "Unable to resolve '" + propertyValue + "' property value");
         Logger.debug("General test property value for [" + generalProperty + "] key is [" + propertyValue + "]");
@@ -175,13 +177,15 @@ public final class PropertyLoader {
     /**
      * Returns property value from file by its key name
      *
-     * @param keyName - property key
+     * @param keyName  property key name
+     * @param fileName properties file name
+     * @return property value
      */
     private static String getPropertyFromFile(String keyName, String fileName) {
         if (Objects.isNull(testProperties)) {
             testProperties = loadPropertiesFromFile(fileName);
         }
-        Objects.requireNonNull(testProperties, "Unable to get " + testProperties + " properties from file");
+        Objects.requireNonNull(testProperties, "Unable to get test properties from file");
         return testProperties.getProperty(keyName);
     }
 
@@ -191,19 +195,31 @@ public final class PropertyLoader {
      * @param path the path to properties file in classpath
      * @return the properties
      */
+    @Nullable
     private static Properties loadPropertiesFromFile(String path) {
-        Properties result = new Properties();
+        Properties properties = new Properties();
+        InputStream stream = null;
+
         try {
-            InputStream stream = PropertyLoader.class.getClassLoader().getResourceAsStream(path);
+            stream = PropertyLoader.class.getClassLoader().getResourceAsStream(path);
             if (Objects.nonNull(stream)) {
-                result.load(stream);
+                properties.load(stream);
             } else {
                 Logger.error("File with path [" + path + "] could not be found");
-                throw new FileNotFoundException("File with path [" + path + "] could not be found");
             }
         } catch (IOException e) {
             Logger.error("Error while reading properties from path [" + path + "]");
+        } finally {
+            try {
+                if (Objects.nonNull(stream)) {
+                    stream.close();
+                }
+            } catch (IOException e) {
+                Logger.error("Exception occurred during stream closing\n" + e.getMessage());
+                e.printStackTrace();
+            }
         }
-        return result;
+
+        return properties.isEmpty() ? null : properties;
     }
 }
