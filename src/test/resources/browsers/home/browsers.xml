@@ -6,10 +6,14 @@
 <!-- Browser attributes names are from CapabilityType -->
 <browsers>
     <browser browserName="chrome" platformName="ANY">
-        <host hostname="HKOKHANAVA-NB" username="" password="" port="8000"/>
+        <host hostname="AniaK" username="" password="" port="8000"/>
     </browser>
 
     <browser browserName="firefox" platformName="ANY">
-        <host hostname="HKOKHANAVA-NB" username="" password="" port="8000"/>
+        <host hostname="AniaK" username="" password="" port="8000"/>
+    </browser>
+
+    <browser browserName="opera" platformName="ANY">
+        <host hostname="AniaK" username="" password="" port="8000"/>
     </browser>
 </browsers>

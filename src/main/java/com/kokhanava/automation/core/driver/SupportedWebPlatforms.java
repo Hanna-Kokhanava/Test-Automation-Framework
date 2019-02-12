@@ -4,6 +4,7 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.opera.OperaOptions;
 
 /**
  * Contains all supported web platforms with its options
@@ -13,6 +14,8 @@ public enum SupportedWebPlatforms {
     CHROME(getChromeOptions()),
 
     FIREFOX(getFirefoxOptions()),
+
+    OPERA(getOperaOptions()),
 
     IE10(getIEOptions());
 
@@ -43,6 +46,13 @@ public enum SupportedWebPlatforms {
     private static MutableCapabilities getIEOptions() {
         InternetExplorerOptions options = new InternetExplorerOptions();
         //TODO stub for further options
+        return options;
+    }
+
+    private static MutableCapabilities getOperaOptions() {
+        OperaOptions options = new OperaOptions();
+        //TODO stub for further options
+        //TODO options.setBinary()
         return options;
     }
 }

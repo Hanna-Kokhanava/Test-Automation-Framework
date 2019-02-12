@@ -1,10 +1,7 @@
 package com.kokhanava.automation.core.driver.managers.web;
 
-import com.kokhanava.automation.core.browser.BrowserManager;
 import com.kokhanava.automation.core.driver.SupportedWebPlatforms;
 import com.kokhanava.automation.core.logger.Logger;
-import com.kokhanava.automation.core.tools.HostMachine;
-import com.kokhanava.automation.core.tools.files.FileManager;
 import com.kokhanava.automation.core.tools.files.property.PropertyLoader;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
@@ -16,13 +13,13 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaDriverService;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.io.File;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
-import static com.kokhanava.automation.core.tools.files.ResultFolder.DRIVERS_FOLDER;
 
 /**
  * Created on 21.01.2019
@@ -31,6 +28,11 @@ public class WebDriverManager {
 
     private static final long IMPLICIT_WAIT_TIMEOUT = 5;
     private static WebDriver driver;
+
+    //Need to coincide with driver-repositories.xml configuration file
+    private static final String CHROME_DRIVER_NAME = "chromedriver";
+    private static final String FIREFOX_DRIVER_NAME = "geckodriver";
+    private static final String OPERA_DRIVER_NAME = "operadriver";
 
     /**
      * Creates driver depends on current browser type
@@ -45,12 +47,19 @@ public class WebDriverManager {
         if (Objects.isNull(driver)) {
             switch (platform) {
                 case CHROME:
-                    System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, getDriverExecutablePath("chromedriver"));
+                    System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY,
+                            DriverRepositoryManager.getDriverExecutableFilePath(CHROME_DRIVER_NAME));
                     driver = new ChromeDriver((ChromeOptions) options);
                     break;
                 case FIREFOX:
-                    System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, getDriverExecutablePath("geckodriver"));
+                    System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY,
+                            DriverRepositoryManager.getDriverExecutableFilePath(FIREFOX_DRIVER_NAME));
                     driver = new FirefoxDriver((FirefoxOptions) options);
+                    break;
+                case OPERA:
+                    System.setProperty(OperaDriverService.OPERA_DRIVER_EXE_PROPERTY,
+                            DriverRepositoryManager.getDriverExecutableFilePath(OPERA_DRIVER_NAME));
+                    driver = new OperaDriver((OperaOptions) options);
                     break;
                 case IE10:
                     //TODO set system property with driver exe path
@@ -91,30 +100,5 @@ public class WebDriverManager {
             driver.quit();
             driver = null;
         }
-    }
-
-    /**
-     * Download and unzip an appropriate driver
-     * SSL problem is temporary solved via certificate validation ignorance
-     *
-     * @param driverName name of required driver
-     * @return driver executable file
-     */
-    private static String getDriverExecutablePath(String driverName) {
-        Logger.debug("Getting executable file path for [" + driverName + "]");
-        HostMachine host = BrowserManager.getCurrentBrowser().getHost();
-        FileManager fileManager = FileManager.getInstance(host);
-
-        //TODO get information from driver-repositories.xml -> filepath - driver id + version id + .zip
-        String fileDriverName = driverName + ".zip";
-        String zipFilePath = DRIVERS_FOLDER + File.separator + fileDriverName;
-
-        if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(zipFilePath), fileDriverName)) {
-            Logger.debug("Start to download and unzip driver executable file");
-            //TODO get path from driver-repositories.xml
-            fileManager.downloadFileFromUrl("http://chromedriver.storage.googleapis.com/2.25/chromedriver_win32.zip", zipFilePath);
-            fileManager.unzipFile(zipFilePath, DRIVERS_FOLDER.getPathToFolder(host));
-        }
-        return DRIVERS_FOLDER + File.separator + driverName + ".exe";
     }
 }

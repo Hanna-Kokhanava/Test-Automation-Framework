@@ -5,6 +5,7 @@ import com.kokhanava.automation.core.tools.HostMachine;
 import com.kokhanava.automation.core.tools.OS;
 import com.kokhanava.automation.core.tools.files.ResultFolder;
 
+import javax.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -60,7 +61,7 @@ public class CommandExecutor {
         StringBuilder buffer = new StringBuilder();
 
         String[] commands = {command};
-        if (os == OS.MAC)
+        if (os == OS.MAC || os == OS.LINUX)
             commands = new String[]{"bash", "-c", command};
         if (os == OS.WINDOWS)
             commands = new String[]{"cmd", "/c", command};
@@ -110,27 +111,32 @@ public class CommandExecutor {
     }
 
     /**
-     * Get type OS on machine
+     * Get type of OS on machine
      *
-     * @param machine the HostMachine
-     * @return type OS
+     * @param machine {@link HostMachine} instance
+     * @return type of {@link OS}
      */
+    @Nullable
     public static OS getOsOfMachine(HostMachine machine) {
-        String result;
         if (machine.isRemote()) {
-            result = executeRemotely(machine, Command.SYSTEM_GET_OS_NAME.getCommandTemplate(OS.MAC)).toLowerCase();
-            if (!result.contains(OS.MAC.toString()))
-                result = executeRemotely(machine, Command.SYSTEM_GET_OS_NAME.getCommandTemplate(OS.WINDOWS)).toLowerCase();
-            else return OS.MAC;
-        } else result = System.getProperty(OS_NAME_PROPERTY).toLowerCase();
-
-        if (result.contains(OS.WINDOWS.toString()))
-            return OS.WINDOWS;
-        if (result.contains(OS.MAC.toString()))
-            return OS.MAC;
-        return null;
+            String osName;
+            for (OS possibleOS : OS.values()) {
+                osName = executeRemotely(machine, Command.SYSTEM_GET_OS_NAME.getCommandTemplate(possibleOS)).toLowerCase();
+                if (osName.contains(possibleOS.toString())) {
+                    return possibleOS;
+                }
+            }
+            return null;
+        }
+        return getOsOfLocalMachine();
     }
 
+    /**
+     * Gets OS type (Windows, Mac, Linux) of local machine from system properties
+     *
+     * @return {@link OS} type
+     */
+    @Nullable
     private static OS getOsOfLocalMachine() {
         String result = System.getProperty(OS_NAME_PROPERTY).toLowerCase();
         if (result.contains(OS.WINDOWS.toString())) {
@@ -138,6 +144,9 @@ public class CommandExecutor {
         }
         if (result.contains(OS.MAC.toString())) {
             return OS.MAC;
+        }
+        if (result.contains(OS.LINUX.toString())) {
+            return OS.LINUX;
         }
         return null;
     }
