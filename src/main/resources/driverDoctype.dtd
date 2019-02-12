@@ -1,0 +1,8 @@
+<!ELEMENT repositories (driver*) >
+        <!ELEMENT driver (version, fileLocation) >
+        <!ATTLIST driver
+                name (chromedriver|geckodriver|operadriver) #REQUIRED
+                os (mac|windows|linux) #REQUIRED >
+
+        <!ELEMENT version (#PCDATA) >
+        <!ELEMENT fileLocation (#PCDATA) >

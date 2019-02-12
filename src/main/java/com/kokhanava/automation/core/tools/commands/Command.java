@@ -10,7 +10,7 @@ import java.util.Objects;
 public enum Command {
     SYSTEM_SOURCE_ENVIRONMENT("source ~/.bash_profile;"),
     SYSTEM_GET_HOST_NAME("hostname"),
-    SYSTEM_GET_OS_NAME("sw_vers", "ver"),
+    SYSTEM_GET_OS_NAME("sw_vers", "ver", "uname -a"),
     SYSTEM_TEMPLATE_KILL_PID("taskkill /PID %s /F"),
 
     ADB_DEVICES_UDID_LIST("adb devices | awk '!/grep/{print $1}' | grep -v 'List'"),
@@ -21,15 +21,24 @@ public enum Command {
 
     private String macCommand;
     private String winCommand;
+    private String linuxCommand;
     private String command;
 
     Command(String command) {
         this.command = command;
     }
 
+    //For Unix uses the same command as for mac
     Command(String macCommand, String winCommand) {
-        this.winCommand = winCommand;
         this.macCommand = macCommand;
+        this.winCommand = winCommand;
+        this.linuxCommand = macCommand;
+    }
+
+    Command(String macCommand, String winCommand, String linuxCommand) {
+        this.macCommand = macCommand;
+        this.winCommand = winCommand;
+        this.linuxCommand = linuxCommand;
     }
 
     public String getCommandTemplate(OS os) {
@@ -38,6 +47,8 @@ public enum Command {
                 return getMacCommand();
             case WINDOWS:
                 return getWinCommand();
+            case LINUX:
+                return getLinuxCommand();
             default:
                 return command;
         }
@@ -56,17 +67,15 @@ public enum Command {
     }
 
     private String getMacCommand() {
-        if (Objects.isNull(macCommand)) {
-            return command;
-        }
-        return macCommand;
+        return Objects.nonNull(macCommand) ? macCommand : command;
     }
 
     private String getWinCommand() {
-        if (Objects.isNull(winCommand)) {
-            return command;
-        }
-        return winCommand;
+        return Objects.nonNull(winCommand) ? winCommand : command;
+    }
+
+    private String getLinuxCommand() {
+        return Objects.nonNull(linuxCommand) ? linuxCommand : command;
     }
 
     @Override
@@ -76,6 +85,9 @@ public enum Command {
         }
         if (Objects.nonNull(macCommand)) {
             return macCommand;
+        }
+        if (Objects.nonNull(linuxCommand)) {
+            return linuxCommand;
         }
         return winCommand;
     }

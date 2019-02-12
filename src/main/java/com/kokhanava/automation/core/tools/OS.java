@@ -4,9 +4,11 @@ package com.kokhanava.automation.core.tools;
  * Created on 01.04.2018
  */
 public enum OS {
-    MAC("mac",'/'),
+    MAC("mac", '/'),
 
-    WINDOWS("windows",'\\');
+    LINUX("linux", '/'),
+
+    WINDOWS("windows", '\\');
 
     private String os;
     private char fileSeparator;

@@ -1,40 +1,63 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE repositories PUBLIC "ROOT-VALUE"
+        "src/main/resources/driverDoctype.dtd">
 
 <repositories>
-    <driver name="chromedriver">
+    <driver name="chromedriver" os="windows">
         <version>2.25</version>
-        <os>windows</os>
         <fileLocation>http://chromedriver.storage.googleapis.com/2.25/chromedriver_win32.zip</fileLocation>
     </driver>
 
-    <driver name="chromedriver">
+    <driver name="chromedriver" os="mac">
         <version>2.25</version>
-        <os>mac</os>
         <fileLocation>http://chromedriver.storage.googleapis.com/2.25/chromedriver_mac64.zip</fileLocation>
     </driver>
 
-    <driver name="geckodriver">
+    <driver name="chromedriver" os="linux">
+        <version>2.25</version>
+        <fileLocation>http://chromedriver.storage.googleapis.com/2.25/chromedriver_linux64.zip</fileLocation>
+    </driver>
+
+    <driver name="geckodriver" os="windows">
         <version>0.24.0</version>
-        <os>windows</os>
-        <fileLocation>https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-win64.zip</fileLocation>
+        <fileLocation>https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-win64.zip
+        </fileLocation>
     </driver>
 
-    <driver name="geckodriver">
+    <driver name="geckodriver" os="mac">
         <version>0.24.0</version>
-        <os>mac</os>
-        <fileLocation>https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-macos.tar.gz</fileLocation>
+        <fileLocation>
+            https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-macos.tar.gz
+        </fileLocation>
     </driver>
 
-    <driver name="operadriver">
-        <version>2.42</version>
-        <os>windows</os>
-        <fileLocation>https://github.com/operasoftware/operachromiumdriver/releases/download/v.2.42/operadriver_win64.zip</fileLocation>
+    <driver name="geckodriver" os="linux">
+        <version>0.24.0</version>
+        <fileLocation>
+            https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
+        </fileLocation>
     </driver>
 
-    <driver name="operadriver">
+    <driver name="operadriver" os="windows">
         <version>2.42</version>
-        <os>mac</os>
-        <fileLocation>https://github.com/operasoftware/operachromiumdriver/releases/download/v.2.42/operadriver_mac64.zip</fileLocation>
+        <fileLocation>
+            https://github.com/operasoftware/operachromiumdriver/releases/download/v.2.42/operadriver_win64.zip
+        </fileLocation>
+    </driver>
+
+    <driver name="operadriver" os="mac">
+        <version>2.42</version>
+        <fileLocation>
+            https://github.com/operasoftware/operachromiumdriver/releases/download/v.2.42/operadriver_mac64.zip
+        </fileLocation>
+    </driver>
+
+    <driver name="operadriver" os="linux">
+        <version>2.42</version>
+        <fileLocation>
+            https://github.com/operasoftware/operachromiumdriver/releases/download/v.2.42/operadriver_linux64.zip
+        </fileLocation>
     </driver>
 
 </repositories>

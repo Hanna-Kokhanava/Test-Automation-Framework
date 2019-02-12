@@ -79,11 +79,12 @@ public class DriverRepositoryManager {
         String osName = Objects.requireNonNull(CommandExecutor.getOsOfMachine(hostMachine),
                 "Failed to define OS type of " + hostMachine.getHostname() + " machine").toString();
 
-        //TODO think about universal OS name somewhere
         DriverRepository driverRepository = driverList.stream()
-                .filter(driver -> driver.getName().equalsIgnoreCase(driverName) && driver.getOs().equalsIgnoreCase(osName))
+                .filter(driver -> driver.getName().equalsIgnoreCase(driverName)
+                        && driver.getOs().equalsIgnoreCase(osName))
                 .findFirst()
                 .orElse(null);
+
         return Objects.requireNonNull(driverRepository, "Driver with ID [" + driverName + "] for OS ["
                 + osName + "] was not found").getFileLocation();
     }
@@ -98,6 +99,7 @@ public class DriverRepositoryManager {
         if (driverList.isEmpty()) {
             throw new RuntimeException("List of driver repositories is empty!");
         }
+
         DriverRepository driverRepository = driverList.stream()
                 .filter(driver -> driver.getName().equalsIgnoreCase(driverName))
                 .findFirst()
