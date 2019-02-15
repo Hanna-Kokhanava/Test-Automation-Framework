@@ -2,7 +2,6 @@ package com.kokhanava.automation.core.tools.files;
 
 import com.kokhanava.automation.core.logger.Logger;
 
-import javax.annotation.Nullable;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import java.io.File;
@@ -38,7 +37,6 @@ public class ProjectDir {
      * @param identifier resource
      * @return file of target resource
      */
-    @Nullable
     public static File getProjectResource(String identifier) {
         URL resourceURL = ClassLoader.getSystemClassLoader().getResource(identifier);
         Objects.requireNonNull(resourceURL, String.format("Not found '%s' resource", identifier));
@@ -49,7 +47,7 @@ public class ProjectDir {
         } catch (URISyntaxException e) {
             Logger.error("URL is not formatted strictly and cannot be converted to a URI.");
         }
-        return resourceFile;
+        return Objects.requireNonNull(resourceFile, String.format("Cannot create file instance of '%s'", identifier));
     }
 
     /**
@@ -59,9 +57,7 @@ public class ProjectDir {
      * @return the resource
      */
     public static <T> T readFromResource(Class<T> resourceClass, String resource) {
-        File resourceFile = Objects.requireNonNull(ProjectDir.getProjectResource(resource),
-                String.format("Not found '%s' resource", resource));
-
+        File resourceFile = ProjectDir.getProjectResource(resource);
         T resources;
         try {
             System.setProperty("javax.xml.accessExternalDTD", "all");

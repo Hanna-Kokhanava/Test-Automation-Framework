@@ -1,11 +1,11 @@
 package com.kokhanava.automation.core.device;
 
+import com.kokhanava.automation.core.driver.managers.mobile.MobileDriverManager;
 import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.commands.Command;
 import com.kokhanava.automation.core.tools.commands.CommandExecutor;
 import com.kokhanava.automation.core.tools.files.ProjectDir;
 import com.kokhanava.automation.core.tools.files.property.PropertyLoader;
-import com.kokhanava.automation.core.driver.managers.mobile.MobileDriverManager;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -67,11 +67,10 @@ public class DeviceManager {
      * @param udid device UDID
      */
     public static Device getDevice(String udid) {
-        Device foundDevice = actualDevicesList.stream()
+        return actualDevicesList.stream()
                 .filter(device -> device.getDeviceUDID().equalsIgnoreCase(udid))
                 .findFirst()
-                .orElse(null);
-        return Objects.requireNonNull(foundDevice, "Device with UDID [" + udid + "] was not found");
+                .orElseThrow(() -> new NullPointerException("Device with UDID [" + udid + "] was not found"));
     }
 
     /**

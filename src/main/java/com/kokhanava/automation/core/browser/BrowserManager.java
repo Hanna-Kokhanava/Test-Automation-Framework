@@ -59,10 +59,9 @@ public class BrowserManager {
      * @return {@link Browser} instance
      */
     public static Browser getBrowserByName(String browserName) {
-        Browser foundBrowser = actualBrowsersList.stream()
+        return actualBrowsersList.stream()
                 .filter(browser -> browser.getBrowserName().equalsIgnoreCase(browserName))
                 .findFirst()
-                .orElse(null);
-        return Objects.requireNonNull(foundBrowser, "Browser with name [" + browserName + "] was not found");
+                .orElseThrow(() -> new NullPointerException("Browser with name [" + browserName + "] was not found"));
     }
 }

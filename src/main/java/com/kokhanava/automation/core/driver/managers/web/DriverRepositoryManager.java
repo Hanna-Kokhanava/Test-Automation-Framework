@@ -6,6 +6,7 @@ import com.kokhanava.automation.core.tools.HostMachine;
 import com.kokhanava.automation.core.tools.commands.CommandExecutor;
 import com.kokhanava.automation.core.tools.files.FileManager;
 import com.kokhanava.automation.core.tools.files.ProjectDir;
+import org.springframework.util.CollectionUtils;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,6 +21,7 @@ import static com.kokhanava.automation.core.tools.files.ResultFolder.DRIVERS_FOL
  * Manages drivers repositories from xml configuration file
  */
 public class DriverRepositoryManager {
+    private static final String REPOSITORIES_CONFIGURATION_FILE = "driver-repositories.xml";
 
     @XmlRootElement
     private static class Repositories {
@@ -31,8 +33,7 @@ public class DriverRepositoryManager {
      * Gets list of all {@link DriverRepository} elements from xml configuration file
      */
     private static List<DriverRepository> driverList = ProjectDir.readFromResource(Repositories.class,
-            "driver-repositories.xml").driverList;
-
+            REPOSITORIES_CONFIGURATION_FILE).driverList;
 
     /**
      * Download and unzip an appropriate driver
@@ -72,21 +73,20 @@ public class DriverRepositoryManager {
      * @return url string
      */
     private static String getRepositoryURL(HostMachine hostMachine, String driverName) {
-        if (driverList.isEmpty()) {
+        if (CollectionUtils.isEmpty(driverList)) {
             throw new RuntimeException("List of driver repositories is empty!");
         }
 
         String osName = Objects.requireNonNull(CommandExecutor.getOsOfMachine(hostMachine),
                 "Failed to define OS type of " + hostMachine.getHostname() + " machine").toString();
 
-        DriverRepository driverRepository = driverList.stream()
+        DriverRepository repository = driverList.stream()
                 .filter(driver -> driver.getName().equalsIgnoreCase(driverName)
                         && driver.getOs().equalsIgnoreCase(osName))
                 .findFirst()
-                .orElse(null);
-
-        return Objects.requireNonNull(driverRepository, "Driver with ID [" + driverName + "] for OS ["
-                + osName + "] was not found").getFileLocation();
+                .orElseThrow(() -> new NullPointerException("Driver with ID [" + driverName + "] for OS ["
+                        + osName + "] was not found"));
+        return repository.getFileLocation();
     }
 
     /**
@@ -96,16 +96,14 @@ public class DriverRepositoryManager {
      * @return {@link DriverRepository}
      */
     private static DriverRepository getRepositoryObjectById(String driverName) {
-        if (driverList.isEmpty()) {
+        if (CollectionUtils.isEmpty(driverList)) {
             throw new RuntimeException("List of driver repositories is empty!");
         }
 
-        DriverRepository driverRepository = driverList.stream()
+        return driverList.stream()
                 .filter(driver -> driver.getName().equalsIgnoreCase(driverName))
                 .findFirst()
-                .orElse(null);
-
-        return Objects.requireNonNull(driverRepository,
-                "Driver with name [" + driverName + "] was not found in configuration file");
+                .orElseThrow(() -> new NullPointerException("Driver with name [" + driverName
+                        + "] was not found in configuration file"));
     }
 }
