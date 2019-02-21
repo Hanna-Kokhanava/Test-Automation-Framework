@@ -59,14 +59,13 @@ public class ProjectDir {
     public static <T> T readFromResource(Class<T> resourceClass, String resource) {
         File resourceFile = ProjectDir.getProjectResource(resource);
         T resources;
-        try {
+        try (InputStream stream = new FileInputStream(resourceFile)) {
             System.setProperty("javax.xml.accessExternalDTD", "all");
-            InputStream stream = new FileInputStream(resourceFile);
             resources = (T) JAXBContext.newInstance(resourceClass)
                     .createUnmarshaller()
                     .unmarshal(stream);
-            stream.close();
         } catch (IOException | JAXBException e) {
+            Logger.error("Exception occurred during XML resource file reading\n" + e.getMessage());
             throw new RuntimeException(e);
         }
         return resources;

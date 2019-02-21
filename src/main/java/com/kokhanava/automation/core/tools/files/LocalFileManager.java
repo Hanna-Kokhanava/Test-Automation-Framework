@@ -25,9 +25,10 @@ public class LocalFileManager extends FileManager {
      */
     @Override
     public void copyFile(String targetFolderPath, File sourceFile, @Nonnull String targetFilename) {
+        File dest = new File(targetFolderPath + File.separator + targetFilename);
+        dest.delete();
+
         try {
-            File dest = new File(targetFolderPath + File.separator + targetFilename);
-            dest.delete();
             FileUtils.copyFile(sourceFile, dest);
         } catch (IOException e) {
             Logger.error("Error while trying to copy file...");

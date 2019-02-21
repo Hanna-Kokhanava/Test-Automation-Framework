@@ -56,12 +56,9 @@ public abstract class FileManager {
      */
     public void downloadFileFromUrl(String fileUrl, String filePath) {
         Logger.debug("Downloading file from [" + fileUrl + "]");
-        ReadableByteChannel channel = null;
-        FileOutputStream outputStream = null;
 
-        try {
-            channel = Channels.newChannel(new URL(fileUrl).openStream());
-            outputStream = new FileOutputStream(new File(filePath));
+        try (ReadableByteChannel channel = Channels.newChannel(new URL(fileUrl).openStream());
+             FileOutputStream outputStream = new FileOutputStream(new File(filePath))) {
             outputStream.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
         } catch (SSLHandshakeException e) {
             //TODO infinite recursive call ?
@@ -71,18 +68,6 @@ public abstract class FileManager {
         } catch (IOException e) {
             Logger.error("Exception occurred while channel creation\n" + e.getMessage());
             e.printStackTrace();
-        } finally {
-            try {
-                if (Objects.nonNull(outputStream)) {
-                    outputStream.close();
-                }
-                if (Objects.nonNull(channel)) {
-                    channel.close();
-                }
-            } catch (IOException e) {
-                Logger.error("Exception occurred during streams closing\n" + e.getMessage());
-                e.printStackTrace();
-            }
         }
     }
 
@@ -128,17 +113,13 @@ public abstract class FileManager {
      */
     public void unzipFile(String zipFilePath, String destPath) {
         Logger.debug("Unzipping file " + zipFilePath);
-        FileInputStream fileInputStream = null;
-        ZipInputStream zipInputStream = null;
-        ZipEntry zipEntry;
         String filePath;
         File newFile;
 
-        try {
-            fileInputStream = new FileInputStream(new File(zipFilePath));
-            zipInputStream = new ZipInputStream(fileInputStream);
-            zipEntry = zipInputStream.getNextEntry();
-
+        try (FileInputStream fileInputStream = new FileInputStream(new File(zipFilePath));
+             ZipInputStream zipInputStream = new ZipInputStream(fileInputStream)
+        ) {
+            ZipEntry zipEntry = zipInputStream.getNextEntry();
             while (Objects.nonNull(zipEntry)) {
                 filePath = destPath + File.separator + zipEntry.getName();
                 newFile = new File(filePath);
@@ -155,19 +136,6 @@ public abstract class FileManager {
         } catch (IOException e) {
             Logger.error("Exception occurred while unzipping process\n" + e.getMessage());
             e.printStackTrace();
-        } finally {
-            try {
-                if (Objects.nonNull(zipInputStream)) {
-                    zipInputStream.closeEntry();
-                    zipInputStream.close();
-                }
-                if (Objects.nonNull(fileInputStream)) {
-                    fileInputStream.close();
-                }
-            } catch (IOException e) {
-                Logger.error("Exception occurred while streams closing\n" + e.getMessage());
-                e.printStackTrace();
-            }
         }
 
         new File(zipFilePath).delete();
