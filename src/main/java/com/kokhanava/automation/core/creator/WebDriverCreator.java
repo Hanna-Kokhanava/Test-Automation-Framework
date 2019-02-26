@@ -5,6 +5,7 @@ import com.kokhanava.automation.core.browser.BrowserManager;
 import com.kokhanava.automation.core.driver.capabilities.WebCapabilities;
 import com.kokhanava.automation.core.driver.managers.web.WebDriverManager;
 import com.kokhanava.automation.core.logger.Logger;
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Objects;
@@ -53,6 +54,7 @@ public class WebDriverCreator implements IDriverCreator {
     @Override
     public void closeDriver() {
         Logger.debug("Quitting driver");
+        Logger.debug(StringUtils.repeat("-", 50) + "\n");
         WebDriverManager.closeDriver();
     }
 
@@ -65,7 +67,6 @@ public class WebDriverCreator implements IDriverCreator {
     private DesiredCapabilities createCapabilitiesForWeb(Browser browser) {
         Logger.debug("Create base capabilities for [" + browser.getBrowserName() + "] browser on [" +
                 browser.getHost().getHostname() + "] host");
-        WebCapabilities webCapabilities = new WebCapabilities(browser);
-        return webCapabilities.createBaseCapabilities();
+        return new WebCapabilities(browser).createBaseCapabilities();
     }
 }

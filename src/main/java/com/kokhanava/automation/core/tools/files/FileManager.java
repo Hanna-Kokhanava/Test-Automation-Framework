@@ -2,6 +2,7 @@ package com.kokhanava.automation.core.tools.files;
 
 import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
+import com.sun.istack.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -9,7 +10,6 @@ import javax.net.ssl.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
@@ -17,7 +17,10 @@ import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -57,17 +60,16 @@ public abstract class FileManager {
     public void downloadFileFromUrl(String fileUrl, String filePath) {
         Logger.debug("Downloading file from [" + fileUrl + "]");
 
-        try (ReadableByteChannel channel = Channels.newChannel(new URL(fileUrl).openStream());
-             FileOutputStream outputStream = new FileOutputStream(new File(filePath))) {
+        try (var channel = Channels.newChannel(new URL(fileUrl).openStream());
+             var outputStream = new FileOutputStream(new File(filePath))) {
             outputStream.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
         } catch (SSLHandshakeException e) {
             //TODO infinite recursive call ?
-            Logger.warn("SSL Exception was thrown, execute stub to disable certificates validation and try to download once again");
+            Logger.warn("SSL Exception was thrown, execute stub to disable certificates validation and try to download once again\n", e);
             disableCertificateValidation();
             downloadFileFromUrl(fileUrl, filePath);
         } catch (IOException e) {
-            Logger.error("Exception occurred while channel creation\n" + e.getMessage());
-            e.printStackTrace();
+            Logger.error("Exception occurred while channel creation", e);
         }
     }
 
@@ -99,7 +101,7 @@ public abstract class FileManager {
             sc.init(null, trustAllCerts, new SecureRandom());
             HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
         } catch (GeneralSecurityException e) {
-            Logger.error("Security exception is occurred during SSL certificates installation");
+            Logger.error("Security exception is occurred during SSL certificates installation", e);
         }
     }
 
@@ -111,13 +113,13 @@ public abstract class FileManager {
      * @param zipFilePath path to zip file
      * @param destPath    destination path for unzipped files
      */
-    public void unzipFile(String zipFilePath, String destPath) {
+    public void unzipFile(@NotNull String zipFilePath, String destPath) {
         Logger.debug("Unzipping file " + zipFilePath);
         String filePath;
         File newFile;
 
-        try (FileInputStream fileInputStream = new FileInputStream(new File(zipFilePath));
-             ZipInputStream zipInputStream = new ZipInputStream(fileInputStream)
+        try (var fileInputStream = new FileInputStream(new File(zipFilePath));
+             var zipInputStream = new ZipInputStream(fileInputStream)
         ) {
             ZipEntry zipEntry = zipInputStream.getNextEntry();
             while (Objects.nonNull(zipEntry)) {
@@ -134,8 +136,7 @@ public abstract class FileManager {
                 zipEntry = zipInputStream.getNextEntry();
             }
         } catch (IOException e) {
-            Logger.error("Exception occurred while unzipping process\n" + e.getMessage());
-            e.printStackTrace();
+            Logger.error("Exception occurred while unzipping process", e);
         }
 
         new File(zipFilePath).delete();
@@ -150,12 +151,14 @@ public abstract class FileManager {
      */
     @Nullable
     public String getPathToFile(File rootDirectory, String fileName) {
-        File[] files = rootDirectory.listFiles();
+        var files = rootDirectory.listFiles();
         Objects.requireNonNull(files, "Files are not found in [" + rootDirectory + "] directory");
+
         String filePath = null;
-        for (File file : files) {
+        for (var file : files) {
             if (file.isFile() && file.getName().equalsIgnoreCase(fileName)) {
-                return file.getAbsolutePath();
+                filePath = file.getAbsolutePath();
+                break;
             } else if (file.isDirectory()) {
                 filePath = getPathToFile(file, fileName);
             }
@@ -189,8 +192,7 @@ public abstract class FileManager {
         try {
             Files.createDirectories(Paths.get(pathToDirectory));
         } catch (IOException e) {
-            Logger.error("Unable to create nonexistent parent directories\n" + e.getMessage());
-            e.printStackTrace();
+            Logger.error("Unable to create nonexistent parent directories", e);
         }
     }
 

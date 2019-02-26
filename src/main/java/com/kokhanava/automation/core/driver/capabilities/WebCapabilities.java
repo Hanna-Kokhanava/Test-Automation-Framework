@@ -22,7 +22,7 @@ public class WebCapabilities {
      * @return {@link DesiredCapabilities} capabilities
      */
     public DesiredCapabilities createBaseCapabilities() {
-        DesiredCapabilities caps = new DesiredCapabilities();
+        var caps = new DesiredCapabilities();
         caps.setCapability(CapabilityType.BROWSER_NAME, browser.getBrowserName());
         caps.setCapability(CapabilityType.PLATFORM_NAME, browser.getPlatformName());
         return caps;

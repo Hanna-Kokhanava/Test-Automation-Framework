@@ -47,7 +47,7 @@ public class BrowserManager {
      * @param Browser instance
      */
     public static void setCurrentBrowser(Browser browser) {
-        Logger.debug("Set current Browser instance with name : " + browser.getBrowserName());
+        Logger.debug("Set current Browser instance name [" + browser.getBrowserName() + "]");
         currentBrowser.remove();
         currentBrowser.set(browser);
     }

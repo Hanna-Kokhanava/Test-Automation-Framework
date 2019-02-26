@@ -18,7 +18,7 @@ public class AndroidPlatformConfig implements IPlatformConfig {
      * @return {@link DesiredCapabilities} instance
      */
     public DesiredCapabilities getDefaultCapabilitiesForDevice(Device device) {
-        DesiredCapabilities caps = new DesiredCapabilities();
+        var caps = new DesiredCapabilities();
         caps.setCapability(MobileCapabilityType.UDID, device.getDeviceUDID());
         caps.setCapability(PLATFORM_VERSION, device.getOsVersion());
         return caps;
