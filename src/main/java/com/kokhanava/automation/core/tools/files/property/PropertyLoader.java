@@ -121,6 +121,8 @@ public final class PropertyLoader {
         try {
             return PropertyLoader.get(property);
         } catch (NullPointerException e) {
+            Logger.warn("Property [" + property.getKey() + "] doesn't exist. " +
+                    "Default value [" + defaultValue + "] will be taken");
             return defaultValue;
         }
     }
@@ -152,7 +154,7 @@ public final class PropertyLoader {
         } else {
             propFromFile = PropertyLoader.getPropertyFromFile(property.getKey(), WEB_TEST_PROPERTIES_PATH);
         }
-        Objects.requireNonNull(propFromFile, "Unable to resolve '" + propFromFile + "' property value");
+        Objects.requireNonNull(propFromFile, "Unable to resolve [" + propFromFile + "] property value");
         return propFromFile;
     }
 
@@ -169,7 +171,7 @@ public final class PropertyLoader {
         Objects.requireNonNull(generalProperties, "Unable to get general properties from file");
 
         String propertyValue = generalProperties.getProperty(generalProperty.getKey());
-        Objects.requireNonNull(propertyValue, "Unable to resolve '" + propertyValue + "' property value");
+        Objects.requireNonNull(propertyValue, "Unable to resolve [" + propertyValue + "] property value");
         Logger.debug("General test property value for [" + generalProperty + "] key is [" + propertyValue + "]");
         return propertyValue;
     }
@@ -198,26 +200,15 @@ public final class PropertyLoader {
     @Nullable
     private static Properties loadPropertiesFromFile(String path) {
         Properties properties = new Properties();
-        InputStream stream = null;
 
-        try {
-            stream = PropertyLoader.class.getClassLoader().getResourceAsStream(path);
+        try (InputStream stream = PropertyLoader.class.getClassLoader().getResourceAsStream(path)) {
             if (Objects.nonNull(stream)) {
                 properties.load(stream);
             } else {
                 Logger.error("File with path [" + path + "] could not be found");
             }
         } catch (IOException e) {
-            Logger.error("Error while reading properties from path [" + path + "]");
-        } finally {
-            try {
-                if (Objects.nonNull(stream)) {
-                    stream.close();
-                }
-            } catch (IOException e) {
-                Logger.error("Exception occurred during stream closing\n" + e.getMessage());
-                e.printStackTrace();
-            }
+            Logger.error("Error while reading properties from path [" + path + "]", e);
         }
 
         return properties.isEmpty() ? null : properties;

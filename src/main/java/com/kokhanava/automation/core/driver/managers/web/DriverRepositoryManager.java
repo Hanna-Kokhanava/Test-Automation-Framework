@@ -3,6 +3,7 @@ package com.kokhanava.automation.core.driver.managers.web;
 import com.kokhanava.automation.core.browser.BrowserManager;
 import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
+import com.kokhanava.automation.core.tools.commands.Command;
 import com.kokhanava.automation.core.tools.commands.CommandExecutor;
 import com.kokhanava.automation.core.tools.files.FileManager;
 import com.kokhanava.automation.core.tools.files.ProjectDir;
@@ -47,9 +48,12 @@ public class DriverRepositoryManager {
         HostMachine host = BrowserManager.getCurrentBrowser().getHost();
         FileManager fileManager = FileManager.getInstance(host);
 
-        String directoryPath = DRIVERS_FOLDER + File.separator + repository.getName()
+        String directoryPath = DRIVERS_FOLDER
+                + File.separator + repository.getName()
                 + File.separator + repository.getVersion();
         String driverExeFileName = driverName + ".exe";
+
+        CommandExecutor.execute(host, Command.SYSTEM_GET_HOST_NAME);
 
         if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(driverName), driverName)) {
             Logger.debug("Start to download and unzip driver executable file");
@@ -77,9 +81,7 @@ public class DriverRepositoryManager {
             throw new RuntimeException("List of driver repositories is empty!");
         }
 
-        String osName = Objects.requireNonNull(CommandExecutor.getOsOfMachine(hostMachine),
-                "Failed to define OS type of " + hostMachine.getHostname() + " machine").toString();
-
+        String osName = CommandExecutor.getOsOfMachine(hostMachine).toString();
         DriverRepository repository = driverList.stream()
                 .filter(driver -> driver.getName().equalsIgnoreCase(driverName)
                         && driver.getOs().equalsIgnoreCase(osName))

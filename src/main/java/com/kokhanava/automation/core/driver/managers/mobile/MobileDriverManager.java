@@ -112,7 +112,7 @@ public class MobileDriverManager {
      *
      * @param capabilities {@link DesiredCapabilities}
      */
-    public static void createDriver(DesiredCapabilities capabilities) throws Exception {
+    public static void createDriver(DesiredCapabilities capabilities) {
         Device.DeviceType type = DeviceManager.getDeviceTypeFromConfigFile().os();
         AppiumDriver driver = null;
 
@@ -128,7 +128,7 @@ public class MobileDriverManager {
                     break;
             }
         } catch (Exception e) {
-            Logger.error("Exception happened during driver creation :\n" + e.getMessage());
+            Logger.error("Exception happened during driver creation", e);
         }
 
         Objects.requireNonNull(driver, "Exception happened with create driver");
@@ -148,7 +148,7 @@ public class MobileDriverManager {
                 driverInstance.quit();
             }
         } catch (WebDriverException e) {
-            Logger.error("Oops, looks like the driver has quited a bit earlier");
+            Logger.error("Oops, looks like the driver has quited a bit earlier", e);
         }
     }
 }

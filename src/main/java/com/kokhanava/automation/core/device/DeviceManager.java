@@ -87,7 +87,7 @@ public class DeviceManager {
      */
     public static Device.DeviceType getDeviceTypeFromConfigFile() {
         if (Objects.isNull(deviceTypeFromConfig)) {
-            String deviceType = PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_TYPE).toLowerCase();
+            var deviceType = PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_TYPE).toLowerCase();
 
             Device.DeviceType mostLikely = null;
             String previousMatch = null;
@@ -164,7 +164,7 @@ public class DeviceManager {
         } else {
             commandResult = CommandExecutor.execute(device.getAppiumHostMachine(), Command.IOS_IDEVICE_UDID_LIST);
         }
-        List<String> devicesUDID = Arrays.asList(commandResult.split("\n"));
+        var devicesUDID = Arrays.asList(commandResult.split("\n"));
         return devicesUDID.contains(device.getDeviceUDID());
     }
 }

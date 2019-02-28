@@ -256,8 +256,8 @@ public class Device {
                     if (DeviceManager.getCurrentDevice().isIOS()) {
                         press(Key.HIDE);
                     }
-                } catch (WebDriverException e2) {
-                    Logger.warn("Keyboard already hide");
+                } catch (WebDriverException e) {
+                    Logger.warn("Keyboard already hidden\n", e);
                 }
                 Logger.debug("Keyboard is hided");
             }

@@ -3,7 +3,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.11
 
 repositories {
     mavenCentral()
@@ -35,4 +35,9 @@ dependencies {
             "org.apache.logging.log4j:log4j-jul:$log4jVersion",
             "org.apache.logging.log4j:log4j-slf4j-impl:$log4jVersion",
             "org.apache.logging.log4j:log4j-jcl:$log4jVersion"
+    // JAXB API
+    compile "javax.xml.bind:jaxb-api:2.3.0"
+    compile "javax.activation:activation:1.1"
+    compile "org.glassfish.jaxb:jaxb-runtime:2.3.0"
+
 }

@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -35,18 +36,21 @@ public class CommandExecutor {
      *
      * @param machine the HostMachine
      * @param command the command
-     * @return result string
+     * @return command result string
      */
     public static String execute(HostMachine machine, String command) {
-        Logger.debug("Executing command [" + command + "] on " + machine.getHostname() + " host");
         OS os = getOsOfMachine(machine);
-        command = os != OS.WINDOWS
-                ? Command.SYSTEM_SOURCE_ENVIRONMENT.getCommandTemplate(Objects.requireNonNull(os)) + " " + command
-                : command;
-        if (machine.isRemote()) {
-            return executeRemotely(machine, command);
+        if (os != OS.WINDOWS) {
+            command = Command.SYSTEM_SOURCE_ENVIRONMENT.getCommandTemplate(os) + " " + command;
         }
-        return executeLocally(os, command);
+
+        Logger.debug("Executing command [" + command + "] on " + machine.getHostname() + " host");
+        String commandResult = machine.isRemote()
+                ? executeRemotely(machine, command)
+                : executeLocally(os, command);
+
+        return Objects.requireNonNull(commandResult, "An error has occurred while command [" +
+                command + "] execution on [" + machine.getHostname() + "] machine");
     }
 
     /**
@@ -56,29 +60,38 @@ public class CommandExecutor {
      * @param command the command
      * @return the string
      */
+    @Nullable
     private static String executeLocally(OS os, String command) {
-        String commandOutput = null;
-        StringBuilder buffer = new StringBuilder();
-
         String[] commands = {command};
-        if (os == OS.MAC || os == OS.LINUX)
+        if (os == OS.MAC || os == OS.LINUX) {
             commands = new String[]{"bash", "-c", command};
-        if (os == OS.WINDOWS)
+        }
+        if (os == OS.WINDOWS) {
             commands = new String[]{"cmd", "/c", command};
+        }
 
+        Process process;
         try {
-            Process p = Runtime.getRuntime().exec(commands);
+            process = Runtime.getRuntime().exec(commands);
+        } catch (IOException e) {
+            Logger.error("Exception was thrown while executing command in a separate process", e);
+            return null;
+        }
+
+        String commandOutput = null;
+        try (var reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+            StringBuilder buffer = new StringBuilder();
             String line;
-            BufferedReader is = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = is.readLine()) != null) {
-                buffer.append(line).append('\n');
+            while (Objects.nonNull(line = reader.readLine())) {
+                buffer.append(line);
+                buffer.append('\n');
             }
             commandOutput = buffer.toString().trim();
-            is.close();
-            p.destroy();
+            process.destroy();
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.error("Exception was thrown during command execution results reading", e);
         }
+
         return commandOutput;
     }
 
@@ -106,8 +119,14 @@ public class CommandExecutor {
         return execute(hostMachine, Command.CD.getCommand(folderPath) + command);
     }
 
+    /**
+     * Get host name of the local host machine
+     *
+     * @return host name
+     */
     public static String getHostNameOfLocalhost() {
-        return executeLocally(getOsOfLocalMachine(), Command.SYSTEM_GET_HOST_NAME.getCommand());
+        String localHostName = executeLocally(getOsOfLocalMachine(), Command.SYSTEM_GET_HOST_NAME.getCommand());
+        return Objects.requireNonNull(localHostName, "An error has occurred while local host name obtaining");
     }
 
     /**
@@ -116,19 +135,20 @@ public class CommandExecutor {
      * @param machine {@link HostMachine} instance
      * @return type of {@link OS}
      */
-    @Nullable
     public static OS getOsOfMachine(HostMachine machine) {
+        OS os;
         if (machine.isRemote()) {
-            String osName;
-            for (OS possibleOS : OS.values()) {
-                osName = executeRemotely(machine, Command.SYSTEM_GET_OS_NAME.getCommandTemplate(possibleOS)).toLowerCase();
-                if (osName.contains(possibleOS.toString())) {
-                    return possibleOS;
-                }
-            }
-            return null;
+            os = Arrays.stream(OS.values())
+                    .filter(possibleOS ->
+                            executeRemotely(machine, Command.SYSTEM_GET_OS_NAME.getCommandTemplate(possibleOS))
+                                    .toLowerCase()
+                                    .contains(possibleOS.toString()))
+                    .findFirst()
+                    .orElse(null);
+        } else {
+            os = getOsOfLocalMachine();
         }
-        return getOsOfLocalMachine();
+        return Objects.requireNonNull(os, "Failed to define OS type of [" + machine.getHostname() + "] machine");
     }
 
     /**
@@ -138,14 +158,14 @@ public class CommandExecutor {
      */
     @Nullable
     private static OS getOsOfLocalMachine() {
-        String result = System.getProperty(OS_NAME_PROPERTY).toLowerCase();
-        if (result.contains(OS.WINDOWS.toString())) {
+        String osName = System.getProperty(OS_NAME_PROPERTY).toLowerCase();
+        if (osName.contains(OS.WINDOWS.toString())) {
             return OS.WINDOWS;
         }
-        if (result.contains(OS.MAC.toString())) {
+        if (osName.contains(OS.MAC.toString())) {
             return OS.MAC;
         }
-        if (result.contains(OS.LINUX.toString())) {
+        if (osName.contains(OS.LINUX.toString())) {
             return OS.LINUX;
         }
         return null;

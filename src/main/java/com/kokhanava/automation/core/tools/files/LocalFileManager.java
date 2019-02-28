@@ -31,7 +31,7 @@ public class LocalFileManager extends FileManager {
         try {
             FileUtils.copyFile(sourceFile, dest);
         } catch (IOException e) {
-            Logger.error("Error while trying to copy file...");
+            Logger.error("Error while trying to copy file...", e);
         }
     }
 
@@ -43,7 +43,7 @@ public class LocalFileManager extends FileManager {
             return false;
         }
 
-        for (File folderFile : files) {
+        for (var folderFile : files) {
             if (folderFile.length() == file.length() && folderFile.getName().equalsIgnoreCase(filename)) {
                 return true;
             }

@@ -7,7 +7,6 @@ import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Objects;
@@ -45,7 +44,7 @@ public class ProjectDir {
         try {
             resourceFile = new File(resourceURL.toURI());
         } catch (URISyntaxException e) {
-            Logger.error("URL is not formatted strictly and cannot be converted to a URI.");
+            Logger.error("URL is not formatted strictly and cannot be converted to a URI", e);
         }
         return Objects.requireNonNull(resourceFile, String.format("Cannot create file instance of '%s'", identifier));
     }
@@ -59,13 +58,13 @@ public class ProjectDir {
     public static <T> T readFromResource(Class<T> resourceClass, String resource) {
         File resourceFile = ProjectDir.getProjectResource(resource);
         T resources;
-        try (InputStream stream = new FileInputStream(resourceFile)) {
+        try (var stream = new FileInputStream(resourceFile)) {
             System.setProperty("javax.xml.accessExternalDTD", "all");
             resources = (T) JAXBContext.newInstance(resourceClass)
                     .createUnmarshaller()
                     .unmarshal(stream);
         } catch (IOException | JAXBException e) {
-            Logger.error("Exception occurred during XML resource file reading\n" + e.getMessage());
+            Logger.error("Exception occurred during XML resource file reading", e);
             throw new RuntimeException(e);
         }
         return resources;

@@ -4,6 +4,7 @@ import com.kokhanava.automation.core.tools.commands.CommandExecutor;
 import org.apache.http.client.utils.URIBuilder;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -90,7 +91,7 @@ public class HostMachine {
     }
 
     public OS getOs() {
-        if (null == os && null == (os = CommandExecutor.getOsOfMachine(this))) {
+        if (Objects.isNull(os)) {
             throw new RuntimeException("OS of the host machine was not determined");
         }
 

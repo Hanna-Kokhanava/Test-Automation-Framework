@@ -29,7 +29,7 @@ public class AppiumCapabilities {
      * @return {@link DesiredCapabilities} capabilities
      */
     public DesiredCapabilities createBaseCapabilities() {
-        DesiredCapabilities caps = new DesiredCapabilities();
+        var caps = new DesiredCapabilities();
 
         if (deviceType.os() == Device.DeviceType.ANDROID) {
             caps.setCapability(APP_PACKAGE, AppDetails.getAppPackage());
@@ -58,7 +58,7 @@ public class AppiumCapabilities {
      * @return {@link DesiredCapabilities} instance
      */
     public DesiredCapabilities getMobilePlatformCapabilities(Device device) {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
+        var capabilities = new DesiredCapabilities();
         capabilities.setCapability(PLATFORM_NAME, deviceType.os());
         capabilities.setCapability(PLATFORM_VERSION, device.getOsVersion().toString());
         return capabilities;
