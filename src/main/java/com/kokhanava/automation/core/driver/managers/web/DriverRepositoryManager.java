@@ -53,8 +53,6 @@ public class DriverRepositoryManager {
                 + File.separator + repository.getVersion();
         String driverExeFileName = driverName + ".exe";
 
-        CommandExecutor.execute(host, Command.SYSTEM_GET_HOST_NAME);
-
         if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(driverName), driverName)) {
             Logger.debug("Start to download and unzip driver executable file");
             String zipFilePath = directoryPath + File.separator + driverName + ".zip";
@@ -83,8 +81,8 @@ public class DriverRepositoryManager {
 
         String osName = CommandExecutor.getOsOfMachine(hostMachine).toString();
         DriverRepository repository = driverList.stream()
-                .filter(driver -> driver.getName().equalsIgnoreCase(driverName)
-                        && driver.getOs().equalsIgnoreCase(osName))
+                .filter(driver -> driver.getName().equalsIgnoreCase(driverName))
+                .filter(driver -> driver.getOs().equalsIgnoreCase(osName))
                 .findFirst()
                 .orElseThrow(() -> new NullPointerException("Driver with ID [" + driverName + "] for OS ["
                         + osName + "] was not found"));

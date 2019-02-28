@@ -6,6 +6,7 @@ import com.kokhanava.automation.core.driver.capabilities.AppiumCapabilities;
 import com.kokhanava.automation.core.driver.managers.mobile.AppiumServerManager;
 import com.kokhanava.automation.core.driver.managers.mobile.MobileDriverManager;
 import com.kokhanava.automation.core.logger.Logger;
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Objects;
@@ -60,6 +61,7 @@ public class AppiumDriverCreator implements IDriverCreator {
     @Override
     public void closeDriver() {
         Logger.debug("Quitting driver");
+        Logger.debug(StringUtils.repeat("-", 50) + "\n");
         MobileDriverManager.closeDriver();
     }
 
