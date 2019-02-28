@@ -41,6 +41,7 @@ public class WebDriverManager {
      */
     public static void createDriver(DesiredCapabilities capabilities) {
         String platformName = PropertyLoader.get(PropertyLoader.BrowserProperty.BROWSER_TYPE).toUpperCase();
+        String driverVersion = PropertyLoader.get(PropertyLoader.BrowserProperty.DRIVER_VERSION);
         SupportedWebPlatforms platform = SupportedWebPlatforms.valueOf(platformName);
         MutableCapabilities options = platform.getOptions().merge(capabilities);
 
@@ -48,17 +49,17 @@ public class WebDriverManager {
             switch (platform) {
                 case CHROME:
                     System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY,
-                            DriverRepositoryManager.getDriverExecutableFilePath(CHROME_DRIVER_NAME));
+                            DriverRepositoryManager.getDriverExecutableFilePath(CHROME_DRIVER_NAME, driverVersion));
                     driver = new ChromeDriver((ChromeOptions) options);
                     break;
                 case FIREFOX:
                     System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY,
-                            DriverRepositoryManager.getDriverExecutableFilePath(FIREFOX_DRIVER_NAME));
+                            DriverRepositoryManager.getDriverExecutableFilePath(FIREFOX_DRIVER_NAME, driverVersion));
                     driver = new FirefoxDriver((FirefoxOptions) options);
                     break;
                 case OPERA:
                     System.setProperty(OperaDriverService.OPERA_DRIVER_EXE_PROPERTY,
-                            DriverRepositoryManager.getDriverExecutableFilePath(OPERA_DRIVER_NAME));
+                            DriverRepositoryManager.getDriverExecutableFilePath(OPERA_DRIVER_NAME, driverVersion));
                     driver = new OperaDriver((OperaOptions) options);
                     break;
                 case IE10:

@@ -25,8 +25,8 @@ public class DriverRepository {
         return name;
     }
 
-    public String getVersion() {
-        return version;
+    public double getVersion() {
+        return Double.parseDouble(version);
     }
 
     public String getOs() {

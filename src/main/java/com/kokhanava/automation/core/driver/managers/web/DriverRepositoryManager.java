@@ -3,7 +3,6 @@ package com.kokhanava.automation.core.driver.managers.web;
 import com.kokhanava.automation.core.browser.BrowserManager;
 import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
-import com.kokhanava.automation.core.tools.commands.Command;
 import com.kokhanava.automation.core.tools.commands.CommandExecutor;
 import com.kokhanava.automation.core.tools.files.FileManager;
 import com.kokhanava.automation.core.tools.files.ProjectDir;
@@ -12,8 +11,10 @@ import org.springframework.util.CollectionUtils;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.kokhanava.automation.core.tools.files.ResultFolder.DRIVERS_FOLDER;
 
@@ -43,7 +44,7 @@ public class DriverRepositoryManager {
      * @param driverName name of required driver
      * @return driver executable file
      */
-    public static String getDriverExecutableFilePath(String driverName) {
+    public static String getDriverExecutableFilePath(String driverName, String driverVersion) {
         DriverRepository repository = getRepositoryObjectById(driverName);
         HostMachine host = BrowserManager.getCurrentBrowser().getHost();
         FileManager fileManager = FileManager.getInstance(host);
@@ -58,7 +59,7 @@ public class DriverRepositoryManager {
             String zipFilePath = directoryPath + File.separator + driverName + ".zip";
 
             fileManager.createSubDirectories(directoryPath);
-            fileManager.downloadFileFromUrl(getRepositoryURL(host, driverName), zipFilePath);
+            fileManager.downloadFileFromUrl(getRepositoryURL(host, driverName, driverVersion), zipFilePath);
             fileManager.unzipFile(zipFilePath, directoryPath);
         }
 
@@ -70,23 +71,36 @@ public class DriverRepositoryManager {
     /**
      * Returns URL for driver exe downloading
      *
-     * @param hostMachine {@link HostMachine} isntance
+     * @param hostMachine {@link HostMachine} instance
      * @param driverName  name of driver
      * @return url string
      */
-    private static String getRepositoryURL(HostMachine hostMachine, String driverName) {
+    private static String getRepositoryURL(HostMachine hostMachine, String driverName, String driverVersion) {
         if (CollectionUtils.isEmpty(driverList)) {
             throw new RuntimeException("List of driver repositories is empty!");
         }
 
         String osName = CommandExecutor.getOsOfMachine(hostMachine).toString();
-        DriverRepository repository = driverList.stream()
-                .filter(driver -> driver.getName().equalsIgnoreCase(driverName))
-                .filter(driver -> driver.getOs().equalsIgnoreCase(osName))
-                .findFirst()
-                .orElseThrow(() -> new NullPointerException("Driver with ID [" + driverName + "] for OS ["
-                        + osName + "] was not found"));
-        return repository.getFileLocation();
+
+        var repositories = driverList.stream()
+                .filter(driver -> driver.getName().equalsIgnoreCase(driverName)
+                        && driver.getOs().equalsIgnoreCase(osName))
+                .collect(Collectors.toList());
+
+        if (driverVersion.isEmpty()) {
+            var repository = repositories.stream()
+                    .max(Comparator.comparing(DriverRepository::getVersion))
+                    .orElseThrow(() -> new NullPointerException("Driver with highest version was not found"));
+
+            return repository.getFileLocation();
+        } else {
+            var repository = repositories.stream()
+                    .filter(driver -> driver.getVersion() == Double.parseDouble(driverVersion))
+                    .findFirst()
+                    .orElseThrow(() -> new NullPointerException("Driver with ID [" + driverName
+                            + "] and version [" + driverVersion + "] for OS [" + osName + "] was not found"));
+            return repository.getFileLocation();
+        }
     }
 
     /**

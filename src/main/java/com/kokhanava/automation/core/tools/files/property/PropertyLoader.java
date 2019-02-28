@@ -39,7 +39,9 @@ public final class PropertyLoader {
     public enum BrowserProperty implements IProperty {
         BROWSER_TYPE("browser.type"),
 
-        BROWSERS_XML("browsers.xml");
+        BROWSERS_XML("browsers.xml"),
+
+        DRIVER_VERSION("driver.version");
 
         private final String propKey;
 

@@ -19,6 +19,21 @@
         <fileLocation>http://chromedriver.storage.googleapis.com/2.25/chromedriver_linux64.zip</fileLocation>
     </driver>
 
+    <driver name="chromedriver" os="windows">
+        <version>2.46</version>
+        <fileLocation>http://chromedriver.storage.googleapis.com/2.46/chromedriver_win32.zip</fileLocation>
+    </driver>
+
+    <driver name="chromedriver" os="mac">
+        <version>2.46</version>
+        <fileLocation>http://chromedriver.storage.googleapis.com/2.46/chromedriver_mac64.zip</fileLocation>
+    </driver>
+
+    <driver name="chromedriver" os="linux">
+        <version>2.46</version>
+        <fileLocation>http://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip</fileLocation>
+    </driver>
+
     <driver name="geckodriver" os="windows">
         <version>0.24.0</version>
         <fileLocation>https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-win64.zip
