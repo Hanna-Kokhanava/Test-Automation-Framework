@@ -19,7 +19,7 @@ public class DriverRepository {
     private String os;
 
     @XmlElement
-    private String fileLocation;
+    private String location;
 
     public String getName() {
         return name;
@@ -33,7 +33,7 @@ public class DriverRepository {
         return os;
     }
 
-    public String getFileLocation() {
-        return fileLocation;
+    public String getLocation() {
+        return location;
     }
 }

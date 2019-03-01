@@ -6,58 +6,93 @@
 <repositories>
     <driver name="chromedriver" os="windows">
         <version>2.25</version>
-        <fileLocation>http://chromedriver.storage.googleapis.com/2.25/chromedriver_win32.zip</fileLocation>
+        <location>http://chromedriver.storage.googleapis.com/2.25/chromedriver_win32.zip</location>
     </driver>
 
     <driver name="chromedriver" os="mac">
         <version>2.25</version>
-        <fileLocation>http://chromedriver.storage.googleapis.com/2.25/chromedriver_mac64.zip</fileLocation>
+        <location>http://chromedriver.storage.googleapis.com/2.25/chromedriver_mac64.zip</location>
     </driver>
 
     <driver name="chromedriver" os="linux">
         <version>2.25</version>
-        <fileLocation>http://chromedriver.storage.googleapis.com/2.25/chromedriver_linux64.zip</fileLocation>
+        <location>http://chromedriver.storage.googleapis.com/2.25/chromedriver_linux64.zip</location>
+    </driver>
+
+    <driver name="chromedriver" os="windows">
+        <version>2.46</version>
+        <location>http://chromedriver.storage.googleapis.com/2.46/chromedriver_win32.zip</location>
+    </driver>
+
+    <driver name="chromedriver" os="mac">
+        <version>2.46</version>
+        <location>http://chromedriver.storage.googleapis.com/2.46/chromedriver_mac64.zip</location>
+    </driver>
+
+    <driver name="chromedriver" os="linux">
+        <version>2.46</version>
+        <location>http://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip</location>
     </driver>
 
     <driver name="geckodriver" os="windows">
         <version>0.24.0</version>
-        <fileLocation>https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-win64.zip
-        </fileLocation>
+        <location>https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-win64.zip
+        </location>
     </driver>
 
     <driver name="geckodriver" os="mac">
         <version>0.24.0</version>
-        <fileLocation>
+        <location>
             https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-macos.tar.gz
-        </fileLocation>
+        </location>
     </driver>
 
     <driver name="geckodriver" os="linux">
         <version>0.24.0</version>
-        <fileLocation>
+        <location>
             https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
-        </fileLocation>
+        </location>
+    </driver>
+
+    <driver name="geckodriver" os="windows">
+        <version>0.20.1</version>
+        <location>https://github.com/mozilla/geckodriver/releases/download/v0.20.1/geckodriver-v0.20.1-win64.zip
+        </location>
+    </driver>
+
+    <driver name="geckodriver" os="mac">
+        <version>0.20.1</version>
+        <location>
+            https://github.com/mozilla/geckodriver/releases/download/v0.20.1/geckodriver-v0.20.1-macos.tar.gz
+        </location>
+    </driver>
+
+    <driver name="geckodriver" os="linux">
+        <version>0.20.1</version>
+        <location>
+            https://github.com/mozilla/geckodriver/releases/download/v0.20.1/geckodriver-v0.20.1-linux64.tar.gz
+        </location>
     </driver>
 
     <driver name="operadriver" os="windows">
         <version>2.42</version>
-        <fileLocation>
+        <location>
             https://github.com/operasoftware/operachromiumdriver/releases/download/v.2.42/operadriver_win64.zip
-        </fileLocation>
+        </location>
     </driver>
 
     <driver name="operadriver" os="mac">
         <version>2.42</version>
-        <fileLocation>
+        <location>
             https://github.com/operasoftware/operachromiumdriver/releases/download/v.2.42/operadriver_mac64.zip
-        </fileLocation>
+        </location>
     </driver>
 
     <driver name="operadriver" os="linux">
         <version>2.42</version>
-        <fileLocation>
+        <location>
             https://github.com/operasoftware/operachromiumdriver/releases/download/v.2.42/operadriver_linux64.zip
-        </fileLocation>
+        </location>
     </driver>
 
 </repositories>

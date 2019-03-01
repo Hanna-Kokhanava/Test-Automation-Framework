@@ -57,7 +57,7 @@ public abstract class FileManager {
      * @param filePath path to file in local system
      */
     public void downloadFileFromUrl(String fileUrl, String filePath) {
-        Logger.debug("Downloading file from [" + fileUrl + "]");
+        Logger.debug("Downloading file from [" + fileUrl + "] to [" + filePath + "]");
 
         try (var channel = Channels.newChannel(new URL(fileUrl).openStream());
              var outputStream = new FileOutputStream(new File(filePath))) {
@@ -113,13 +113,12 @@ public abstract class FileManager {
      * @param destPath    destination path for unzipped files
      */
     public void unzipFile(@NotNull String zipFilePath, String destPath) {
-        Logger.debug("Unzipping file " + zipFilePath);
+        Logger.debug("Unzipping file [" + zipFilePath + "]");
         String filePath;
         File newFile;
 
         try (var fileInputStream = new FileInputStream(new File(zipFilePath));
-             var zipInputStream = new ZipInputStream(fileInputStream)
-        ) {
+             var zipInputStream = new ZipInputStream(fileInputStream)) {
             ZipEntry zipEntry = zipInputStream.getNextEntry();
             while (Objects.nonNull(zipEntry)) {
                 filePath = destPath + File.separator + zipEntry.getName();
@@ -216,7 +215,7 @@ public abstract class FileManager {
      * @param filename   how verifiable file must be named
      * @return {@code true} if verifiable file have the same filename and file size
      */
-    abstract boolean isFileExist(String folderPath, File file, String filename);
+    public abstract boolean isFileExist(String folderPath, File file, String filename);
 
     public boolean isFileExist(ResultFolder targetFolder, File sourceFile, String filename) {
         return isFileExist(targetFolder.getPathToFolder(hostMachine), sourceFile, filename);

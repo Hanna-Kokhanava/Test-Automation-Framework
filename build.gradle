@@ -1,4 +1,4 @@
-group 'com.linkedin'
+group 'com.kokhanava'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'

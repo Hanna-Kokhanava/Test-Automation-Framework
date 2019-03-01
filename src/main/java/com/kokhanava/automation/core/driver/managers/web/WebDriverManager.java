@@ -8,11 +8,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeDriverService;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaDriverService;
 import org.openqa.selenium.opera.OperaOptions;
@@ -29,41 +30,36 @@ public class WebDriverManager {
     private static final long IMPLICIT_WAIT_TIMEOUT = 5;
     private static WebDriver driver;
 
-    //Need to coincide with driver-repositories.xml configuration file
-    private static final String CHROME_DRIVER_NAME = "chromedriver";
-    private static final String FIREFOX_DRIVER_NAME = "geckodriver";
-    private static final String OPERA_DRIVER_NAME = "operadriver";
-
     /**
      * Creates driver depends on current browser type
      *
      * @param capabilities {@link DesiredCapabilities}
      */
     public static void createDriver(DesiredCapabilities capabilities) {
-        String platformName = PropertyLoader.get(PropertyLoader.BrowserProperty.BROWSER_TYPE).toUpperCase();
+        var platformName = PropertyLoader.get(PropertyLoader.BrowserProperty.BROWSER_TYPE).toUpperCase();
+        var driverVersion = PropertyLoader.get(PropertyLoader.BrowserProperty.DRIVER_VERSION);
+
         SupportedWebPlatforms platform = SupportedWebPlatforms.valueOf(platformName);
         MutableCapabilities options = platform.getOptions().merge(capabilities);
+        var driverExeFilePath = DriverRepositoryManager.getDriverExecutableFilePath(platform.getDriverName(), driverVersion);
 
         if (Objects.isNull(driver)) {
             switch (platform) {
                 case CHROME:
-                    System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY,
-                            DriverRepositoryManager.getDriverExecutableFilePath(CHROME_DRIVER_NAME));
+                    System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, driverExeFilePath);
                     driver = new ChromeDriver((ChromeOptions) options);
                     break;
                 case FIREFOX:
-                    System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY,
-                            DriverRepositoryManager.getDriverExecutableFilePath(FIREFOX_DRIVER_NAME));
+                    System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, driverExeFilePath);
                     driver = new FirefoxDriver((FirefoxOptions) options);
                     break;
                 case OPERA:
-                    System.setProperty(OperaDriverService.OPERA_DRIVER_EXE_PROPERTY,
-                            DriverRepositoryManager.getDriverExecutableFilePath(OPERA_DRIVER_NAME));
+                    System.setProperty(OperaDriverService.OPERA_DRIVER_EXE_PROPERTY, driverExeFilePath);
                     driver = new OperaDriver((OperaOptions) options);
                     break;
-                case IE10:
-                    //TODO set system property with driver exe path
-                    driver = new InternetExplorerDriver((InternetExplorerOptions) options);
+                case EDGE:
+                    System.setProperty(EdgeDriverService.EDGE_DRIVER_EXE_PROPERTY, driverExeFilePath);
+                    driver = new EdgeDriver((EdgeOptions) options);
                     break;
                 default:
                     throw new IllegalStateException("Cannot create appropriate driver based on configuration information");
