@@ -19,7 +19,7 @@ public class RemoteFileManager extends FileManager {
     }
 
     @Override
-    boolean isFileExist(String folderPath, File file, String filename) {
+    public boolean isFileExist(String folderPath, File file, String filename) {
         return false;
     }
 

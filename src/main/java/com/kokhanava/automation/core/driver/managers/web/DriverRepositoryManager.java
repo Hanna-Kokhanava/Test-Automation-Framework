@@ -2,8 +2,6 @@ package com.kokhanava.automation.core.driver.managers.web;
 
 import com.kokhanava.automation.core.browser.BrowserManager;
 import com.kokhanava.automation.core.logger.Logger;
-import com.kokhanava.automation.core.tools.HostMachine;
-import com.kokhanava.automation.core.tools.commands.CommandExecutor;
 import com.kokhanava.automation.core.tools.files.FileManager;
 import com.kokhanava.automation.core.tools.files.ProjectDir;
 import org.springframework.util.CollectionUtils;
@@ -45,79 +43,66 @@ public class DriverRepositoryManager {
      * @return driver executable file
      */
     public static String getDriverExecutableFilePath(String driverName, String driverVersion) {
-        DriverRepository repository = getRepositoryObjectById(driverName);
-        HostMachine host = BrowserManager.getCurrentBrowser().getHost();
-        FileManager fileManager = FileManager.getInstance(host);
+        var hostMachine = BrowserManager.getCurrentBrowser().getHost();
+        var fileManager = FileManager.getInstance(hostMachine);
+        var osName = hostMachine.getOs().toString();
+        var driverRepository = getRepositoryObject(driverName, driverVersion, osName);
 
-        String directoryPath = DRIVERS_FOLDER
-                + File.separator + repository.getName()
-                + File.separator + repository.getVersion();
-        String driverExeFileName = driverName + ".exe";
+        var driverDirPath = DRIVERS_FOLDER
+                + File.separator + driverRepository.getName()
+                + File.separator + driverRepository.getVersion();
+        var driverExeFileName = driverName + ".exe";
+        var driverExeFilePath = driverDirPath + File.separator + driverExeFileName;
 
-        if (!fileManager.isFileExist(DRIVERS_FOLDER, new File(driverName), driverName)) {
-            Logger.debug("Start to download and unzip driver executable file");
-            String zipFilePath = directoryPath + File.separator + driverName + ".zip";
+        if (!fileManager.isFileExist(driverDirPath, new File(driverExeFilePath), driverExeFileName)) {
+            Logger.debug("Start downloading and unzipping driver executable file");
+            String zipFilePath = driverDirPath + File.separator + driverName + ".zip";
 
-            fileManager.createSubDirectories(directoryPath);
-            fileManager.downloadFileFromUrl(getRepositoryURL(host, driverName, driverVersion), zipFilePath);
-            fileManager.unzipFile(zipFilePath, directoryPath);
+            fileManager.createSubDirectories(driverDirPath);
+            fileManager.downloadFileFromUrl(driverRepository.getLocation(), zipFilePath);
+            fileManager.unzipFile(zipFilePath, driverDirPath);
         }
 
-        Logger.debug("Got executable file path for [" + driverExeFileName + "] with version [" + repository.getVersion() + "]");
-        String filePath = fileManager.getPathToFile(new File(directoryPath), driverExeFileName);
+        Logger.debug("Got executable file path for [" + driverExeFileName
+                + "] with version [" + driverRepository.getVersion() + "]");
+        String filePath = fileManager.getPathToFile(new File(driverDirPath), driverExeFileName);
         return Objects.requireNonNull(filePath, "Driver executable file is not found!");
     }
 
     /**
-     * Returns URL for driver exe downloading
+     * Returns DriverRepository object based on its driver name and version
      *
-     * @param hostMachine {@link HostMachine} instance
-     * @param driverName  name of driver
-     * @return url string
+     * @param driverName    name of driver
+     * @param driverVersion version of driver
+     * @param currentOsName OS name for current machine
+     * @return {@link DriverRepository} instance
      */
-    private static String getRepositoryURL(HostMachine hostMachine, String driverName, String driverVersion) {
+    private static DriverRepository getRepositoryObject(String driverName, String driverVersion, String currentOsName) {
         if (CollectionUtils.isEmpty(driverList)) {
             throw new RuntimeException("List of driver repositories is empty!");
         }
 
-        String osName = CommandExecutor.getOsOfMachine(hostMachine).toString();
-
-        var repositories = driverList.stream()
-                .filter(driver -> driver.getName().equalsIgnoreCase(driverName)
-                        && driver.getOs().equalsIgnoreCase(osName))
+        var allRepositories = driverList.stream()
+                .filter(driver -> driver.getName().equalsIgnoreCase(driverName))
+                .filter(driver -> driver.getOs().equalsIgnoreCase(currentOsName))
                 .collect(Collectors.toList());
 
-        if (driverVersion.isEmpty()) {
-            var repository = repositories.stream()
+        DriverRepository repository;
+
+        if (driverVersion.isBlank()) {
+            Logger.warn("Driver version was not specified explicitly, looking for driver with highest version");
+            repository = allRepositories.stream()
                     .max(Comparator.comparing(DriverRepository::getVersion))
                     .orElseThrow(() -> new NullPointerException("Driver with highest version was not found"));
-
-            return repository.getFileLocation();
         } else {
-            var repository = repositories.stream()
-                    .filter(driver -> driver.getVersion() == Double.parseDouble(driverVersion))
+            Logger.debug("Looking for driver with [" + driverVersion + "] version");
+            repository = allRepositories.stream()
+                    .filter(driver -> driver.getVersion().equals(driverVersion))
                     .findFirst()
                     .orElseThrow(() -> new NullPointerException("Driver with ID [" + driverName
-                            + "] and version [" + driverVersion + "] for OS [" + osName + "] was not found"));
-            return repository.getFileLocation();
+                            + "] and version [" + driverVersion + "] for OS [" + currentOsName + "] was not found in ["
+                            + REPOSITORIES_CONFIGURATION_FILE + "] configuration file"));
         }
-    }
-
-    /**
-     * Returns {@link DriverRepository} instance by its driver ID
-     *
-     * @param driverName name of driver
-     * @return {@link DriverRepository}
-     */
-    private static DriverRepository getRepositoryObjectById(String driverName) {
-        if (CollectionUtils.isEmpty(driverList)) {
-            throw new RuntimeException("List of driver repositories is empty!");
-        }
-
-        return driverList.stream()
-                .filter(driver -> driver.getName().equalsIgnoreCase(driverName))
-                .findFirst()
-                .orElseThrow(() -> new NullPointerException("Driver with name [" + driverName
-                        + "] was not found in configuration file"));
+        return repository;
     }
 }

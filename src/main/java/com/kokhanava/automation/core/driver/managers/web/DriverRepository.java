@@ -19,21 +19,21 @@ public class DriverRepository {
     private String os;
 
     @XmlElement
-    private String fileLocation;
+    private String location;
 
     public String getName() {
         return name;
     }
 
-    public double getVersion() {
-        return Double.parseDouble(version);
+    public String getVersion() {
+        return version;
     }
 
     public String getOs() {
         return os;
     }
 
-    public String getFileLocation() {
-        return fileLocation;
+    public String getLocation() {
+        return location;
     }
 }

@@ -44,7 +44,8 @@ public class LocalFileManager extends FileManager {
         }
 
         for (var folderFile : files) {
-            if (folderFile.length() == file.length() && folderFile.getName().equalsIgnoreCase(filename)) {
+            if (folderFile.length() == file.length()
+                    && folderFile.getName().equalsIgnoreCase(filename)) {
                 return true;
             }
         }

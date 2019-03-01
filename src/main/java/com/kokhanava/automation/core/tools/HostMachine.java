@@ -91,10 +91,9 @@ public class HostMachine {
     }
 
     public OS getOs() {
-        if (Objects.isNull(os)) {
+        if (Objects.isNull(os) && null == (os = CommandExecutor.getOsOfMachine(this))) {
             throw new RuntimeException("OS of the host machine was not determined");
         }
-
         return os;
     }
 
