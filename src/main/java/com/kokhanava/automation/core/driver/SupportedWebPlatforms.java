@@ -2,31 +2,38 @@ package com.kokhanava.automation.core.driver;
 
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
 
 /**
- * Contains all supported web platforms with its options
+ * Contains all supported web platforms with its options and driver names
  */
 public enum SupportedWebPlatforms {
+    //Driver name need to coincide with driver-repositories.xml configuration file
 
-    CHROME(getChromeOptions()),
+    CHROME("chromedriver", getChromeOptions()),
 
-    FIREFOX(getFirefoxOptions()),
+    FIREFOX("geckodriver", getFirefoxOptions()),
 
-    OPERA(getOperaOptions()),
+    OPERA("operadriver", getOperaOptions()),
 
-    IE10(getIEOptions());
+    EDGE("edgedriver", getEdgeOptions());
 
     private MutableCapabilities options;
+    private String driverName;
 
-    SupportedWebPlatforms(MutableCapabilities capabilities) {
+    SupportedWebPlatforms(String driverName, MutableCapabilities capabilities) {
+        this.driverName = driverName;
         this.options = capabilities;
     }
 
     public MutableCapabilities getOptions() {
         return this.options;
+    }
+
+    public String getDriverName() {
+        return driverName;
     }
 
     private static ChromeOptions getChromeOptions() {
@@ -44,13 +51,13 @@ public enum SupportedWebPlatforms {
         return options;
     }
 
-    private static MutableCapabilities getIEOptions() {
-        InternetExplorerOptions options = new InternetExplorerOptions();
+    private static EdgeOptions getEdgeOptions() {
+        EdgeOptions options = new EdgeOptions();
         //TODO stub for further options
         return options;
     }
 
-    private static MutableCapabilities getOperaOptions() {
+    private static OperaOptions getOperaOptions() {
         OperaOptions options = new OperaOptions();
         //TODO stub for further options
         //TODO options.setBinary()

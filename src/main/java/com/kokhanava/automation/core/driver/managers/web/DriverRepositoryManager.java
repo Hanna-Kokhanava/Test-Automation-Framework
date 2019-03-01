@@ -70,7 +70,7 @@ public class DriverRepositoryManager {
     }
 
     /**
-     * Returns DriverRepository object based on its driver name and version
+     * Returns DriverRepository object based on its driver name, os and version
      *
      * @param driverName    name of driver
      * @param driverVersion version of driver
@@ -82,27 +82,45 @@ public class DriverRepositoryManager {
             throw new RuntimeException("List of driver repositories is empty!");
         }
 
-        var allRepositories = driverList.stream()
+        List<DriverRepository> allRepositories = driverList.stream()
                 .filter(driver -> driver.getName().equalsIgnoreCase(driverName))
                 .filter(driver -> driver.getOs().equalsIgnoreCase(currentOsName))
                 .collect(Collectors.toList());
 
-        DriverRepository repository;
+        DriverRepository repository = driverVersion.isBlank()
+                ? getRepositoryWithHighestVersion(allRepositories)
+                : getRepositoryByVersion(allRepositories, driverVersion);
 
-        if (driverVersion.isBlank()) {
-            Logger.warn("Driver version was not specified explicitly, looking for driver with highest version");
-            repository = allRepositories.stream()
-                    .max(Comparator.comparing(DriverRepository::getVersion))
-                    .orElseThrow(() -> new NullPointerException("Driver with highest version was not found"));
-        } else {
-            Logger.debug("Looking for driver with [" + driverVersion + "] version");
-            repository = allRepositories.stream()
-                    .filter(driver -> driver.getVersion().equals(driverVersion))
-                    .findFirst()
-                    .orElseThrow(() -> new NullPointerException("Driver with ID [" + driverName
-                            + "] and version [" + driverVersion + "] for OS [" + currentOsName + "] was not found in ["
-                            + REPOSITORIES_CONFIGURATION_FILE + "] configuration file"));
-        }
-        return repository;
+        return Objects.requireNonNull(repository, "Driver with ID [" + driverName
+                + "] and version [" + driverVersion + "] for OS [" + currentOsName + "] was not found in ["
+                + REPOSITORIES_CONFIGURATION_FILE + "] configuration file");
+    }
+
+    /**
+     * Returns DriverRepository object by its version or else null
+     *
+     * @param allRepositories list of all repositories with specified name and os
+     * @param driverVersion   driver version
+     * @return {@link DriverRepository} instance
+     */
+    private static DriverRepository getRepositoryByVersion(List<DriverRepository> allRepositories, String driverVersion) {
+        Logger.debug("Looking for driver with [" + driverVersion + "] version");
+        return allRepositories.stream()
+                .filter(driver -> driver.getVersion().equals(driverVersion))
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * Returns DriverRepository object with a highest driver version
+     *
+     * @param allRepositories list of all repositories with specified name and os
+     * @return {@link DriverRepository} instance
+     */
+    private static DriverRepository getRepositoryWithHighestVersion(List<DriverRepository> allRepositories) {
+        Logger.warn("Driver version was not specified explicitly, looking for driver with highest version");
+        return allRepositories.stream()
+                .max(Comparator.comparing(DriverRepository::getVersion))
+                .orElse(null);
     }
 }
