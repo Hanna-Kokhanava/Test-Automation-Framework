@@ -1,35 +1,54 @@
-# Test Automation Framework
-The main purpose of this project is to combine base functionality implementation (driver creation, capabilities setting, etc) in universal solution.
+# Unified Test Automation Framework (UTAF)
+The main purpose of this project is to combine base functionality implementation (driver creation, capabilities setting, etc) in one universal solution.
 
-## Installations
-## Java JDK
-* Download [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and install it.
-* Set **JAVA** env. variable to JDK's **bin** folder.
-* Set **JAVA_HOME** env. variable to **JDK** folder.
+## Getting Started
+### Installing
+### Java JDK
+1. Download [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and install it.
+2. Set environment variables.
 
-## Git
-* Download [Git](https://git-scm.com/download)
+### Android SDK tools
+1. Download SDK from [Android SDK](https://developer.android.com/studio/index.html).
+2. Run the *android* tool (included in the SDK/tools folder) and make sure an API Level 17 or greater SDK platform, Google Driver, SDK Tools and SDK platform-tools are installed.
+3. Set environment variables.
 
-## Node
-* Install [NodeJS](https://nodejs.org/en/download/) 
+#### Set environment variables :
+**For Windows** -> System properties
+* Set **JAVA** env. variable to JDK's **bin** folder
+* Set **JAVA_HOME** env. variable to **JDK** folder
+* Add __%JAVA_HOME%\bin__ to **PATH** variable.
+* Set **ANDROID_HOME** env. variable to **Android SDK** folder (e.g. "C:\Users\User\AppData\Local\Android\sdk")
+* Add the __"...\sdk\platform-tools\"__ and __"...\sdk\tools\"__ to **PATH** variable.
 
-## Appium
-* Latest version : __npm install -g appium__
-* Specific version : __npm install -g appium@1.11.0__
+**For MacOS** -> ~/.bash_profile :
+```
+export JAVA_HOME="$(/usr/libexec/java_home)"
+export ANDROID_HOME=/Users/hanna_kokhanava/Library/Android/sdk
+export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$JAVA_HOME$
+```
 
-## IntelliJ IDEA
-* Download and install [Community Edition](https://www.jetbrains.com/idea/download/#section=windows)
+### Git
+Download and install [Git](https://git-scm.com/download)
 
-## Android SDK tools
-* Download SDK from [Android SDK](https://developer.android.com/studio/index.html).
-* Run the *android* tool (included in the SDK/tools folder) and make sure an API Level 17 or greater SDK platform, Google Driver, SDK Tools and SDK platform-tools are installed.
-* Set **ANDROID_HOME** variable to Android SDK path - "C:\Users\User\AppData\Local\Android\sdk" for Windows.
-* Add the "...\sdk\platform-tools\" and "...\sdk\tools\" to PATH variable.
+### Node
+Download and install [NodeJS](https://nodejs.org/en/download/)
 
-## For MacOS environmental variables will be in **.bash_profile** :
-* export JAVA_HOME="$(/usr/libexec/java_home)"
-* export ANDROID_HOME=/Users/hanna_kokhanava/Library/Android/sdk
-* export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$JAVA_HOME$
+### Appium
+  Download Appium using one of the following options:
+* Latest version : 
+```
+npm install -g appium
+```
+* Specific version : 
+```
+npm install -g appium@1.11.0
+```
+
+### Appium Desktop
+Download and install [Appium](https://github.com/appium/appium-desktop/releases)
+
+### IntelliJ IDEA
+Download and install [Community Edition](https://www.jetbrains.com/idea/download/#section=windows)
 
 
 ## Tips
@@ -55,3 +74,7 @@ Install from mirror - add **chromedriver_cdnurl=http://npm.taobao.org/mirrors/ch
 
 * Install [Python](https://www.python.org/downloads/) manually 
 * Set path (Windows) - path %path%;C:\Python
+
+
+## Authors
+**[Hanna Kokhanava](https://github.com/Hanna-Kokhanava)** - God of the UTAF
