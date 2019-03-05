@@ -4,13 +4,11 @@ The main purpose of this project is to combine base functionality implementation
 ## Getting Started
 ### Installing
 ### Java JDK
-1. Download [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and install it.
-2. Set environment variables.
+* Download [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and install it.
 
 ### Android SDK tools
-1. Download SDK from [Android SDK](https://developer.android.com/studio/index.html).
-2. Run the *android* tool (included in the SDK/tools folder) and make sure an API Level 17 or greater SDK platform, Google Driver, SDK Tools and SDK platform-tools are installed.
-3. Set environment variables.
+* Download SDK from [Android SDK](https://developer.android.com/studio/index.html).
+* Run the *android* tool (included in the SDK/tools folder) and make sure an API Level 17 or greater SDK platform, Google Driver, SDK Tools and SDK platform-tools are installed.
 
 #### Set environment variables :
 **For Windows** -> System properties
@@ -50,13 +48,11 @@ Download and install [Appium](https://github.com/appium/appium-desktop/releases)
 ### IntelliJ IDEA
 Download and install [Community Edition](https://www.jetbrains.com/idea/download/#section=windows)
 
-
 ## Tips
 To get information about the name of the package and the first activity that has to be launched for the testing
 1. Browse through the **SDK folder -> Build-Tools -> Version folder**
 2. Open cmd and execute command **./aapt dumb badging "path_to_apk"**
 3. Find **package** (in the beginning of logs) and **launchable-activity** parameters
-
 
 ## Appium installation errors
 ### **Proxy issue** SELF_SIGNED_CERT_IN_CHAIN request to https://registry.npmjs.org/appium failed, reason: self signed certificate in certificate chain
