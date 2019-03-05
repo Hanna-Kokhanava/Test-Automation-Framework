@@ -18,10 +18,6 @@ public class BaseCase {
     protected IDriverCreator driverCreator;
 
     {
-        servicesInject();
-    }
-
-    private void servicesInject() {
         Guice.createInjector(new DriverModules())
                 .injectMembers(this);
     }
