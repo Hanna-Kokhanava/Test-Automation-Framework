@@ -14,7 +14,8 @@ The main purpose of this project is to combine base functionality implementation
 * Install [NodeJS](https://nodejs.org/en/download/) 
 
 ## Appium
-* npm install -g appium
+* Latest version : __npm install -g appium__
+* Specific version : __npm install -g appium@1.11.0__
 
 ## IntelliJ IDEA
 * Download and install [Community Edition](https://www.jetbrains.com/idea/download/#section=windows)
