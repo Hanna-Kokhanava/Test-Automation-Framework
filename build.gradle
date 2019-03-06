@@ -5,21 +5,25 @@ apply plugin: 'java'
 
 targetCompatibility = 1.11
 sourceCompatibility = 1.11
+targetCompatibility = 1.11
 
 repositories {
     mavenCentral()
 }
 
-ext.seleniumVersion = '2.53.0'
+ext.seleniumServerVersion = '2.53.0'
+ext.seleniumJavaVersion = '3.141.59'
+
 ext.log4jVersion = '2.11.1'
 ext.guiceVersion = '4.1.0'
 ext.htmlElementsVersion = '1.12'
+ext.javaxApiVersion = '2.3.0'
 
 dependencies {
     // Selenium Java
-    compile 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    compile "org.seleniumhq.selenium:selenium-java:$seleniumJavaVersion"
     // Selenium Grid
-    compile "org.seleniumhq.selenium:selenium-server:$seleniumVersion"
+    compile "org.seleniumhq.selenium:selenium-server:$seleniumServerVersion"
     // Appium
     compile "io.appium:java-client:7.0.0"
     // TestNG
@@ -37,8 +41,8 @@ dependencies {
             "org.apache.logging.log4j:log4j-slf4j-impl:$log4jVersion",
             "org.apache.logging.log4j:log4j-jcl:$log4jVersion"
     // JAXB API
-    compile "javax.xml.bind:jaxb-api:2.3.0"
+    compile "javax.xml.bind:jaxb-api:$javaxApiVersion"
     compile "javax.activation:activation:1.1"
-    compile "org.glassfish.jaxb:jaxb-runtime:2.3.0"
+    compile "org.glassfish.jaxb:jaxb-runtime:$javaxApiVersion"
 
 }
