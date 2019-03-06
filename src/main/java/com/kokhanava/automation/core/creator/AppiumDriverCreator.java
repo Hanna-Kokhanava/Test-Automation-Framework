@@ -49,7 +49,7 @@ public class AppiumDriverCreator implements IDriverCreator {
             MobileDriverManager.createDriver(capabilities);
         } catch (Exception er) {
             Logger.warn("Exception happened with create driver. Look at appium log for additional information.\n");
-            AppiumServerManager.restartServer(device);
+//            AppiumServerManager.restartServer(device);
             MobileDriverManager.createDriver(capabilities);
         }
         return device;

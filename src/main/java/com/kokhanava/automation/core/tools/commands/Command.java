@@ -8,10 +8,15 @@ import java.util.Objects;
  * Created on 17.03.2018
  */
 public enum Command {
+    // http://appium.io/docs/en/writing-running-appium/server-args/
+    APPIUM_GET_PID("FOR /F 'tokens=5' %%i in ('netstat -ano ^| findstr %s’) do @echo %%i"),
+    APPIUM_START_SERVER_ANDROID("appium --port %s -bp %s --log-timestamp --default-capabilities '%s' &> appium.log 2>&1"),
+
     SYSTEM_SOURCE_ENVIRONMENT("source ~/.bash_profile;"),
     SYSTEM_GET_HOST_NAME("hostname"),
     SYSTEM_GET_OS_NAME("sw_vers", "ver", "uname -a"),
-    SYSTEM_TEMPLATE_KILL_PID("taskkill /PID %s /F"),
+
+    SYSTEM_TEMPLATE_KILL_PID("kill -9 %s", "taskkill /PID %s /F"),
 
     ADB_DEVICES_UDID_LIST("adb devices | awk '!/grep/{print $1}' | grep -v 'List'"),
     IOS_IDEVICE_UDID_LIST("idevice_id --list"),
@@ -28,11 +33,10 @@ public enum Command {
         this.command = command;
     }
 
-    //For Unix uses the same command as for mac
     Command(String macCommand, String winCommand) {
         this.macCommand = macCommand;
         this.winCommand = winCommand;
-        this.linuxCommand = macCommand;
+        this.linuxCommand = macCommand; //For Unix uses the same command as for mac
     }
 
     Command(String macCommand, String winCommand, String linuxCommand) {

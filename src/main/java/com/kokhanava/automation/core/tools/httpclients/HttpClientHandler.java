@@ -14,7 +14,9 @@ import java.util.Objects;
  * Created on 05.03.2019
  */
 public class HttpClientHandler {
-    private CloseableHttpClient httpClient = null;
+    private static final int RETRY_COUNT = 5;
+
+    private CloseableHttpClient httpClient;
     private RequestConfig requestConfig;
 
     public CloseableHttpClient getHttpClient() {
@@ -23,7 +25,7 @@ public class HttpClientHandler {
             if (Objects.nonNull(requestConfig)) {
                 httpClientBuilder.setDefaultRequestConfig(requestConfig);
             }
-            httpClientBuilder.setRetryHandler(new DefaultHttpRequestRetryHandler(5, true));
+            httpClientBuilder.setRetryHandler(new DefaultHttpRequestRetryHandler(RETRY_COUNT, true));
             httpClient = httpClientBuilder.build();
         }
         return httpClient;
