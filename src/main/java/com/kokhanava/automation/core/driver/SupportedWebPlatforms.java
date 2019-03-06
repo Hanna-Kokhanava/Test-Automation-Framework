@@ -47,6 +47,7 @@ public enum SupportedWebPlatforms {
 
     private static FirefoxOptions getFirefoxOptions() {
         FirefoxOptions options = new FirefoxOptions();
+        options.setCapability("marionette", false);
         //TODO stub for further options
         return options;
     }
