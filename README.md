@@ -71,6 +71,9 @@ Install from mirror - add **chromedriver_cdnurl=http://npm.taobao.org/mirrors/ch
 * Install [Python](https://www.python.org/downloads/) manually 
 * Set path (Windows) - path %path%;C:\Python
 
+## Links
+Appium server arguments - [Appium CLI](http://appium.io/docs/en/writing-running-appium/server-args/)
+
 
 ## Authors
 **[Hanna Kokhanava](https://github.com/Hanna-Kokhanava)** - God of the UTAF
