@@ -17,5 +17,8 @@
             <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>
         </Root>
+        <Logger name="org.apache.http" level="info">
+            <AppenderRef ref="Console"/>
+        </Logger>
     </Loggers>
 </Configuration>
