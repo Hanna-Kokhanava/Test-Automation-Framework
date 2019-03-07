@@ -74,6 +74,8 @@ Install from mirror - add **chromedriver_cdnurl=http://npm.taobao.org/mirrors/ch
 ## Links
 Appium server arguments - [Appium CLI](http://appium.io/docs/en/writing-running-appium/server-args/)
 
+Default capabilities JSON - [--default-capabilities](https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/default-capabilities-arg.md)
+
 
 ## Authors
 **[Hanna Kokhanava](https://github.com/Hanna-Kokhanava)** - God of the UTAF
