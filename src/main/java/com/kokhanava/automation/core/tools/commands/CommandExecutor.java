@@ -116,7 +116,7 @@ public class CommandExecutor {
      * @return result string
      */
     public static String executeCommandFromFolder(HostMachine hostMachine, String folderPath, String command) {
-        return execute(hostMachine, Command.CD.getCommand(folderPath) + command);
+        return execute(hostMachine, Command.CD.getCommand(hostMachine.getOs(), folderPath) + command);
     }
 
     /**

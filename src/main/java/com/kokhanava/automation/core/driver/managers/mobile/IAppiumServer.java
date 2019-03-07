@@ -8,14 +8,7 @@ import com.kokhanava.automation.core.tools.HostMachine;
  */
 public interface IAppiumServer {
 
-    String WD_SERVER_STATUS = "/wd/hub/status";
-
-    /**
-     * Checks status of appium server
-     *
-     * @return boolean status
-     */
-    boolean checkStatus(HostMachine hostMachine);
+    String WD_SERVER_STATUS_ENDPOINT = "/wd/hub/status";
 
     /**
      * Starts appium server on {@link HostMachine}
@@ -30,4 +23,11 @@ public interface IAppiumServer {
      * @param host on which {@link HostMachine} we need to stop appium server
      */
     void stopServer(HostMachine host);
+
+    /**
+     * Checks status of appium server
+     *
+     * @return boolean status
+     */
+    boolean checkStatus(HostMachine hostMachine);
 }

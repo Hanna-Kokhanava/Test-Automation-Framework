@@ -3,6 +3,7 @@ package com.kokhanava.automation.core.driver.config;
 import com.google.gson.JsonObject;
 import com.kokhanava.automation.core.device.Device;
 import com.kokhanava.automation.core.tools.HostMachine;
+import com.kokhanava.automation.core.tools.OS;
 import com.kokhanava.automation.core.tools.commands.Command;
 import com.kokhanava.automation.core.tools.commands.CommandExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -27,9 +28,18 @@ public class AndroidPlatformConfig extends BaseMobilePlatformConfig {
     public String getStartAppiumCommand(Device device) {
         HostMachine host = device.getAppiumHostMachine();
         JsonObject defaultCapabilities = createDefaultJsonDeviceCapabilities(device);
+
+        //TODO change OS verification
+        String stringCapabilities = defaultCapabilities.toString();
+        if (host.getOs().toString().equalsIgnoreCase(OS.WINDOWS.toString())) {
+            //Need to escape double quotes - https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/default-capabilities-arg.md
+            stringCapabilities = stringCapabilities.replaceAll("\"", "\\\\\"");
+        }
+
         return Command.APPIUM_START_SERVER_ANDROID.getCommand(CommandExecutor.getOsOfMachine(host),
                 host.getPort(),
                 host.getPortInt() * 10,
-                defaultCapabilities.toString());
+                host.getPort(),
+                stringCapabilities);
     }
 }

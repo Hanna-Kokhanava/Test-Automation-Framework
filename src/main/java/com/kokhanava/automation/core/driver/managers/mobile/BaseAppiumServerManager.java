@@ -1,9 +1,5 @@
 package com.kokhanava.automation.core.driver.managers.mobile;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.kokhanava.automation.core.driver.PlatformModules;
-import com.kokhanava.automation.core.driver.config.ICommandStartAppiumServer;
 import com.kokhanava.automation.core.driver.managers.AbstractServerManager;
 import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
@@ -16,9 +12,7 @@ import com.kokhanava.automation.core.tools.httpclients.HttpClient;
  */
 public abstract class BaseAppiumServerManager extends AbstractServerManager implements IAppiumServer {
 
-    private Injector injector = Guice.createInjector(new PlatformModules());
-    protected ICommandStartAppiumServer commandStartAppium = injector.getInstance(ICommandStartAppiumServer.class);
-
+    //TODO to be checked
     public void stopServer(HostMachine host) {
         String exitMessage = CommandExecutor.execute(host, Command.SYSTEM_TEMPLATE_KILL_PID, getPidAppiumProcess(host));
         HttpClient.closeHttpClient();
@@ -38,15 +32,15 @@ public abstract class BaseAppiumServerManager extends AbstractServerManager impl
      * Checks status of appium server
      *
      * @param hostMachine {@link HostMachine} instance
-     * @return current status of server - true/false
+     * @return current status of server, running - true/false
      */
     public boolean checkStatus(HostMachine hostMachine) {
-        Logger.debug("Check Appium server status on " + hostMachine);
-        return checkStatus(hostMachine.getURIBuilder().setPath(WD_SERVER_STATUS));
+        Logger.debug("Check Appium server status on " + hostMachine + " host");
+        return checkStatus(hostMachine.getURIBuilder().setPath(WD_SERVER_STATUS_ENDPOINT));
     }
 
     /**
-     * Returns PID of appium server
+     * Returns PID of appium server process
      *
      * @param host {@link HostMachine} instance
      * @return command execution output

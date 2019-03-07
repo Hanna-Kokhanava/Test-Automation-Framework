@@ -9,8 +9,8 @@ import java.util.Objects;
  */
 public enum Command {
     // http://appium.io/docs/en/writing-running-appium/server-args/
+    APPIUM_START_SERVER_ANDROID("appium --port %s -bp %s --log-timestamp --log appium%s.log --default-capabilities \"%s\""),
     APPIUM_GET_PID("FOR /F 'tokens=5' %%i in ('netstat -ano ^| findstr %s’) do @echo %%i"),
-    APPIUM_START_SERVER_ANDROID("appium --port %s -bp %s --log-timestamp --default-capabilities '%s' &> appium.log 2>&1"),
 
     SYSTEM_SOURCE_ENVIRONMENT("source ~/.bash_profile;"),
     SYSTEM_GET_HOST_NAME("hostname"),
@@ -22,7 +22,7 @@ public enum Command {
     IOS_IDEVICE_UDID_LIST("idevice_id --list"),
 
     UNZIP_FILE("unzip -u %s"),
-    CD("cd %s; ");
+    CD("cd %s; ", "cd %s && ");
 
     private String macCommand;
     private String winCommand;

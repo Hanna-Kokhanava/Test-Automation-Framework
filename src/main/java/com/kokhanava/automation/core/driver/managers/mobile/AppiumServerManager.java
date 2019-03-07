@@ -1,6 +1,10 @@
 package com.kokhanava.automation.core.driver.managers.mobile;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.kokhanava.automation.core.device.Device;
+import com.kokhanava.automation.core.driver.PlatformModules;
+import com.kokhanava.automation.core.driver.config.ICommandStartAppiumServer;
 import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
 import com.kokhanava.automation.core.tools.commands.CommandExecutor;
@@ -12,6 +16,9 @@ import static com.kokhanava.automation.core.tools.files.ResultFolder.APPIUM_FOLD
  */
 public class AppiumServerManager extends BaseAppiumServerManager {
 
+    private Injector injector = Guice.createInjector(new PlatformModules());
+    private ICommandStartAppiumServer commandStartAppium = injector.getInstance(ICommandStartAppiumServer.class);
+
     /**
      * Starts Appium server on IP:port address
      *
@@ -19,10 +26,9 @@ public class AppiumServerManager extends BaseAppiumServerManager {
      */
     @Override
     public void startServer(Device device) {
-        Logger.debug("Start Appium server on " + device.getAppiumHostMachine().getHostname());
-        HostMachine host = device.getAppiumHostMachine();
-
-        CommandExecutor.executeCommandFromFolder(host, APPIUM_FOLDER, commandStartAppium.getStartAppiumCommand(device));
-
+        Logger.debug("Start Appium server on [" + device.getAppiumHostMachine().getHostname() + "]");
+        HostMachine hostMachine = device.getAppiumHostMachine();
+        CommandExecutor.executeCommandFromFolder(hostMachine, APPIUM_FOLDER, commandStartAppium.getStartAppiumCommand(device));
+        waitForServerStarts(hostMachine, (Void) -> checkStatus(hostMachine));
     }
 }
