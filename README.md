@@ -71,6 +71,13 @@ Install from mirror - add **chromedriver_cdnurl=http://npm.taobao.org/mirrors/ch
 * Install [Python](https://www.python.org/downloads/) manually 
 * Set path (Windows) - path %path%;C:\Python
 
+### **Appium connection reset**
+**One of the possible solutions**
+
+Uncomment localhost name resolution lines in the following file :
+**Windows** - C:\Windows\System32\Drivers\etc\hosts
+**MacOS/Linux** - /etc/hosts
+
 ## Links
 Appium server arguments - [Appium CLI](http://appium.io/docs/en/writing-running-appium/server-args/)
 
