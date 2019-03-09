@@ -52,6 +52,7 @@ Download and install [Community Edition](https://www.jetbrains.com/idea/download
 ### Genymotion
 Download and install [Genymotion](https://www.genymotion.com/fun-zone/)
 DHCP problem - https://www.genymotion.com/help/desktop/faq/#category-virtualbox
+INSTALL_FAILED_NO_MATCHING_ABIS - http://aksahu.blogspot.com/2016/09/how-to-fix-installfailednomatchingabis.html
 
 ## Tips
 To get information about the name of the package and the first activity that has to be launched for the testing
