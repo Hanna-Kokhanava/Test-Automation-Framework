@@ -50,8 +50,10 @@ Download and install [Appium](https://github.com/appium/appium-desktop/releases)
 Download and install [Community Edition](https://www.jetbrains.com/idea/download/#section=windows)
 
 ### Genymotion
-Download and install [Genymotion](https://www.genymotion.com/fun-zone/)
+* Download and install [Genymotion](https://www.genymotion.com/fun-zone/)
+
 DHCP problem - https://www.genymotion.com/help/desktop/faq/#category-virtualbox
+
 INSTALL_FAILED_NO_MATCHING_ABIS - http://aksahu.blogspot.com/2016/09/how-to-fix-installfailednomatchingabis.html
 
 ## Tips
