@@ -12,11 +12,12 @@ The main purpose of this project is to combine base functionality implementation
 
 #### Set environment variables :
 **For Windows** -> System properties
-* Set **JAVA** env. variable to JDK's **bin** folder
-* Set **JAVA_HOME** env. variable to **JDK** folder
+* Set **JAVA** system env. variable to JDK's **bin** folder
+* Set **JAVA_HOME** system env. variable to **JDK** folder
 * Add __%JAVA_HOME%\bin__ to **PATH** variable.
-* Set **ANDROID_HOME** env. variable to **Android SDK** folder (e.g. "C:\Users\User\AppData\Local\Android\sdk")
-* Add the __"...\sdk\platform-tools\"__ and __"...\sdk\tools\"__ to **PATH** variable.
+
+* Set **ANDROID_HOME** system env. variable to **Android SDK** folder (e.g. "C:\Users\User\AppData\Local\Android\sdk")
+* Add the __"...\sdk\platform-tools\"__ and __"...\sdk\tools\"__ to the **PATH** variable.
 
 **For MacOS** -> ~/.bash_profile :
 ```
