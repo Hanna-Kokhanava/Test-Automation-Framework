@@ -49,6 +49,10 @@ Download and install [Appium](https://github.com/appium/appium-desktop/releases)
 ### IntelliJ IDEA
 Download and install [Community Edition](https://www.jetbrains.com/idea/download/#section=windows)
 
+### Genymotion
+Download and install [Genymotion](https://www.genymotion.com/fun-zone/)
+DHCP problem - https://www.genymotion.com/help/desktop/faq/#category-virtualbox
+
 ## Tips
 To get information about the name of the package and the first activity that has to be launched for the testing
 1. Browse through the **SDK folder -> Build-Tools -> Version folder**
