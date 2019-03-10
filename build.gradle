@@ -5,7 +5,6 @@ apply plugin: 'java'
 
 targetCompatibility = 1.11
 sourceCompatibility = 1.11
-targetCompatibility = 1.11
 
 repositories {
     mavenCentral()
@@ -46,6 +45,4 @@ dependencies {
     compile "org.glassfish.jaxb:jaxb-runtime:$javaxApiVersion"
     // Guava
     compile "com.google.guava:guava:27.0.1-jre"
-
-
 }

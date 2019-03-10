@@ -40,7 +40,6 @@ public class DeviceManager {
      * @return {@link Device} instance
      */
     public static Device getCurrentDevice() {
-        Logger.debug("Get current Device instance");
         if (Objects.isNull(currentDevice.get())
                 && MobileDriverManager.getDriverType() == MobileDriverManager.DriverType.APPIUM) {
             String udid = PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_UDID, "");

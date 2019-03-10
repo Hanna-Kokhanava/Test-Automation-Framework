@@ -35,6 +35,8 @@ public class AppiumCapabilities {
             caps.setCapability(APP_PACKAGE, AppDetails.getAppPackage());
             caps.setCapability(APP_ACTIVITY, AppDetails.getAppActivity());
 
+            caps.setCapability("uiautomator2ServerLaunchTimeout", 50000);
+
             //For Android version 6.0 and higher
             caps.setCapability(AUTO_GRANT_PERMISSIONS, "true");
         }

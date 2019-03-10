@@ -1,4 +1,4 @@
-package com.kokhanava.automation.testscripts;
+package com.kokhanava.automation.testscripts.web;
 
 import com.kokhanava.automation.core.driver.managers.web.WebDriverManager;
 import com.kokhanava.automation.core.logger.Logger;

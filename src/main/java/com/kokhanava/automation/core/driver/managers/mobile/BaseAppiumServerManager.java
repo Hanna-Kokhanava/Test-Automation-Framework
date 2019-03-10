@@ -35,7 +35,6 @@ public abstract class BaseAppiumServerManager extends AbstractServerManager impl
      * @return current status of server, running - true/false
      */
     public boolean checkStatus(HostMachine hostMachine) {
-        Logger.debug("Check Appium server status on " + hostMachine + " host");
         return checkStatus(hostMachine.getURIBuilder().setPath(WD_SERVER_STATUS_ENDPOINT));
     }
 

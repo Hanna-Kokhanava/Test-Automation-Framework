@@ -60,22 +60,20 @@ public class AbstractServerManager {
      * @return current status of server, running - true/false
      */
     protected static boolean checkStatus(URIBuilder uriBuilder) {
-        boolean status = false;
         int tryCount = ATTEMPTS_COUNT;
+        boolean status;
 
-        do {
-            HttpGet request = null;
-            try {
-                request = new HttpGet(uriBuilder.build());
-            } catch (URISyntaxException e) {
-                Logger.warn("Could not parse string as URI reference", e);
-            }
-            try (CloseableHttpResponse response = HttpClient.getHttpClient().execute(request)) {
-                status = response.getStatusLine().getStatusCode() == HttpStatus.SC_OK;
-            } catch (IOException e) {
-                Logger.warn("Failed to get status of the server", e);
-            }
-        } while (--tryCount > 0 && !status);
+        try {
+            do {
+                HttpGet request = new HttpGet(uriBuilder.build());
+                try (CloseableHttpResponse response = HttpClient.getHttpClient().execute(request)) {
+                    status = response.getStatusLine().getStatusCode() == HttpStatus.SC_OK;
+                }
+            } while (--tryCount > 0 && !status);
+
+        } catch (Exception e) {
+            status = false;
+        }
 
         return status;
     }

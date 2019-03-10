@@ -1,5 +1,7 @@
 package com.kokhanava.automation.core.tools.commands;
 
+import com.google.common.util.concurrent.SimpleTimeLimiter;
+import com.google.common.util.concurrent.TimeLimiter;
 import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
 import com.kokhanava.automation.core.tools.OS;
@@ -11,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created on 17.03.2018
@@ -62,36 +66,40 @@ public class CommandExecutor {
      */
     @Nullable
     private static String executeLocally(OS os, String command) {
-        String[] commands = {command};
-        if (os == OS.MAC || os == OS.LINUX) {
-            commands = new String[]{"bash", "-c", command};
-        }
-        if (os == OS.WINDOWS) {
-            commands = new String[]{"cmd", "/c", command};
-        }
-
-        Process process;
-        try {
-            process = Runtime.getRuntime().exec(commands);
-        } catch (IOException e) {
-            Logger.error("Exception was thrown while executing command in a separate process", e);
-            return null;
-        }
-
         String commandOutput = null;
-        try (var reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-            StringBuilder buffer = new StringBuilder();
+        StringBuilder buffer = new StringBuilder();
+        String[] commands = {command};
+        if (os == OS.MAC)
+            commands = new String[]{"bash", "-c", command};
+        if (os == OS.WINDOWS)
+            commands = new String[]{"cmd", "/c", command};
+
+        try {
+            Process p = Runtime.getRuntime().exec(commands);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+            int timeout = 0;
+            while (!bufferedReader.ready()) { //wait until Stream is ready to be read
+                try {
+                    Thread.sleep(10);
+                    timeout++;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            timeout = 0;
             String line;
-            while (Objects.nonNull(line = reader.readLine())) {
-                buffer.append(line);
-                buffer.append('\n');
+            while (timeout < 100) {
+                while (bufferedReader.ready() && (line = bufferedReader.readLine()) != null) {
+                    buffer.append(line).append(System.lineSeparator());
+                }
             }
             commandOutput = buffer.toString().trim();
-            process.destroy();
+            bufferedReader.close();
+            p.destroy();
         } catch (IOException e) {
-            Logger.error("Exception was thrown during command execution results reading", e);
+            e.printStackTrace();
         }
-
         return commandOutput;
     }
 
