@@ -62,30 +62,6 @@ To get information about the name of the package and the first activity that has
 2. Open cmd and execute command **./aapt dumb badging "path_to_apk"**
 3. Find **package** (in the beginning of logs) and **launchable-activity** parameters
 
-## Appium installation errors
-### **Proxy issue** SELF_SIGNED_CERT_IN_CHAIN request to https://registry.npmjs.org/appium failed, reason: self signed certificate in certificate chain
-**Solution** 
-
-npm config set registry http://registry.npmjs.org/ (not recommended?)
-
-### **Chromedriver installation proxy issue**
-**Solution**
-
-Install from mirror - add **chromedriver_cdnurl=http://npm.taobao.org/mirrors/chromedriver** property to the  **..\nodejs\node_modules\npm\npmrc** file
-
-### **Downloading Python failed - self signed certificate in certificate chain** 
-**Solution**
-
-* Install [Python](https://www.python.org/downloads/) manually 
-* Set path (Windows) - path %path%;C:\Python
-
-### **Appium connection reset**
-**One of the possible solutions**
-
-Uncomment localhost name resolution lines in the following file :
-**Windows** - C:\Windows\System32\Drivers\etc\hosts
-**MacOS/Linux** - /etc/hosts
-
 ## Links
 Appium server arguments - [Appium CLI](http://appium.io/docs/en/writing-running-appium/server-args/)
 
