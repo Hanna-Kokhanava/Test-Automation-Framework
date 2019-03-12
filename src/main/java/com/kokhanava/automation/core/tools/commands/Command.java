@@ -10,13 +10,12 @@ import java.util.Objects;
 public enum Command {
     // http://appium.io/docs/en/writing-running-appium/server-args/
     APPIUM_START_SERVER_ANDROID("appium --port %s -bp %s --log-timestamp --log appium%s.log --default-capabilities \"%s\""),
-    APPIUM_GET_PID("FOR /F \"tokens=5\" %i in ('netstat -ano ^| findstr %s') do @echo %%i"),
+    APPIUM_GET_PID("for /f \"tokens=5\" %%i in ('netstat -aon ^| findstr %s ^| find \"LISTENING\"') do @echo %%i"),
 
     SYSTEM_SOURCE_ENVIRONMENT("source ~/.bash_profile;"),
     SYSTEM_GET_HOST_NAME("hostname"),
     SYSTEM_GET_OS_NAME("sw_vers", "ver", "uname -a"),
-
-    SYSTEM_TEMPLATE_KILL_PID("kill -9 %s", "taskkill /PID %s /F"),
+    SYSTEM_KILL_PROCESS_BY_PID("kill -9 %s", "taskkill /PID %s /F"),
 
     ADB_DEVICES_UDID_LIST("adb devices | awk '!/grep/{print $1}' | grep -v 'List'"),
     IOS_IDEVICE_UDID_LIST("idevice_id --list"),
@@ -45,6 +44,12 @@ public enum Command {
         this.linuxCommand = linuxCommand;
     }
 
+    /**
+     * Returns an appropriate command template depending on the {@link OS}
+     *
+     * @param os current {@link OS}
+     * @return an appropriate command for OS
+     */
     public String getCommandTemplate(OS os) {
         switch (os) {
             case MAC:

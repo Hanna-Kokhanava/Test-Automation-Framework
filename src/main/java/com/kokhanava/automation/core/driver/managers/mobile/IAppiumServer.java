@@ -13,16 +13,23 @@ public interface IAppiumServer {
     /**
      * Starts appium server on {@link HostMachine}
      *
-     * @param device for which {@link Device} we need to start server
+     * @param device for which {@link Device} appium server need to be started
      */
     void startServer(Device device);
 
     /**
      * Stops appium server on {@link HostMachine}
      *
-     * @param host on which {@link HostMachine} we need to stop appium server
+     * @param host on which {@link HostMachine} appium server need to be started
      */
     void stopServer(HostMachine host);
+
+    /**
+     * Restarts appium server on {@link HostMachine}
+     *
+     * @param device for which {@link Device} appium server need to be started
+     */
+    void restartServer(Device device);
 
     /**
      * Checks status of appium server

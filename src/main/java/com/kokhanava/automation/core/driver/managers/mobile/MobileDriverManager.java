@@ -131,7 +131,7 @@ public class MobileDriverManager {
             Logger.error("Exception happened during driver creation", e);
         }
 
-        Objects.requireNonNull(driver, "Exception happened with create driver");
+        Objects.requireNonNull(driver, "Exception happened during driver creation");
         driverPool.set(driver);
         driverPool.get().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     }

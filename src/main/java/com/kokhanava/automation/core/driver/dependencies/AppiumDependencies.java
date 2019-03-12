@@ -14,7 +14,7 @@ import com.kokhanava.automation.core.tools.files.property.PropertyLoader;
 public class AppiumDependencies implements IDependencies {
 
     @Inject
-    IAppiumServer appiumServer;
+    private IAppiumServer appiumServer;
 
     /**
      * Sets current device, starts Appium server
@@ -26,10 +26,15 @@ public class AppiumDependencies implements IDependencies {
         Device device = DeviceManager.getDevice(PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_UDID));
         DeviceManager.setCurrentDevice(device);
 
-        if (!appiumServer.checkStatus(device.getAppiumHostMachine())) {
-            appiumServer.startServer(device);
-        } else {
-            Logger.debug("Appium server was already started");
+        try {
+            if (!appiumServer.checkStatus(device.getAppiumHostMachine())) {
+                appiumServer.startServer(device);
+            } else {
+                Logger.debug("Appium server was already started");
+            }
+        } catch (RuntimeException e) {
+            Logger.error("Failed to start server at " + device.getAppiumHostMachine(), e);
+            appiumServer.stopServer(device.getAppiumHostMachine());
         }
 
         ApplicationManager.uploadApp(device.getAppiumHostMachine());

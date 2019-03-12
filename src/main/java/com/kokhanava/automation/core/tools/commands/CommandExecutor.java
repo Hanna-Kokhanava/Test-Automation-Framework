@@ -1,7 +1,5 @@
 package com.kokhanava.automation.core.tools.commands;
 
-import com.google.common.util.concurrent.SimpleTimeLimiter;
-import com.google.common.util.concurrent.TimeLimiter;
 import com.kokhanava.automation.core.logger.Logger;
 import com.kokhanava.automation.core.tools.HostMachine;
 import com.kokhanava.automation.core.tools.OS;
@@ -13,8 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created on 17.03.2018
@@ -31,7 +27,7 @@ public class CommandExecutor {
      * @return result string
      */
     public static String execute(HostMachine machine, Command commandTemplate, Object... args) {
-        String command = commandTemplate.getCommand(args);
+        String command = commandTemplate.getCommand(machine.getOs(), args);
         return execute(machine, command);
     }
 
@@ -79,7 +75,7 @@ public class CommandExecutor {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
             int timeout = 0;
-            while (!bufferedReader.ready()) { //wait until Stream is ready to be read
+            while (!bufferedReader.ready() && timeout < 1000) { //wait until Stream is ready to be read
                 try {
                     Thread.sleep(10);
                     timeout++;
@@ -87,11 +83,19 @@ public class CommandExecutor {
                     e.printStackTrace();
                 }
             }
-            timeout = 0;
+
             String line;
+            timeout = 0;
             while (timeout < 100) {
                 while (bufferedReader.ready() && (line = bufferedReader.readLine()) != null) {
-                    buffer.append(line).append(System.lineSeparator());
+                    buffer.append(line).append('\n');
+                }
+                //TODO think about a possibility to get rid of it
+                try {
+                    Thread.sleep(10);
+                    timeout++;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
             commandOutput = buffer.toString().trim();
