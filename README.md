@@ -12,11 +12,12 @@ The main purpose of this project is to combine base functionality implementation
 
 #### Set environment variables :
 **For Windows** -> System properties
-* Set **JAVA** env. variable to JDK's **bin** folder
-* Set **JAVA_HOME** env. variable to **JDK** folder
+* Set **JAVA** system env. variable to JDK's **bin** folder
+* Set **JAVA_HOME** system env. variable to **JDK** folder
 * Add __%JAVA_HOME%\bin__ to **PATH** variable.
-* Set **ANDROID_HOME** env. variable to **Android SDK** folder (e.g. "C:\Users\User\AppData\Local\Android\sdk")
-* Add the __"...\sdk\platform-tools\"__ and __"...\sdk\tools\"__ to **PATH** variable.
+
+* Set **ANDROID_HOME** system env. variable to **Android SDK** folder (e.g. "C:\Users\User\AppData\Local\Android\sdk")
+* Add the __"...\sdk\platform-tools\"__ and __"...\sdk\tools\"__ to the **PATH** variable.
 
 **For MacOS** -> ~/.bash_profile :
 ```
@@ -48,28 +49,18 @@ Download and install [Appium](https://github.com/appium/appium-desktop/releases)
 ### IntelliJ IDEA
 Download and install [Community Edition](https://www.jetbrains.com/idea/download/#section=windows)
 
+### Genymotion
+* Download and install [Genymotion](https://www.genymotion.com/fun-zone/)
+
+DHCP problem - https://www.genymotion.com/help/desktop/faq/#category-virtualbox
+
+INSTALL_FAILED_NO_MATCHING_ABIS - http://aksahu.blogspot.com/2016/09/how-to-fix-installfailednomatchingabis.html
+
 ## Tips
 To get information about the name of the package and the first activity that has to be launched for the testing
 1. Browse through the **SDK folder -> Build-Tools -> Version folder**
 2. Open cmd and execute command **./aapt dumb badging "path_to_apk"**
 3. Find **package** (in the beginning of logs) and **launchable-activity** parameters
-
-## Appium installation errors
-### **Proxy issue** SELF_SIGNED_CERT_IN_CHAIN request to https://registry.npmjs.org/appium failed, reason: self signed certificate in certificate chain
-**Solution** 
-
-npm config set registry http://registry.npmjs.org/ (not recommended?)
-
-### **Chromedriver installation proxy issue**
-**Solution**
-
-Install from mirror - add **chromedriver_cdnurl=http://npm.taobao.org/mirrors/chromedriver** property to the  **..\nodejs\node_modules\npm\npmrc** file
-
-### **Downloading Python failed - self signed certificate in certificate chain** 
-**Solution**
-
-* Install [Python](https://www.python.org/downloads/) manually 
-* Set path (Windows) - path %path%;C:\Python
 
 ## Links
 Appium server arguments - [Appium CLI](http://appium.io/docs/en/writing-running-appium/server-args/)
