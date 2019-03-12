@@ -29,9 +29,8 @@ public class AndroidPlatformConfig extends BaseMobilePlatformConfig {
         HostMachine host = device.getAppiumHostMachine();
         JsonObject defaultCapabilities = createDefaultJsonDeviceCapabilities(device);
 
-        //TODO change OS verification
         String stringCapabilities = defaultCapabilities.toString();
-        if (host.getOs().toString().equalsIgnoreCase(OS.WINDOWS.toString())) {
+        if (host.hasOS(OS.WINDOWS)) {
             //Need to escape double quotes - https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/default-capabilities-arg.md
             stringCapabilities = stringCapabilities.replaceAll("\"", "\\\\\"");
         }

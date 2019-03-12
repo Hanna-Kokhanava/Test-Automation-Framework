@@ -65,14 +65,16 @@ public class CommandExecutor {
         String commandOutput = null;
         StringBuilder buffer = new StringBuilder();
         String[] commands = {command};
-        if (os == OS.MAC)
+        if (os == OS.MAC || os == OS.LINUX) {
             commands = new String[]{"bash", "-c", command};
-        if (os == OS.WINDOWS)
+        }
+        if (os == OS.WINDOWS) {
             commands = new String[]{"cmd", "/c", command};
+        }
 
         try {
-            Process p = Runtime.getRuntime().exec(commands);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            Process process = Runtime.getRuntime().exec(commands);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             int timeout = 0;
             while (!bufferedReader.ready() && timeout < 1000) { //wait until Stream is ready to be read
@@ -100,7 +102,7 @@ public class CommandExecutor {
             }
             commandOutput = buffer.toString().trim();
             bufferedReader.close();
-            p.destroy();
+            process.destroy();
         } catch (IOException e) {
             e.printStackTrace();
         }

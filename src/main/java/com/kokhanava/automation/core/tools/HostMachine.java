@@ -90,11 +90,26 @@ public class HostMachine {
         this.port = port;
     }
 
+    /**
+     * Returns {@link OS} of host machine
+     *
+     * @return {@link OS} entity
+     */
     public OS getOs() {
         if (Objects.isNull(os) && null == (os = CommandExecutor.getOsOfMachine(this))) {
             throw new RuntimeException("OS of the host machine was not determined");
         }
         return os;
+    }
+
+    /**
+     * Checks if {@link OS} of current Host machine is the same as the following parameter
+     *
+     * @param os {@link OS}
+     * @return true if host machine has the same OS as provided
+     */
+    public boolean hasOS(OS os) {
+        return getOs().equals(os);
     }
 
     public int getPortInt() {
