@@ -17,8 +17,13 @@
         <appium hostname="localhost" username="" password="" port="4882"/>
     </device>
 
-    <device deviceName="Samsung Galaxy S8 emulator" deviceType="android-phone" platformVersion="7.0"
-            udid="192.168.56.101:5555">
+    <device deviceName="Samsung Galaxy S7 emulator" deviceType="android-phone" platformVersion="7.1"
+            udid="192.168.231.101:5555">
+        <appium hostname="localhost" username="" password="" port="4881"/>
+    </device>
+
+    <device deviceName="Custom phone emulator" deviceType="android-phone" platformVersion="7.1"
+            udid="192.168.151.102:5555">
         <appium hostname="localhost" username="" password="" port="4881"/>
     </device>
 

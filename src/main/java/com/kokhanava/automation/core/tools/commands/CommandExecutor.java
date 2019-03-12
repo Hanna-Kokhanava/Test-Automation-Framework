@@ -27,7 +27,7 @@ public class CommandExecutor {
      * @return result string
      */
     public static String execute(HostMachine machine, Command commandTemplate, Object... args) {
-        String command = commandTemplate.getCommand(args);
+        String command = commandTemplate.getCommand(machine.getOs(), args);
         return execute(machine, command);
     }
 
@@ -62,6 +62,8 @@ public class CommandExecutor {
      */
     @Nullable
     private static String executeLocally(OS os, String command) {
+        String commandOutput = null;
+        StringBuilder buffer = new StringBuilder();
         String[] commands = {command};
         if (os == OS.MAC || os == OS.LINUX) {
             commands = new String[]{"bash", "-c", command};
@@ -70,28 +72,40 @@ public class CommandExecutor {
             commands = new String[]{"cmd", "/c", command};
         }
 
-        Process process;
         try {
-            process = Runtime.getRuntime().exec(commands);
-        } catch (IOException e) {
-            Logger.error("Exception was thrown while executing command in a separate process", e);
-            return null;
-        }
+            Process process = Runtime.getRuntime().exec(commands);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-        String commandOutput = null;
-        try (var reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-            StringBuilder buffer = new StringBuilder();
+            int timeout = 0;
+            while (!bufferedReader.ready() && timeout < 1000) { //wait until Stream is ready to be read
+                try {
+                    Thread.sleep(10);
+                    timeout++;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
             String line;
-            while (Objects.nonNull(line = reader.readLine())) {
-                buffer.append(line);
-                buffer.append('\n');
+            timeout = 0;
+            while (timeout < 100) {
+                while (bufferedReader.ready() && (line = bufferedReader.readLine()) != null) {
+                    buffer.append(line).append('\n');
+                }
+                //TODO think about a possibility to get rid of it
+                try {
+                    Thread.sleep(10);
+                    timeout++;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             commandOutput = buffer.toString().trim();
+            bufferedReader.close();
             process.destroy();
         } catch (IOException e) {
-            Logger.error("Exception was thrown during command execution results reading", e);
+            e.printStackTrace();
         }
-
         return commandOutput;
     }
 
@@ -116,7 +130,7 @@ public class CommandExecutor {
      * @return result string
      */
     public static String executeCommandFromFolder(HostMachine hostMachine, String folderPath, String command) {
-        return execute(hostMachine, Command.CD.getCommand(folderPath) + command);
+        return execute(hostMachine, Command.CD.getCommand(hostMachine.getOs(), folderPath) + command);
     }
 
     /**

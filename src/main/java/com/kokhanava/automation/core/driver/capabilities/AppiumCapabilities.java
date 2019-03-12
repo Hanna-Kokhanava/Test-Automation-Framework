@@ -35,19 +35,25 @@ public class AppiumCapabilities {
             caps.setCapability(APP_PACKAGE, AppDetails.getAppPackage());
             caps.setCapability(APP_ACTIVITY, AppDetails.getAppActivity());
 
-            //For Android version 6.0 and higher
-            caps.setCapability(AUTO_GRANT_PERMISSIONS, "true");
+            caps.setCapability("uiautomator2ServerLaunchTimeout", Integer.parseInt(
+                    PropertyLoader.get(PropertyLoader.MobileProperty.ANDROID_AUTOMATOR_LAUNCH_TIMEOUT, "20000")));
+
+            caps.setCapability(AUTO_GRANT_PERMISSIONS, "true"); //For Android version 6.0 and higher
         }
 
         caps.setCapability(AUTOMATION_NAME, DeviceManager.getCurrentDevice().getAutomationName());
         caps.setCapability(APP, ApplicationManager.getAbsolutePath());
         caps.setCapability(DEVICE_NAME, deviceType);
 
-        caps.setCapability(FULL_RESET, Boolean.parseBoolean(PropertyLoader.get(PropertyLoader.MobileProperty.APP_FULL_RESET, "true")));
-        caps.setCapability(NO_RESET, Boolean.parseBoolean(PropertyLoader.get(PropertyLoader.MobileProperty.APP_NO_RESET, "false")));
+        caps.setCapability(FULL_RESET, Boolean.parseBoolean(
+                PropertyLoader.get(PropertyLoader.MobileProperty.APP_FULL_RESET, "true")));
+        caps.setCapability(NO_RESET, Boolean.parseBoolean(
+                PropertyLoader.get(PropertyLoader.MobileProperty.APP_NO_RESET, "false")));
 
-        caps.setCapability(NEW_COMMAND_TIMEOUT, Integer.parseInt(PropertyLoader.get(PropertyLoader.MobileProperty.NEW_COMMAND_TIMEOUT, "1200")));
-        caps.setCapability(DEVICE_READY_TIMEOUT, Integer.parseInt(PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_READY_TIMEOUT, "120")));
+        caps.setCapability(NEW_COMMAND_TIMEOUT, Integer.parseInt(
+                PropertyLoader.get(PropertyLoader.MobileProperty.NEW_COMMAND_TIMEOUT, "1200")));
+        caps.setCapability(DEVICE_READY_TIMEOUT, Integer.parseInt(
+                PropertyLoader.get(PropertyLoader.MobileProperty.DEVICE_READY_TIMEOUT, "120")));
         return caps;
     }
 

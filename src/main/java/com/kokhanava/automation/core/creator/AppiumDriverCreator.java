@@ -1,9 +1,10 @@
 package com.kokhanava.automation.core.creator;
 
+import com.google.inject.Inject;
 import com.kokhanava.automation.core.device.Device;
 import com.kokhanava.automation.core.device.DeviceManager;
 import com.kokhanava.automation.core.driver.capabilities.AppiumCapabilities;
-import com.kokhanava.automation.core.driver.managers.mobile.AppiumServerManager;
+import com.kokhanava.automation.core.driver.managers.mobile.IAppiumServer;
 import com.kokhanava.automation.core.driver.managers.mobile.MobileDriverManager;
 import com.kokhanava.automation.core.logger.Logger;
 import org.apache.commons.lang.StringUtils;
@@ -16,6 +17,9 @@ import java.util.Objects;
  * Created on 10.03.2018
  */
 public class AppiumDriverCreator implements IDriverCreator {
+
+    @Inject
+    private IAppiumServer appiumServer;
 
     /**
      * {@inheritDoc}
@@ -35,7 +39,7 @@ public class AppiumDriverCreator implements IDriverCreator {
      * @return current {@link Device} instance
      */
     @Override
-    public Device createDriver(DesiredCapabilities customCapabilities) throws Exception {
+    public Device createDriver(DesiredCapabilities customCapabilities) {
         Device device = DeviceManager.getCurrentDevice();
         DesiredCapabilities capabilities = createCapabilitiesForAppium(device);
 
@@ -48,8 +52,8 @@ public class AppiumDriverCreator implements IDriverCreator {
         try {
             MobileDriverManager.createDriver(capabilities);
         } catch (Exception er) {
-            Logger.warn("Exception happened with create driver. Look at appium log for additional information.\n");
-            AppiumServerManager.restartServer(device);
+            Logger.warn("Exception happened with create driver. Look at appium log for additional information.");
+            appiumServer.restartServer(device);
             MobileDriverManager.createDriver(capabilities);
         }
         return device;

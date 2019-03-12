@@ -22,6 +22,7 @@ gradle/
 gradlew.bat
 
 # Ignore custom files
+/appium
 /certificates
 /drivers
 /logs

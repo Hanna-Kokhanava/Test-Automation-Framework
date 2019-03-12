@@ -77,7 +77,9 @@ public final class PropertyLoader {
 
         DEFAULT_TIMEOUT("default.timeout"),
 
-        LAUNCH_TIMEOUT("launch.timeout"),
+        IOS_INSTRUMENTS_LAUNCH_TIMEOUT("instruments.launch.timeout"),
+
+        ANDROID_AUTOMATOR_LAUNCH_TIMEOUT("uiautomator2.launch.timeout"),
 
         DRIVER_URL("driver.url"),
 
