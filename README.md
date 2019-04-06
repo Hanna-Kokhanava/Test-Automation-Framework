@@ -1,5 +1,5 @@
 # Unified Test Automation Framework (UTAF)
-The main purpose of this project is to combine base functionality implementation (driver creation, capabilities setting, etc) in one universal solution.
+The main purpose of this project is to combine base functionality implementation (driver creation, capabilities setting, etc) for mobile and web platforms in one universal solution.
 
 ## Getting Started
 ### Installing
